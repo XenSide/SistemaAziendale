@@ -1,0 +1,107 @@
+#custDatePicker {
+	-fx-background-color: #f60000;
+	-fx-border-color: transparent;
+	-fx-border-radius: 0;
+
+	-fx-font-family: "Visby Round CF Medium";
+	-fx-text-fill: #000000;
+}
+
+#custDatePicker .floating-text {
+	-fx-background-color: transparent;
+
+	-fx-font-family: "Visby Round CF Demi Bold";
+	-fx-text-fill: #000000;
+}
+
+#custDatePicker .icon {
+	-mfx-color: rgba(0, 0, 0, 0.65);
+}
+
+#custDatePicker .date-picker-popup .content {
+	-fx-background-color: #ffffff;
+	-fx-border-color: transparent;
+	-fx-border-radius: 0;
+}
+
+#custDatePicker .date-picker-popup .left-arrow:disabled,
+#custDatePicker .date-picker-popup .right-arrow:disabled {
+	-fx-opacity: 0.8;
+}
+
+#custDatePicker .date-picker-popup .left-arrow .mfx-font-icon,
+#custDatePicker .date-picker-popup .right-arrow .mfx-font-icon {
+	-mfx-color: #7e2020;
+}
+
+#custDatePicker .date-picker-popup .months-combo,
+#custDatePicker .date-picker-popup .years-combo {
+	-fx-border-color: transparent;
+	-fx-border-radius: 0;
+	-fx-background-color: white;
+	-fx-text-fill: black;
+
+	-fx-padding: 4;
+	-fx-background-insets: 0;
+	-fx-font-family: "Visby Round CF Medium";
+}
+
+#custDatePicker .date-picker-popup .months-combo:focus-within,
+#custDatePicker .date-picker-popup .years-combo:focus-within {
+	-fx-text-fill: #7e2020;
+}
+
+#custDatePicker .date-picker-popup .months-combo:focus-within .caret .mfx-font-icon,
+#custDatePicker .date-picker-popup .years-combo:focus-within .caret .mfx-font-icon {
+	-mfx-color: #7e2020;
+}
+
+#custDatePicker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:selected .label,
+#custDatePicker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:selected .label {
+	-fx-text-fill: #700000;
+}
+
+#custDatePicker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:hover,
+#custDatePicker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:hover,
+#custDatePicker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:selected,
+#custDatePicker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:selected {
+	-fx-background-color: derive(#3a0000, 130%);
+}
+
+#custDatePicker .date-picker-popup .week-day {
+	-fx-text-fill: #000000;
+}
+
+#custDatePicker .date-picker-popup .mfx-date-cell {
+	-fx-text-fill: #000000;
+}
+
+#custDatePicker .date-picker-popup .mfx-date-cell:extra {
+	-fx-text-fill: rgba(96, 96, 96, 0.5);
+}
+
+#custDatePicker .date-picker-popup .mfx-date-cell:current {
+	-fx-border-color: #7e2020;
+	-fx-background-color: transparent;
+	-fx-border-width: 2;
+	-fx-font-family: 'Visby Round CF Demi Bold';
+}
+
+#custDatePicker .date-picker-popup .mfx-date-cell:selected {
+	-fx-background-color: #7e2020;
+	-fx-text-fill: #ffffff;
+}
+
+#customNCombo2:focus-within .caret .mfx-font-icon {
+	-mfx-color: #7e2020;
+}
+
+#customNCombo2 .virtual-flow {
+	-track-color: derive(#ff5d53, 90%);
+	-thumb-color: derive(#ff5d53, 50%);
+	-thumb-hover-color: derive(#ff5d53, 25%);
+}
+
+#customNCombo2 .virtual-flow .mfx-combo-box-cell:hover {
+	-fx-background-color: derive(#ff5d53, 90%);
+}

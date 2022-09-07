@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="custDatepicker" fx:id="ancora" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Region layoutY="64.0" prefHeight="6.0" prefWidth="1000.0" style="-fx-background-color: #AB3434;" />
+      <ImageView layoutX="820.0" layoutY="15.5">
+         <image>
+            <Image url="@../../images/UserIcon.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="870.0" layoutY="19.0" prefHeight="25.0" prefWidth="81.0" text="Username" textFill="#ab3434">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="39.0" fitWidth="39.0" x="53.0" y="12.5">
+         <image>
+            <Image url="@../../images/Logo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="109.0" layoutY="20.5" prefHeight="24.0" prefWidth="103.0" text="LOREM IPSUM" textFill="#ab3434">
+         <font>
+            <Font name="MS Outlook" size="15.0" />
+         </font>
+      </Label>
+      <MFXTextField fx:id="uidField" borderGap="20.0" floatMode="DISABLED" floatingText="UID" floatingTextGap="10.0" layoutX="53.0" layoutY="195.0" prefHeight="42.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #AB3434; -fx-text-fill: #ab3434; -fx-border-width: 2;">
+         <textFill>
+            <Color red="0.4941176474094391" green="0.125490203499794" blue="0.125490203499794" />
+         </textFill>
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+      </MFXTextField>
+      <MFXTextField fx:id="nomeField" borderGap="20.0" floatMode="DISABLED" floatingText="NOME" floatingTextGap="10.0" layoutX="375.0" layoutY="195.0" prefHeight="42.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #AB3434; -fx-border-width: 2;">
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+         <textFill>
+            <Color red="0.4941176474094391" green="0.125490203499794" blue="0.125490203499794" opacity="0.8700000047683716" />
+         </textFill></MFXTextField>
+      <MFXTextField fx:id="lottoField" borderGap="20.0" floatMode="DISABLED" floatingText="PRINCIPIO ATTIVO" floatingTextGap="10.0" layoutX="697.0" layoutY="195.0" prefHeight="42.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #AB3434; -fx-border-width: 2;">
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+         <textFill>
+            <Color red="0.4941176474094391" green="0.125490203499794" blue="0.125490203499794" />
+         </textFill></MFXTextField>
+      <MFXTextField fx:id="quantitaField" borderGap="20.0" floatMode="DISABLED" floatingText="test" floatingTextGap="10.0" layoutX="375.0" layoutY="299.0" prefHeight="42.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #AB3434; -fx-border-width: 2;">
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+         <textFill>
+            <Color red="0.4941176474094391" green="0.125490203499794" blue="0.125490203499794" opacity="0.8700000047683716" />
+         </textFill></MFXTextField>
+      <MFXTextField fx:id="costoField" borderGap="20.0" floatMode="DISABLED" floatingText="test" floatingTextGap="10.0" layoutX="697.0" layoutY="299.0" prefHeight="42.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #AB3434; -fx-border-width: 2;">
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+         <textFill>
+            <Color red="0.4941176474094391" green="0.125490203499794" blue="0.125490203499794" opacity="0.8700000047683716" />
+         </textFill></MFXTextField>
+      <MFXTextField fx:id="pAttivoField" borderGap="20.0" floatMode="DISABLED" floatingText="test" floatingTextGap="10.0" layoutX="53.0" layoutY="403.0" prefHeight="42.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #AB3434; -fx-border-width: 2;">
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+         <textFill>
+            <Color red="0.4941176474094391" green="0.125490203499794" blue="0.125490203499794" opacity="0.8700000047683716" />
+         </textFill></MFXTextField>
+      <Label layoutX="53.0" layoutY="160.0" text="UID" textFill="#ab3434">
+         <font>
+            <Font name="MS Outlook" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="375.0" layoutY="160.0" text="NOME" textFill="#ab3434">
+         <font>
+            <Font name="MS Outlook" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="697.0" layoutY="160.0" text="LOTTO" textFill="#ab3434">
+         <font>
+            <Font name="MS Outlook" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="53.0" layoutY="264.0" text="DA BANCO" textFill="#ab3434">
+         <font>
+            <Font name="MS Outlook" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="375.0" layoutY="264.0" text="QUANTITÁ" textFill="#ab3434">
+         <font>
+            <Font name="MS Outlook" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="697.0" layoutY="264.0" text="COSTO" textFill="#ab3434">
+         <font>
+            <Font name="MS Outlook" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="53.0" layoutY="368.0" text="PRINCIPIO ATTIVO" textFill="#ab3434">
+         <font>
+            <Font name="MS Outlook" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="375.0" layoutY="368.0" text="DATA DI PRODUZIONE" textFill="#ab3434">
+         <font>
+            <Font name="MS Outlook" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="697.0" layoutY="368.0" text="DATA DI SCADENZA" textFill="#ab3434">
+         <font>
+            <Font name="MS Outlook" size="16.0" />
+         </font>
+      </Label>
+      <MFXButton buttonType="RAISED" defaultButton="true" layoutX="310.0" layoutY="518.0" onAction="#onConfirmButtonClick" prefHeight="37.0" prefWidth="154.0" style="-fx-background-color: #AB3434; -fx-border-radius: 20; -fx-background-radius: 20;" text="CONFERMA" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </MFXButton>
+      <MFXButton buttonType="RAISED" cancelButton="true" layoutX="536.0" layoutY="518.0" onAction="#onCancelButtonClick" prefHeight="37.0" prefWidth="154.0" style="-fx-background-color: #AB3434; -fx-border-radius: 20; -fx-background-radius: 20;" text="ANNULLA" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </MFXButton>
+      <MFXDatePicker id="custDatePicker" fx:id="dataProduzioneField" allowEdit="false" layoutX="375.0" layoutY="403.0" prefHeight="42.0" prefWidth="250.0" style="-mfx-color: #AB3434; -fx-background-color: #0000; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #AB3434; -fx-border-width: 2; -mfx-main: #AB3434; -fx-text-fill: #AB3434;" stylesheets="Pickers.css">
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+         <textFill>
+            <Color red="0.4941176474094391" green="0.125490203499794" blue="0.125490203499794" opacity="0.8700000047683716" />
+         </textFill>
+      </MFXDatePicker>
+      <MFXComboBox id="customNCombo2" fx:id="daBancoField" floatMode="DISABLED" layoutX="53.0" layoutY="300.0" prefHeight="42.0" prefWidth="250.0" style="-fx-border-radius: 20; -fx-background-radius: 20; -fx-border-color: #AB3434; -fx-border-width: 2;" stylesheets="Pickers.css">
+         <padding>
+            <Insets bottom="3.0" left="15.0" right="15.0" />
+         </padding>
+         <textFill>
+            <Color red="0.4941176474094391" green="0.125490203499794" blue="0.125490203499794" opacity="0.8700000047683716" />
+         </textFill>
+      </MFXComboBox>
+      <MFXDatePicker id="custDatePicker" fx:id="dataScadenzaField" allowEdit="false" layoutX="697.0" layoutY="403.0" prefHeight="42.0" prefWidth="250.0" style="-mfx-color: #AB3434; -fx-background-color: #0000; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #AB3434; -fx-border-width: 2; -mfx-main: #AB3434; -fx-text-fill: #AB3434;" stylesheets="Pickers.css">
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
+         <textFill>
+            <Color red="0.4941176474094391" green="0.125490203499794" blue="0.125490203499794" opacity="0.8700000047683716" />
+         </textFill>
+      </MFXDatePicker>
+   </children>
+</AnchorPane>

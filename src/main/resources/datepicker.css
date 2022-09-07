@@ -1,0 +1,30 @@
+.mfx-date-picker .date-picker-popup .months-combo:focus-within,
+.mfx-date-picker .date-picker-popup .years-combo:focus-within {
+    -fx-background-color: #f8f7fa;
+    -fx-text-fill: #7e2020;
+}
+
+.mfx-date-picker:focus-within .icon {
+    -mfx-color: #7e2020;
+}
+
+.mfx-date-picker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:selected .label,
+.mfx-date-picker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:selected .label {
+    -fx-text-fill: black;
+}
+
+.mfx-date-picker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:hover,
+.mfx-date-picker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:hover {
+    -fx-background-color: #7e2020;
+}
+
+.mfx-date-picker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:selected,
+.mfx-date-picker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:selected {
+    -fx-background-color: #7e2020;
+}
+
+.mfx-date-picker .date-picker-popup .years-combo:focus-within,
+.mfx-date-picker .date-picker-popup .months-combo:focus-within {
+    -fx-text-fill: #7e2020;
+}
+
