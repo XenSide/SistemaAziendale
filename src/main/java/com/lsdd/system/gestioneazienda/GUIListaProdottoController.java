@@ -40,7 +40,7 @@ public class GUIListaProdottoController implements Initializable {
     private MFXTableView table;
 
     public void onCancelButtonClick(ActionEvent actionEvent) {
-        System.out.println(actionEvent.getSource());
+
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
     }

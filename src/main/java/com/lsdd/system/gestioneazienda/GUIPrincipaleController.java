@@ -1,6 +1,7 @@
 package com.lsdd.system.gestioneazienda;
 
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,15 +27,17 @@ public class GUIPrincipaleController implements Initializable {
     @FXML
     private URL location;
 
+    @FXML
+    private MFXButton registraProdottiButton;
+    @FXML
+    private MFXButton ricercaButton;
 
-    public void onRegistraProdottiButtonClick(ActionEvent actionEvent) {
-        //Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        prodottoManager.onClickRegistraProdotti();
-    }
-
-    public void onRicercaClick(ActionEvent actionEvent) {
-        //Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        prodottoManager.onClickRicerca();
+    public void onClick(ActionEvent event){
+        if(event.getSource() == registraProdottiButton){
+            prodottoManager.onClickRegistraProdotti();
+        } else if (event.getSource() == ricercaButton) {
+            prodottoManager.onClickRicerca();
+        }
     }
 
     @Override

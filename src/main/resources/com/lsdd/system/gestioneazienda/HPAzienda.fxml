@@ -43,7 +43,7 @@
             <Font name="MS Outlook" size="15.0" />
          </font>
       </Label>
-      <MFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" ellipsisString="" graphicTextGap="0.0" layoutX="222.0" layoutY="171.0" onAction="#onRegistraProdottiButtonClick" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020" style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;" textFill="WHITE">
+      <MFXButton fx:id="registraProdottiButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" ellipsisString="" graphicTextGap="0.0" layoutX="222.0" layoutY="171.0" onAction="#onClick" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020" style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;" text="registraProdottiButton" textFill="WHITE">
          <graphic>
             <Label contentDisplay="RIGHT" graphicTextGap="28.0" lineSpacing="24.0" text="REGISTRAZIONE&#13;PRODOTTI" textFill="WHITE">
                <font>
@@ -59,7 +59,7 @@
             </Label>
          </graphic>
       </MFXButton>
-      <MFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="222.0" layoutY="277.0" onAction="#onRicercaClick" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020" style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;">
+      <MFXButton fx:id="ricercaButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="222.0" layoutY="277.0" onAction="#onClick" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020" style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;" text="ricercaButton">
          <graphic>
             <Label contentDisplay="RIGHT" graphicTextGap="68.0" text="RICERCA&#13;PRODOTTI" textFill="WHITE">
                <font>

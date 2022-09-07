@@ -2,6 +2,7 @@ package com.lsdd.system.gestioneazienda;
 
 
 import com.lsdd.system.utils.Utils;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -58,16 +59,31 @@ public class GUICaricamentoNuovoProdottoController implements Initializable {
     @FXML
     private MFXDatePicker dataScadenzaField;
 
+    @FXML
+    private MFXButton cancelButton;
+    @FXML
+    private MFXButton confirmButton;
+
 
     public void onConfirmButtonClick(ActionEvent actionEvent) throws DateTimeParseException, ParseException {
-        prodottoManager.controlloCaricoDelFarmaco(uidField.getText(), nomeField.getText(), lottoField.getText(),
-                daBancoField.getText().equals("Si")? true:false, quantitaField.getText(), costoField.getText(), pAttivoField.getText(),
-                dataProduzioneField.getText(), dataScadenzaField.getText(), stage);
+
 
     }
 
-    public void onCancelButtonClick(ActionEvent actionEvent) {
-        stage.close();
+
+    public void onClick(ActionEvent actionEvent)
+    {
+        if(actionEvent.getSource() == cancelButton) {
+            stage.close();
+        } else if (actionEvent.getSource() == confirmButton) {
+            try {
+                prodottoManager.controlloCaricoDelFarmaco(uidField.getText(), nomeField.getText(), lottoField.getText(),
+                        daBancoField.getText().equals("Si") ? true : false, quantitaField.getText(), costoField.getText(), pAttivoField.getText(),
+                        dataProduzioneField.getText(), dataScadenzaField.getText(), stage);
+            }catch (Exception exception){
+                System.err.println(exception);
+            }
+        }
     }
 
     @Override

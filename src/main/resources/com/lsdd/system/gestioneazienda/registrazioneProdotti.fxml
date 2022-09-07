@@ -124,12 +124,12 @@
             <Font name="MS Outlook" size="16.0" />
          </font>
       </Label>
-      <MFXButton buttonType="RAISED" defaultButton="true" layoutX="310.0" layoutY="518.0" onAction="#onConfirmButtonClick" prefHeight="37.0" prefWidth="154.0" style="-fx-background-color: #AB3434; -fx-border-radius: 20; -fx-background-radius: 20;" text="CONFERMA" textFill="WHITE">
+      <MFXButton fx:id="confirmButton" buttonType="RAISED" defaultButton="true" layoutX="310.0" layoutY="518.0" onAction="#onClick" prefHeight="37.0" prefWidth="154.0" style="-fx-background-color: #AB3434; -fx-border-radius: 20; -fx-background-radius: 20;" text="CONFERMA" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </MFXButton>
-      <MFXButton buttonType="RAISED" cancelButton="true" layoutX="536.0" layoutY="518.0" onAction="#onCancelButtonClick" prefHeight="37.0" prefWidth="154.0" style="-fx-background-color: #AB3434; -fx-border-radius: 20; -fx-background-radius: 20;" text="ANNULLA" textFill="WHITE">
+      <MFXButton fx:id="cancelButton" buttonType="RAISED" cancelButton="true" layoutX="536.0" layoutY="518.0" onAction="#onClick" prefHeight="37.0" prefWidth="154.0" style="-fx-background-color: #AB3434; -fx-border-radius: 20; -fx-background-radius: 20;" text="ANNULLA" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
