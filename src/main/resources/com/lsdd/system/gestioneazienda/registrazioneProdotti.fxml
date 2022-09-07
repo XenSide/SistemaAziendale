@@ -36,7 +36,7 @@
             <Font name="MS Outlook" size="15.0" />
          </font>
       </Label>
-      <MFXTextField fx:id="uidField" allowEdit="false" borderGap="20.0" floatMode="DISABLED" floatingText="UID" floatingTextGap="10.0" layoutX="53.0" layoutY="195.0" prefHeight="42.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #AB3434; -fx-text-fill: #ab3434; -fx-border-width: 2;">
+      <MFXTextField fx:id="uidField" borderGap="20.0" floatMode="DISABLED" floatingText="UID" floatingTextGap="10.0" layoutX="53.0" layoutY="195.0" prefHeight="42.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #AB3434; -fx-text-fill: #ab3434; -fx-border-width: 2;">
          <textFill>
             <Color red="0.4941176474094391" green="0.125490203499794" blue="0.125490203499794" />
          </textFill>
