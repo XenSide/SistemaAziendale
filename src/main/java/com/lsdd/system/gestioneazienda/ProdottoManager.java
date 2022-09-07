@@ -15,7 +15,6 @@ import java.util.List;
 
 public class ProdottoManager {
 
-    public ClassLoader cachingClassLoader = new MyClassLoader(FXMLLoader.getDefaultClassLoader());
 
     private final Stage stage;
     public ProdottoManager(Stage stage) {
@@ -25,7 +24,6 @@ public class ProdottoManager {
     public void onClickRegistraProdotti() {
         FXMLLoader fxmlLoader = new FXMLLoader(GUICaricamentoNuovoProdottoController.class.getResource("registrazioneProdotti.fxml"));
         Stage stage = new Stage();
-        fxmlLoader.setClassLoader(cachingClassLoader); // FIXME: 9/6/2022 Tentativo di caching FXML
         fxmlLoader.setController(new GUICaricamentoNuovoProdottoController(stage, this));
         new GUICaricamentoNuovoProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
@@ -33,6 +31,7 @@ public class ProdottoManager {
     public void onClickRicerca() {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(GUIListaProdottoController.class.getResource("ricerca.fxml"));
+        // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO 
         Date data = new Date(1662477550);
         Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
         List<Ordine> ordines = new ArrayList<>();
@@ -51,7 +50,7 @@ public class ProdottoManager {
         Prodotto prodotto = null;
         try {
             prodotto = new Prodotto(Integer.parseInt(uid), nome, lotto, daBanco, Integer.parseInt(quantita), Integer.parseInt(costo), pAttivo, formatter.parse(dataProduzione), formatter.parse(dataScadenza));
-            Boolean query = false; // FIXME: 07/09/2022 query per salvare
+            Boolean query = true; // FIXME: 07/09/2022 query per salvare
             if (query){
             Utils.showAlert("Caricamento effettuato con successo");
             stage.close();
