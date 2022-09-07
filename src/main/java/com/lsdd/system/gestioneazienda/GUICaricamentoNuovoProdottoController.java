@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 
 import java.net.URL;
+import java.text.ParseException;
 import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 
@@ -57,9 +58,9 @@ public class GUICaricamentoNuovoProdottoController implements Initializable {
     private MFXDatePicker dataScadenzaField;
 
 
-    public void onConfirmButtonClick(ActionEvent actionEvent) throws DateTimeParseException {
+    public void onConfirmButtonClick(ActionEvent actionEvent) throws DateTimeParseException, ParseException {
         prodottoManager.controlloCaricoDelFarmaco(uidField.getText(), nomeField.getText(), lottoField.getText(),
-                daBancoField.getText(), quantitaField.getText(), costoField.getText(), pAttivoField.getText(),
+                daBancoField.getText().equals("Si")? true:false, quantitaField.getText(), costoField.getText(), pAttivoField.getText(),
                 dataProduzioneField.getText(), dataScadenzaField.getText());
         stage.close();
     }
