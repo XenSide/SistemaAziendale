@@ -1,6 +1,7 @@
 package com.lsdd.system.gestioneazienda;
 
 
+import com.lsdd.system.utils.Utils;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -59,11 +60,10 @@ public class GUICaricamentoNuovoProdottoController implements Initializable {
 
 
     public void onConfirmButtonClick(ActionEvent actionEvent) throws DateTimeParseException, ParseException {
-        // TODO: 07/09/2022 Add null checks
         prodottoManager.controlloCaricoDelFarmaco(uidField.getText(), nomeField.getText(), lottoField.getText(),
                 daBancoField.getText().equals("Si")? true:false, quantitaField.getText(), costoField.getText(), pAttivoField.getText(),
-                dataProduzioneField.getText(), dataScadenzaField.getText());
-        stage.close();
+                dataProduzioneField.getText(), dataScadenzaField.getText(), stage);
+
     }
 
     public void onCancelButtonClick(ActionEvent actionEvent) {
