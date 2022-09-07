@@ -50,15 +50,15 @@ public class GUIListaProdottoController implements Initializable {
 
     public void setupTable() {
         MFXTableColumn<Ordine> codiceOrdineColumn = new MFXTableColumn<>("Codice Ordine", true, Comparator.comparing(Ordine::getCodiceOrdine));
-        codiceOrdineColumn.setPrefWidth(130);
+        codiceOrdineColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> indirizzoFarmaciaColumn = new MFXTableColumn<>("Indirizzo Farmacia", true, Comparator.comparing(Ordine::getIndirizzoFarmacia));
-        indirizzoFarmaciaColumn.setPrefWidth(130);
+        indirizzoFarmaciaColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> nomeFarmaciaColumn = new MFXTableColumn<>("Nome Farmacia", true, Comparator.comparing(Ordine::getNomeFarmacia));
-        nomeFarmaciaColumn.setPrefWidth(130);
+        nomeFarmaciaColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> dataConsegnaColumn = new MFXTableColumn<>("Data di Consegna", true, Comparator.comparing(Ordine::getDataConsegna));
-        dataConsegnaColumn.setPrefWidth(130);
+        dataConsegnaColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> statoColumn = new MFXTableColumn<>("Stato Ordine", true, Comparator.comparing(Ordine::getStatoOrdine));
-        statoColumn.setPrefWidth(130);
+        statoColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> infoOrderColumn = new MFXTableColumn<>("", false);
         infoOrderColumn.setRowCellFactory(param -> new MFXTableRowCell<>(order -> order) {
             private final MFXButton infoOrderButton = new MFXButton("");
