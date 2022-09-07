@@ -1,6 +1,5 @@
 package com.lsdd.system.gestioneazienda;
 
-import com.lsdd.system.utils.MyClassLoader;
 import com.lsdd.system.utils.Ordine;
 import com.lsdd.system.utils.Prodotto;
 import com.lsdd.system.utils.Utils;
@@ -15,22 +14,22 @@ import java.util.List;
 
 public class ProdottoManager {
 
-
+    private FXMLLoader fxmlLoader = new FXMLLoader();
     private final Stage stage;
     public ProdottoManager(Stage stage) {
         this.stage = stage;
     }
 
     public void onClickRegistraProdotti() {
-        FXMLLoader fxmlLoader = new FXMLLoader(GUICaricamentoNuovoProdottoController.class.getResource("registrazioneProdotti.fxml"));
+        fxmlLoader = new FXMLLoader(GUICaricamentoNuovoProdottoController.class.getResource("registrazioneProdotti.fxml"));
         Stage stage = new Stage();
         fxmlLoader.setController(new GUICaricamentoNuovoProdottoController(stage, this));
         new GUICaricamentoNuovoProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
 
-    public void onClickRicerca() {
+    public void onClickListaOrdine() {
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(GUIListaProdottoController.class.getResource("ricerca.fxml"));
+        fxmlLoader = new FXMLLoader(GUIListaOrdiniRicevutiController.class.getResource("listaOrdiniRicevuti.fxml"));
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO 
         Date data = new Date(1662477550);
         Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
@@ -39,8 +38,8 @@ public class ProdottoManager {
         prodottos.add(augmentin);
         ordines.add(new Ordine(1,"bobbina", "viavai", prodottos, data, 1, 1));
         ordines.add(new Ordine(1,"Antonina", "viavai", prodottos, data, 1, 1));
-        fxmlLoader.setController(new GUIListaProdottoController(stage, this, ordines));
-        new GUIListaProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+        fxmlLoader.setController(new GUIListaOrdiniRicevutiController(stage, this, ordines));
+        new GUIListaOrdiniRicevutiBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
 
     public void controlloCaricoDelFarmaco(String uid, String nome, String lotto, Boolean daBanco,
@@ -64,6 +63,18 @@ public class ProdottoManager {
         System.out.println(prodotto);
     }
 
-    public void creaInfo(Ordine ordine) {
+    public void creaInfoProdotto(Prodotto prodotto) {
+        fxmlLoader = new FXMLLoader(InfoPanelController.class.getResource("ProductinfoPanel.fxml"));
+        Stage stage = new Stage();
+        fxmlLoader.setController(new InfoPanelController(stage, fxmlLoader));
+        new GUIInfoProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+    }
+
+    public void creaInfoOrdine(Ordine ordine) {
+        Utils.showAlert("Info Ordine");
+    }
+
+    public void cancellaOrdine(Ordine ordine) {
+        Utils.showAlert("cancella ordine");
     }
 }

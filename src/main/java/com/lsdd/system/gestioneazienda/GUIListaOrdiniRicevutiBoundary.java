@@ -10,11 +10,11 @@ import javafx.stage.StageStyle;
 import static com.lsdd.system.utils.Utils.startStage;
 
 
-public class GUIListaProdottoBoundary extends Application {
+public class GUIListaOrdiniRicevutiBoundary extends Application {
     private final Stage stage;
     private final FXMLLoader fxmlLoader;
 
-    public GUIListaProdottoBoundary(Stage stage, FXMLLoader fxmlLoader) {
+    public GUIListaOrdiniRicevutiBoundary(Stage stage, FXMLLoader fxmlLoader) {
         this.stage = stage;
         this.fxmlLoader = fxmlLoader;
 

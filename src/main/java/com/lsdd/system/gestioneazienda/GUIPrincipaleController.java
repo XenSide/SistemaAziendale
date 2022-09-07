@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 
@@ -29,14 +28,17 @@ public class GUIPrincipaleController implements Initializable {
 
     @FXML
     private MFXButton registraProdottiButton;
+
     @FXML
     private MFXButton ricercaButton;
+    @FXML
+    private MFXButton listaOrdineButton;
 
     public void onClick(ActionEvent event){
         if(event.getSource() == registraProdottiButton){
             prodottoManager.onClickRegistraProdotti();
-        } else if (event.getSource() == ricercaButton) {
-            prodottoManager.onClickRicerca();
+        } else if (event.getSource() == listaOrdineButton) {
+            prodottoManager.onClickListaOrdine();
         }
     }
 

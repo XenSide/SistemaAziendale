@@ -89,7 +89,7 @@
                </graphic>
             </Label>
          </graphic></MFXButton>
-      <MFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="534.0" layoutY="277.0" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020" style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;">
+      <MFXButton fx:id="listaOrdineButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="534.0" layoutY="277.0" onAction="#onClick" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020" style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;">
          <graphic>
             <Label contentDisplay="RIGHT" graphicTextGap="51.0" lineSpacing="24.0" text="LISTA ORDINI&#13;RICEVUTI" textFill="WHITE">
                <font>
