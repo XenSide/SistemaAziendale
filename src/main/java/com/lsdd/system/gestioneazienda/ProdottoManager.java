@@ -3,6 +3,7 @@ package com.lsdd.system.gestioneazienda;
 import com.lsdd.system.utils.MyClassLoader;
 import com.lsdd.system.utils.Ordine;
 import com.lsdd.system.utils.Prodotto;
+import com.lsdd.system.utils.Utils;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
@@ -45,10 +46,22 @@ public class ProdottoManager {
 
     public void controlloCaricoDelFarmaco(String uid, String nome, String lotto, Boolean daBanco,
                                           String quantita, String costo, String pAttivo, String dataProduzione,
-                                          String dataScadenza) throws ParseException {
+                                          String dataScadenza, Stage stage) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Prodotto prodotto = new Prodotto(Integer.parseInt(uid), nome, lotto, daBanco, Integer.parseInt(quantita), Integer.parseInt(costo), pAttivo, formatter.parse(dataProduzione), formatter.parse(dataScadenza));
-        // FIXME: 9/2/2022 QUERY PER SALVARE
+        Prodotto prodotto = null;
+        try {
+            prodotto = new Prodotto(Integer.parseInt(uid), nome, lotto, daBanco, Integer.parseInt(quantita), Integer.parseInt(costo), pAttivo, formatter.parse(dataProduzione), formatter.parse(dataScadenza));
+            Boolean query = false; // FIXME: 07/09/2022 query per salvare
+            if (query){
+            Utils.showAlert("Caricamento effettuato con successo");
+            stage.close();
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            Utils.showAlert("I dati inseriti sono errati!");
+        }
+
         System.out.println(prodotto);
     }
 
