@@ -16,7 +16,6 @@ import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class AlertController implements Initializable {
     private final Stage stage;
-    private final AuthManager authManager;
     private final String stringaErrore;
 
     @Setter
@@ -31,7 +30,7 @@ public class AlertController implements Initializable {
 
 
     public void onConfirmButtonClick(ActionEvent actionEvent) {
-        authManager.deleteStage(stage);
+        stage.close();
     }
 
     @Override
