@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: rgba(0,0,0,0.4);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="100.0" layoutY="100.0" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #FFFF;">
+         <children>
+            <Region prefHeight="22.0" prefWidth="800.0" style="-fx-background-color: #AB3434;" />
+            <Label layoutX="39.0" layoutY="53.0" text="DETTAGLI PRODOTTO" textFill="#ab3434">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="230.0" text="PRINCIPIO ATTIVO" textFill="#ab3434">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="nomeLabel" layoutX="41.0" layoutY="168.0" text="Errore" textFill="#ab3434">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="241.0" layoutY="136.0" text="CODICE UID" textFill="#ab3434">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="uidLabel" layoutX="242.0" layoutY="168.0" text="Errore" textFill="#ab3434">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="400.0" layoutY="136.0" text="LOTTO" textFill="#ab3434">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lottoLabel" layoutX="401.0" layoutY="168.0" text="Errore" textFill="#ab3434">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="556.0" layoutY="136.0" text="DATA DI SCADENZA" textFill="#ab3434">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="scadenzaLabel" layoutX="557.0" layoutY="168.0" text="Errore" textFill="#ab3434">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="136.0" text="NOME FARMACO" textFill="#ab3434">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="pAttivoLabel" layoutX="41.0" layoutY="262.0" text="Errore" textFill="#ab3434">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="241.0" layoutY="230.0" text="QUANTITÁ" textFill="#ab3434">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="qtaLabel" layoutX="242.0" layoutY="262.0" text="Errore" textFill="#ab3434">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="400.0" layoutY="230.0" text="COSTO" textFill="#ab3434">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="costoLabel" layoutX="401.0" layoutY="262.0" text="Errore" textFill="#ab3434">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="556.0" layoutY="230.0" text="DATA PRODUZIONE" textFill="#ab3434">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="produzioneLabel" layoutX="557.0" layoutY="262.0" text="Errore" textFill="#ab3434">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <MFXButton fx:id="confirmButton" buttonType="RAISED" defaultButton="true" layoutX="668.0" layoutY="345.0" onAction="#onClick" prefHeight="32.0" prefWidth="86.0" style="-fx-background-color: #AB3434; -fx-border-radius: 20; -fx-background-radius: 20;" text="OK" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </MFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
