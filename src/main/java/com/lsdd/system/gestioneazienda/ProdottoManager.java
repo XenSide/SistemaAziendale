@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +33,7 @@ public class ProdottoManager {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(GUIListaProdottoController.class.getResource("ricerca.fxml"));
         Date data = new Date(1662477550);
-        Prodotto augmentin = new Prodotto("augmentin", "augmentin", 123, "ABC123", data, data, 2, 3, true);
+        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
         List<Ordine> ordines = new ArrayList<>();
         List<Prodotto> prodottos = new ArrayList<>();
         prodottos.add(augmentin);
@@ -41,12 +43,12 @@ public class ProdottoManager {
         new GUIListaProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
 
-    public void controlloCaricoDelFarmaco(String uid, String nome, String lotto, String peso,
+    public void controlloCaricoDelFarmaco(String uid, String nome, String lotto, Boolean daBanco,
                                           String quantita, String costo, String pAttivo, String dataProduzione,
-                                          String dataScadenza) {
-        System.out.println(uid + " " + nome + " " + lotto + " " + peso + " " + quantita + " " + costo + " " + pAttivo +
-                " " + dataProduzione + " " + dataScadenza);
+                                          String dataScadenza) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Prodotto prodotto = new Prodotto(Integer.parseInt(uid), nome, lotto, daBanco, Integer.parseInt(quantita), Integer.parseInt(costo), pAttivo, formatter.parse(dataProduzione), formatter.parse(dataScadenza));
         // FIXME: 9/2/2022 QUERY PER SALVARE
-
+        System.out.println(prodotto);
     }
 }
