@@ -4,6 +4,7 @@ import com.lsdd.system.gestioneazienda.GUIPrincipaleBoundary;
 import com.lsdd.system.gestioneazienda.GUIPrincipaleController;
 import com.lsdd.system.utils.AlertBoundary;
 import com.lsdd.system.utils.AlertController;
+import com.lsdd.system.utils.Utils;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -45,19 +46,12 @@ public class AuthManager {
     }
 
     public void confirmLogin(String email, String password) {
-        FXMLLoader fxmlLoader;
-
         if (controlloCredenziali(email, password)) {
-            fxmlLoader = new FXMLLoader(GUIPrincipaleBoundary.class.getResource("HPAzienda.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(GUIPrincipaleBoundary.class.getResource("HPAzienda.fxml"));
             fxmlLoader.setController(new GUIPrincipaleController(stage, fxmlLoader));
             new GUIPrincipaleBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
         } else {
-            fxmlLoader = new FXMLLoader(AlertBoundary.class.getResource("Alert.fxml"));
-            Stage stageDatiErrati = new Stage();
-            stageDatiErrati.initStyle(StageStyle.TRANSPARENT);
-            AlertController alertController = new AlertController(stageDatiErrati, this, "I dati inseriti sono errati!");
-            fxmlLoader.setController(alertController);
-            new AlertBoundary(stageDatiErrati, fxmlLoader); //new Stage() per creare una nuova finestra
+            Utils.showAlert("I dati inseriti sono errati!");
         }
     }
 
