@@ -14,7 +14,7 @@
       <Region layoutY="64.0" prefHeight="6.0" prefWidth="1000.0" style="-fx-background-color: #AB3434;" />
       <ImageView layoutX="820.0" layoutY="15.5">
          <image>
-            <Image url="@../../images/UserIcon.png" />
+            <Image url="@../../../../images/UserIcon.png" />
          </image>
       </ImageView>
       <Label layoutX="870.0" layoutY="19.0" prefHeight="25.0" prefWidth="81.0" text="Username" textFill="#ab3434">
@@ -24,7 +24,7 @@
       </Label>
       <ImageView fitHeight="39.0" fitWidth="39.0" x="53.0" y="12.5">
          <image>
-            <Image url="@../../images/Logo.png" />
+            <Image url="@../../../../images/Logo.png" />
          </image>
       </ImageView>
       <Label layoutX="109.0" layoutY="20.5" prefHeight="24.0" prefWidth="103.0" text="LOREM IPSUM" textFill="#ab3434">

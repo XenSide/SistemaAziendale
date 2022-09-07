@@ -51,4 +51,7 @@ public class ProdottoManager {
         // FIXME: 9/2/2022 QUERY PER SALVARE
         System.out.println(prodotto);
     }
+
+    public void creaInfo(Ordine ordine) {
+    }
 }

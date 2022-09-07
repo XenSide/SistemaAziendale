@@ -4,17 +4,16 @@ package com.lsdd.system.gestioneazienda;
 import com.lsdd.system.utils.Ordine;
 import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
-import io.github.palexdev.materialfx.filter.BooleanFilter;
 import io.github.palexdev.materialfx.filter.IntegerFilter;
 import io.github.palexdev.materialfx.filter.StringFilter;
-import io.github.palexdev.materialfx.utils.others.dates.DateStringConverter;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Paint;
@@ -22,7 +21,6 @@ import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 
 import java.net.URL;
-import java.time.format.DateTimeParseException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -49,6 +47,7 @@ public class GUIListaProdottoController implements Initializable {
 
 
     public void setupTable() {
+
         MFXTableColumn<Ordine> codiceOrdineColumn = new MFXTableColumn<>("Codice Ordine", true, Comparator.comparing(Ordine::getCodiceOrdine));
         codiceOrdineColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> indirizzoFarmaciaColumn = new MFXTableColumn<>("Indirizzo Farmacia", true, Comparator.comparing(Ordine::getIndirizzoFarmacia));
@@ -61,7 +60,7 @@ public class GUIListaProdottoController implements Initializable {
         statoColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> infoOrderColumn = new MFXTableColumn<>("", false);
         infoOrderColumn.setRowCellFactory(param -> new MFXTableRowCell<>(order -> order) {
-            private final MFXButton infoOrderButton = new MFXButton("");
+            private final Button infoOrderButton = new MFXButton("");
 
             @Override
             public void update(Ordine ordine) {
@@ -69,15 +68,15 @@ public class GUIListaProdottoController implements Initializable {
                     setGraphic(null);
                     return;
                 }
-              /*  Image buttonImage = new Image(getClass().getResourceAsStream("/images/info.png"));
-                ImageView imageView = new ImageView(buttonImage);
-                imageView.setFitWidth(15);
-                imageView.setFitHeight(17);
-                infoOrderButton.setTextFill(Paint.valueOf("WHITE"));
-                infoOrderButton.setGraphic(imageView);
 
+                Image buttonImage = new Image((getClass().getResourceAsStream("Info.png"))); // FIXME: 07/09/2022 
+                ImageView imageView = new ImageView(buttonImage);
+                imageView.setFitWidth(20);
+                imageView.setFitHeight(20);
+                infoOrderButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0)"); //trasparent
+                infoOrderButton.setGraphic(imageView);
                 setGraphic(infoOrderButton);
-                infoOrderButton.setOnAction(event -> ordersC.showInfoOrder(ordine));*/
+                infoOrderButton.setOnAction(event -> prodottoManager.creaInfo(ordine));
             }
         });
 
@@ -87,7 +86,6 @@ public class GUIListaProdottoController implements Initializable {
         nomeFarmaciaColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getNomeFarmacia));
         dataConsegnaColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getDataConsegna));
         statoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getStatoOrdine));
-
         table.getTableColumns().addAll(codiceOrdineColumn, indirizzoFarmaciaColumn, nomeFarmaciaColumn, dataConsegnaColumn, statoColumn, infoOrderColumn);
         table.getFilters().addAll(
                 new IntegerFilter<>("Codice Ordine", Ordine::getCodiceOrdine),
@@ -95,7 +93,11 @@ public class GUIListaProdottoController implements Initializable {
                 new StringFilter<>("Nome Farmacia", Ordine::getNomeFarmacia),
                 new IntegerFilter<>("Stato Ordine", Ordine::getStatoOrdine)
         );
-
+        table.setTableRowFactory(resource -> new MFXTableRow<>(table, resource) {{
+            setPrefHeight(40);
+            setAlignment(Pos.CENTER);
+        }});
+        table.autosizeColumnsOnInitialization();
         table.setItems(FXCollections.observableArrayList(listaOrdini));
 
 

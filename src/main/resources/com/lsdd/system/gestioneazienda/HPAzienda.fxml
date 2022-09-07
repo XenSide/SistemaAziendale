@@ -14,7 +14,7 @@
       <Region layoutY="64.0" prefHeight="6.0" prefWidth="1000.0" style="-fx-background-color: #AB3434;" />
       <ImageView x="652.0" y="15.5">
          <image>
-            <Image url="@../../images/UserIcon.png" />
+            <Image url="@../../../../images/UserIcon.png" />
          </image>
       </ImageView>
       <Label layoutX="702.0" layoutY="19.0" prefHeight="25.0" prefWidth="81.0" text="Username" textFill="#ab3434">
@@ -26,7 +26,7 @@
       <Button graphicTextGap="23.0" layoutX="842.0" layoutY="15.0" mnemonicParsing="false" style="-fx-background-color: #0000;" text="Logout" textFill="#ab3434">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="19.0" x="842.0" y="20.0">
-                  <Image url="@../../images/Logout.png" />
+                  <Image url="@../../../../images/Logout.png" />
             </ImageView>
          </graphic>
          <font>
@@ -35,7 +35,7 @@
       </Button>
       <ImageView fitHeight="39.0" fitWidth="39.0" x="53.0" y="12.5">
          <image>
-            <Image url="@../../images/Logo.png" />
+            <Image url="@../../../../images/Logo.png" />
          </image>
       </ImageView>
       <Label layoutX="109.0" layoutY="20.0" prefHeight="24.0" prefWidth="103.0" text="LOREM IPSUM" textFill="#ab3434">
@@ -52,7 +52,7 @@
                <graphic>
                   <ImageView>
                      <image>
-                        <Image url="@../../images/Codebar.png" />
+                        <Image url="@../../../../images/Codebar.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -68,7 +68,7 @@
                <graphic>
                   <ImageView>
                      <image>
-                        <Image url="@../../images/Search.png" />
+                        <Image url="@../../../../images/Search.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -83,7 +83,7 @@
                <graphic>
                   <ImageView>
                      <image>
-                        <Image url="@../../images/Edit.png" />
+                        <Image url="@../../../../images/Edit.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -98,7 +98,7 @@
                <graphic>
                   <ImageView>
                      <image>
-                        <Image url="@../../images/OrderList.png" />
+                        <Image url="@../../../../images/OrderList.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -113,7 +113,7 @@
                <graphic>
                   <ImageView>
                      <image>
-                        <Image url="@../../images/Sell.png" />
+                        <Image url="@../../../../images/Sell.png" />
                      </image>
                   </ImageView>
                </graphic>

@@ -59,6 +59,7 @@ public class GUICaricamentoNuovoProdottoController implements Initializable {
 
 
     public void onConfirmButtonClick(ActionEvent actionEvent) throws DateTimeParseException, ParseException {
+        // TODO: 07/09/2022 Add null checks
         prodottoManager.controlloCaricoDelFarmaco(uidField.getText(), nomeField.getText(), lottoField.getText(),
                 daBancoField.getText().equals("Si")? true:false, quantitaField.getText(), costoField.getText(), pAttivoField.getText(),
                 dataProduzioneField.getText(), dataScadenzaField.getText());
