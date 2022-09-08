@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 import java.net.URL;
 import java.util.ResourceBundle;
 @RequiredArgsConstructor
-public class InfoPanelController implements Initializable {
+public class GUIInfoProdottoController implements Initializable {
     private final Stage stage;
     private ProdottoManager prodottoManager;
 
@@ -56,7 +56,6 @@ public class InfoPanelController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //FXML edit code here
-        nomeLabel.setText("Prova");
         this.prodottoManager = new ProdottoManager(stage);
     }
 }
