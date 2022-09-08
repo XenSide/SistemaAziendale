@@ -15,11 +15,17 @@ public class Prodotto {
     private Date dataProduzione;
     private Date dataScadenza;
 
-    @Override
+   /* @Override
     public String toString() {
         return "UID: "+codiceUID+" Nome: "+nome+" Lotto: "+lotto+" daBanco: "+daBanco+" quantita: "+quantitá+" costo: "
                 +costo+" Principio Attivo: "+principioAttivo+" Data Di Produzione: "+dataProduzione
                 +" Data Di Scadenza: "+dataScadenza;
+    }*/
+
+    @Override
+    public String toString(){
+        nome = Utils.toDisplayCase(nome);
+        return nome+" "+quantitá;
     }
 
 }
