@@ -8,11 +8,12 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class Ordine {
-    private int codiceOrdine;
+    private Integer codiceOrdine;
     private String nomeFarmacia;
     private String indirizzoFarmacia;
     private List<Prodotto> prodotto;
     private Date dataConsegna;
-    private int statoOrdine;
-    private int tipoOrdine;
+    private Date dataOrdine;
+    private Integer statoOrdine;
+    private Integer tipoOrdine;
 }
