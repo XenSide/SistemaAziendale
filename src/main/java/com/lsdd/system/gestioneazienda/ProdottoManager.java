@@ -33,11 +33,19 @@ public class ProdottoManager {
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO 
         Date data = new Date(1662477550);
         Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
         List<Ordine> ordines = new ArrayList<>();
         List<Prodotto> prodottos = new ArrayList<>();
         prodottos.add(augmentin);
-        ordines.add(new Ordine(1,"bobbina", "viavai", prodottos, data, 1, 1));
-        ordines.add(new Ordine(1,"Antonina", "viavai", prodottos, data, 1, 1));
+        prodottos.add(augmentina);
+        prodottos.add(augmentina1);
+        prodottos.add(augmentina2);
+        prodottos.add(augmentina3);
+        ordines.add(new Ordine(1,"bobbina", "viavai", prodottos, data, data, 1,1));
+        ordines.add(new Ordine(1,"Antonina", "viavai", prodottos, data, data, 1,1));
         fxmlLoader.setController(new GUIListaOrdiniRicevutiController(stage, this, ordines));
         new GUIListaOrdiniRicevutiBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
@@ -64,14 +72,17 @@ public class ProdottoManager {
     }
 
     public void creaInfoProdotto(Prodotto prodotto) {
-        fxmlLoader = new FXMLLoader(InfoPanelController.class.getResource("ProductinfoPanel.fxml"));
+        fxmlLoader = new FXMLLoader(GUIInfoProdottoController.class.getResource("infoProdottoPanel.fxml"));
         Stage stage = new Stage();
-        fxmlLoader.setController(new InfoPanelController(stage, fxmlLoader));
+        fxmlLoader.setController(new GUIInfoProdottoController(stage, fxmlLoader));
         new GUIInfoProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
 
     public void creaInfoOrdine(Ordine ordine) {
-        Utils.showAlert("Info Ordine");
+        fxmlLoader = new FXMLLoader(GUIInfoOrdineController.class.getResource("infoOrdinePanel.fxml"));
+        Stage stage = new Stage();
+        fxmlLoader.setController(new GUIInfoOrdineController(stage, fxmlLoader, ordine));
+        new GUIInfoOrdineBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
 
     public void cancellaOrdine(Ordine ordine) {
