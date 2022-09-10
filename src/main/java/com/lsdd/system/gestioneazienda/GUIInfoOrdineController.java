@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -75,12 +77,13 @@ public class GUIInfoOrdineController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //FXML edit code here
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         ordercodeLabel.setText(Utils.toDisplayCase(ordine.getCodiceOrdine().toString()));
-        dataOrdineLabel.setText(Utils.toDisplayCase(ordine.getDataOrdine().toString()));
+        dataOrdineLabel.setText(Utils.toDisplayCase(df.format(ordine.getDataOrdine())));
         indirizzoLabel.setText(Utils.toDisplayCase(ordine.getIndirizzoFarmacia()));
         nomeLabel.setText(Utils.toDisplayCase(ordine.getNomeFarmacia()));
         statoLabel.setText(Utils.toDisplayCase(ordine.getStatoOrdine().toString()));
-        dataConsegnaLabel.setText(Utils.toDisplayCase(ordine.getDataConsegna().toString()));
+        dataConsegnaLabel.setText(Utils.toDisplayCase(df.format(ordine.getDataConsegna())));
         tipoLabel.setText(Utils.toDisplayCase(ordine.getTipoOrdine().toString()));
 
         List<String> strings = new ArrayList<>();
