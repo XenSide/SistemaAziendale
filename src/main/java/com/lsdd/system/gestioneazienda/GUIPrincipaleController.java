@@ -39,6 +39,8 @@ public class GUIPrincipaleController implements Initializable {
             prodottoManager.onClickRegistraProdotti();
         } else if (event.getSource() == listaOrdineButton) {
             prodottoManager.onClickListaOrdine();
+        } else if (event.getSource() == ricercaButton) {
+            prodottoManager.onclickRicerca();
         }
     }
 

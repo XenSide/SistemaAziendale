@@ -29,7 +29,7 @@ public class ProdottoManager {
 
     public void onClickListaOrdine() {
         Stage stage = new Stage();
-        fxmlLoader = new FXMLLoader(GUIListaOrdiniRicevutiController.class.getResource("listaOrdiniRicevuti.fxml"));
+        fxmlLoader = new FXMLLoader(GUIListaOrdiniRicevutiController.class.getResource("tableView.fxml"));
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO 
         Date data = new Date(1662477550);
         Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
@@ -44,10 +44,30 @@ public class ProdottoManager {
         prodottos.add(augmentina1);
         prodottos.add(augmentina2);
         prodottos.add(augmentina3);
-        ordines.add(new Ordine(1,"bobbina", "viavai", prodottos, data, data, 1,1));
-        ordines.add(new Ordine(1,"Antonina", "viavai", prodottos, data, data, 1,1));
+        ordines.add(new Ordine(1, "bobbina", "viavai", prodottos, data, data, 1, 1));
+        ordines.add(new Ordine(1, "Antonina", "viavai", prodottos, data, data, 1, 1));
         fxmlLoader.setController(new GUIListaOrdiniRicevutiController(stage, this, ordines));
         new GUIListaOrdiniRicevutiBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+    }
+
+    public void onclickRicerca() {
+        Stage stage = new Stage();
+        fxmlLoader = new FXMLLoader(GUIRicercaController.class.getResource("tableView.fxml"));
+        // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
+        Date data = new Date(1662477550);
+        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        List<Prodotto> prodottos = new ArrayList<>();
+        prodottos.add(augmentin);
+        prodottos.add(augmentina);
+        prodottos.add(augmentina1);
+        prodottos.add(augmentina2);
+        prodottos.add(augmentina3);
+        fxmlLoader.setController(new GUIRicercaController(stage, this, prodottos));
+        new GUIRicercaBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
 
     public void controlloCaricoDelFarmaco(String uid, String nome, String lotto, Boolean daBanco,
@@ -58,7 +78,7 @@ public class ProdottoManager {
         try {
             prodotto = new Prodotto(Integer.parseInt(uid), nome, lotto, daBanco, Integer.parseInt(quantita), Integer.parseInt(costo), pAttivo, formatter.parse(dataProduzione), formatter.parse(dataScadenza));
             Boolean query = true; // FIXME: 07/09/2022 query per salvare
-            if (query){
+            if (query) {
             Utils.showAlert("Caricamento effettuato con successo");
             stage.close();
             } else {
@@ -74,7 +94,7 @@ public class ProdottoManager {
     public void creaInfoProdotto(Prodotto prodotto) {
         fxmlLoader = new FXMLLoader(GUIInfoProdottoController.class.getResource("infoProdottoPanel.fxml"));
         Stage stage = new Stage();
-        fxmlLoader.setController(new GUIInfoProdottoController(stage, fxmlLoader));
+        fxmlLoader.setController(new GUIInfoProdottoController(prodotto, stage, fxmlLoader));
         new GUIInfoProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
 
