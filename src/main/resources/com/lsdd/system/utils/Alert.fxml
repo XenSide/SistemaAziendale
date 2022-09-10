@@ -11,12 +11,12 @@
    <children>
       <AnchorPane layoutX="290.0" layoutY="220.0" maxHeight="160.0" maxWidth="420.0" prefHeight="160.0" prefWidth="420.0" style="-fx-background-color: #FFFF;">
          <children>
-            <Label fx:id="messaggioErrore" alignment="CENTER" layoutX="7.0" layoutY="59.0" prefHeight="21.0" prefWidth="413.0" text="Contattare l'amministratore" textFill="#ab3434">
+            <Label fx:id="messaggioErrore" alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="41.0" prefHeight="47.0" prefWidth="310.0" text="Si è verificato un errore, contattare l'amministratore" textAlignment="CENTER" textFill="#ab3434" wrapText="true">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <MFXButton buttonType="RAISED" layoutX="170.0" layoutY="108.0" onAction="#onConfirmButtonClick" prefHeight="32.0" prefWidth="86.0" rippleAnimateShadow="true" rippleColor="#7e2020" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #AB3434;" text="OK" textFill="WHITE">
+            <MFXButton buttonType="RAISED" layoutX="167.0" layoutY="107.0" onAction="#onConfirmButtonClick" prefHeight="32.0" prefWidth="86.0" rippleAnimateShadow="true" rippleColor="#7e2020" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #AB3434;" text="OK" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
