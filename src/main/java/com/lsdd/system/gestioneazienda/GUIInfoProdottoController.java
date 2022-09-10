@@ -1,5 +1,7 @@
 package com.lsdd.system.gestioneazienda;
 
+import com.lsdd.system.utils.Prodotto;
+import com.lsdd.system.utils.Utils;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,9 +12,12 @@ import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class GUIInfoProdottoController implements Initializable {
+    private final Prodotto prodotto;
     private final Stage stage;
     private ProdottoManager prodottoManager;
 
@@ -55,7 +60,15 @@ public class GUIInfoProdottoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //FXML edit code here
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        pAttivoLabel.setText(Utils.toDisplayCase(prodotto.getPrincipioAttivo()));
+        uidLabel.setText(Utils.toDisplayCase((prodotto.getCodiceUID().toString())));
+        lottoLabel.setText(Utils.toDisplayCase(prodotto.getLotto()));
+        scadenzaLabel.setText(df.format(prodotto.getDataScadenza()));
+        nomeLabel.setText(Utils.toDisplayCase(prodotto.getNome()));
+        qtaLabel.setText(prodotto.getQuantitá().toString());
+        costoLabel.setText(prodotto.getCosto().toString() + "€");
+        produzioneLabel.setText(df.format(prodotto.getDataProduzione()));
         this.prodottoManager = new ProdottoManager(stage);
     }
 }
