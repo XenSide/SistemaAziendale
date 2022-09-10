@@ -1,16 +1,19 @@
 package com.lsdd.system.utils;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.Date;
+
+@Getter
 @AllArgsConstructor
 public class Prodotto {
-    private int codiceUID;
+    private Integer codiceUID;
     private String nome;
     private String lotto;
     private boolean daBanco;
-    private int quantitá;
-    private int costo;
+    private Integer quantitá;
+    private Integer costo;
     private String principioAttivo;
     private Date dataProduzione;
     private Date dataScadenza;
