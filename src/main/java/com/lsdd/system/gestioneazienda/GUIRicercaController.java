@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -27,6 +28,7 @@ import java.util.ResourceBundle;
 
 @RequiredArgsConstructor
 public class GUIRicercaController implements Initializable {
+    private final String title = "RICERCA";
     private final Stage stage;
     private final ProdottoManager prodottoManager;
     private final List<Prodotto> listaProdotti;
@@ -38,6 +40,9 @@ public class GUIRicercaController implements Initializable {
 
     @FXML
     private MFXTableView table;
+
+    @FXML
+    private Label titleLabel;
 
     public void onCancelButtonClick(ActionEvent actionEvent) {
         stage.close();
@@ -105,6 +110,7 @@ public class GUIRicercaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //FXML edit code here
+        titleLabel.setText(title);
         setupTable();
     }
 }

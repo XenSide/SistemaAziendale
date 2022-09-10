@@ -2,11 +2,10 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXListView?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.text.Font?>
-
+<?import javafx.scene.text.*?>
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: rgba(0,0,0,0.4);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="100.0" layoutY="100.0" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #FFFF;">
@@ -98,9 +97,12 @@
                   <Font size="16.0" />
                </font>
             </MFXButton>
-            <MFXButton fx:id="indietroButton" buttonType="RAISED" defaultButton="true" layoutX="657.0" layoutY="346.0" onAction="#onClick" prefHeight="32.0" prefWidth="109.0" style="-fx-background-color: #AB3434; -fx-border-radius: 20; -fx-background-radius: 20;" text="INDIETRO" textFill="WHITE">
+            <MFXButton fx:id="indietroButton" buttonType="RAISED" cancelButton="true" layoutX="657.0" layoutY="346.0"
+                       onAction="#onClick" prefHeight="32.0" prefWidth="109.0"
+                       style="-fx-background-color: #AB3434; -fx-border-radius: 20; -fx-background-radius: 20;"
+                       text="INDIETRO" textFill="WHITE">
                <font>
-                  <Font size="16.0" />
+                  <Font size="16.0"/>
                </font>
             </MFXButton>
          </children>

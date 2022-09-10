@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -28,6 +29,8 @@ import java.util.ResourceBundle;
 
 @RequiredArgsConstructor
 public class GUIVenditaController implements Initializable {
+    private final String title = "VENDITA";
+
     private final Stage stage;
     private final ProdottoManager prodottoManager;
     private final List<Ordine> listaOrdini;
@@ -39,6 +42,9 @@ public class GUIVenditaController implements Initializable {
 
     @FXML
     private MFXTableView table;
+
+    @FXML
+    private Label titleLabel;
 
     public void onCancelButtonClick(ActionEvent actionEvent) {
 
@@ -128,6 +134,7 @@ public class GUIVenditaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //FXML edit code here
+        titleLabel.setText(title);
         setupTable();
     }
 }

@@ -47,9 +47,9 @@
          </font>
       </MFXButton>
       <MFXTableView fx:id="table" layoutX="53.0" layoutY="168.0" prefHeight="311.0" prefWidth="894.0" style="-fx-border-color: AB3434; -fx-border-radius: 20; -fx-background-radius: 20;" />
-      <Label layoutX="53.0" layoutY="114.0" text="LISTA ORDINI RICEVUTI" textFill="#ab3434">
+      <Label fx:id="titleLabel" layoutX="53.0" layoutY="114.0" text="ERRORE" textFill="#ab3434">
          <font>
-            <Font size="24.0" />
+            <Font size="24.0"/>
          </font>
       </Label>
    </children>
