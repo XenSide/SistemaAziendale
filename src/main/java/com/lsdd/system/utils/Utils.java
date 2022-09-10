@@ -29,6 +29,13 @@ public class Utils {
         fxmlLoader.setController(alertController);
         new AlertBoundary(stageDatiErrati, fxmlLoader); //new Stage() per creare una nuova finestra
     }
+    public static void showAlertInSameWindow(String errore, Stage stage){
+        FXMLLoader fxmlLoader = new FXMLLoader(AlertBoundary.class.getResource("Alert.fxml"));
+        AlertController alertController = new AlertController(stage,errore);
+        fxmlLoader.setController(alertController);
+        new AlertBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+    }
+
     public static String toDisplayCase(String s) { //"prova prova prova" becomes "Prova Prova Prova"
 
         final String ACTIONABLE_DELIMITERS = " '-/"; // these cause the character following
