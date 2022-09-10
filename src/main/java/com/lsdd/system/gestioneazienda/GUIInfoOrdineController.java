@@ -62,6 +62,13 @@ public class GUIInfoOrdineController implements Initializable {
     public void onClick(ActionEvent event){
         if(event.getSource() == indietroButton) {
             stage.close();
+        } else if (event.getSource() == vendiButton) {
+            boolean success = prodottoManager.vendiProdotto();
+            if (success){
+                Utils.showAlertInSameWindow("Vendita confermata", stage);
+            }else {
+                Utils.showAlertInSameWindow("Vendita fallita", stage);
+            }
         }
     }
 
