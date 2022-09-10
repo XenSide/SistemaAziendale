@@ -2,7 +2,10 @@ package com.lsdd.system.gestioneazienda;
 
 
 import com.lsdd.system.utils.Ordine;
-import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTableColumn;
+import io.github.palexdev.materialfx.controls.MFXTableRow;
+import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.filter.IntegerFilter;
 import io.github.palexdev.materialfx.filter.StringFilter;
@@ -45,7 +48,6 @@ public class GUIListaOrdiniRicevutiController implements Initializable {
 
 
     public void setupTable() {
-
         MFXTableColumn<Ordine> codiceOrdineColumn = new MFXTableColumn<>("Codice Ordine", true, Comparator.comparing(Ordine::getCodiceOrdine));
         codiceOrdineColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> indirizzoFarmaciaColumn = new MFXTableColumn<>("Indirizzo Farmacia", true, Comparator.comparing(Ordine::getIndirizzoFarmacia));
