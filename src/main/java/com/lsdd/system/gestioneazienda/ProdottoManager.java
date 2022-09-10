@@ -82,10 +82,24 @@ public class ProdottoManager {
         fxmlLoader = new FXMLLoader(GUIInfoOrdineController.class.getResource("infoOrdinePanel.fxml"));
         Stage stage = new Stage();
         fxmlLoader.setController(new GUIInfoOrdineController(stage, fxmlLoader, ordine));
-        new GUIInfoOrdineBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+        new GUIInfoOrdineBoundary(stage,fxmlLoader);
     }
 
     public void cancellaOrdine(Ordine ordine) {
-        Utils.showAlert("cancella ordine");
+        fxmlLoader = new FXMLLoader(GUIInfoOrdineController.class.getResource("ConfermaAnnullamentoOrdine.fxml"));
+        Stage stage = new Stage();
+        fxmlLoader.setController(new ConfermaAnnullamentoController(stage,
+                "Sei sicuro di voler annullare l'ordine?", this, ordine));
+        new ConfermaAnnullamentoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+    }
+
+    public boolean annullaOrdine(Ordine ordine) {
+        // TODO: 10/09/2022 query annullamento ordine 
+        return false;
+    }
+
+    public boolean vendiProdotto() {
+        // TODO: 10/09/2022 query vendita ordine 
+        return false;
     }
 }
