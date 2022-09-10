@@ -33,14 +33,16 @@ public class GUIPrincipaleController implements Initializable {
     private MFXButton ricercaButton;
     @FXML
     private MFXButton listaOrdineButton;
+    @FXML
+    private MFXButton venditaButton;
 
-    public void onClick(ActionEvent event){
-        if(event.getSource() == registraProdottiButton){
+    public void onClick(ActionEvent event) {
+        if (event.getSource() == registraProdottiButton) {
             prodottoManager.onClickRegistraProdotti();
-        } else if (event.getSource() == listaOrdineButton) {
-            prodottoManager.onClickListaOrdine();
+        } else if (event.getSource() == venditaButton) {
+            prodottoManager.onClickVendita();
         } else if (event.getSource() == ricercaButton) {
-            prodottoManager.onclickRicerca();
+            prodottoManager.onClickRicerca();
         }
     }
 

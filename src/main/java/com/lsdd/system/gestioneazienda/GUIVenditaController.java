@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @RequiredArgsConstructor
-public class GUIListaOrdiniRicevutiController implements Initializable {
+public class GUIVenditaController implements Initializable {
     private final Stage stage;
     private final ProdottoManager prodottoManager;
     private final List<Ordine> listaOrdini;

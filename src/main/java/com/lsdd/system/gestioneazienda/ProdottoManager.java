@@ -27,9 +27,9 @@ public class ProdottoManager {
         new GUICaricamentoNuovoProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
 
-    public void onClickListaOrdine() {
+    public void onClickVendita() {
         Stage stage = new Stage();
-        fxmlLoader = new FXMLLoader(GUIListaOrdiniRicevutiController.class.getResource("tableView.fxml"));
+        fxmlLoader = new FXMLLoader(GUIVenditaController.class.getResource("tableView.fxml"));
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO 
         Date data = new Date(1662477550);
         Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
@@ -46,11 +46,11 @@ public class ProdottoManager {
         prodottos.add(augmentina3);
         ordines.add(new Ordine(1, "bobbina", "viavai", prodottos, data, data, 1, 1));
         ordines.add(new Ordine(1, "Antonina", "viavai", prodottos, data, data, 1, 1));
-        fxmlLoader.setController(new GUIListaOrdiniRicevutiController(stage, this, ordines));
-        new GUIListaOrdiniRicevutiBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+        fxmlLoader.setController(new GUIVenditaController(stage, this, ordines));
+        new GUIVenditaBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
 
-    public void onclickRicerca() {
+    public void onClickRicerca() {
         Stage stage = new Stage();
         fxmlLoader = new FXMLLoader(GUIRicercaController.class.getResource("tableView.fxml"));
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
