@@ -59,8 +59,8 @@ public class GUIRicercaController implements Initializable {
         codiceUIDColumn.setPrefWidth(179);
         MFXTableColumn<Prodotto> quantitaColumn = new MFXTableColumn<>("Quantitá", true, Comparator.comparing(Prodotto::getQuantitá));
         quantitaColumn.setPrefWidth(179);
-        MFXTableColumn<Prodotto> costoColumn = new MFXTableColumn<>("Costo", true, Comparator.comparing(Prodotto::getCosto));
-        costoColumn.setPrefWidth(179);
+        MFXTableColumn<Prodotto> pAttivoColumn = new MFXTableColumn<>("Principio Attivo", true, Comparator.comparing(Prodotto::getPrincipioAttivo));
+        pAttivoColumn.setPrefWidth(179);
         MFXTableColumn<Prodotto> infoOrderColumn = new MFXTableColumn<>("", false);
         infoOrderColumn.setRowCellFactory(param -> new MFXTableRowCell<>(prodotto -> prodotto) {
             private final Button infoOrderButton = new MFXButton("");
@@ -88,14 +88,14 @@ public class GUIRicercaController implements Initializable {
         nomeFarmacoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getNome));
         codiceUIDColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getCodiceUID));
         quantitaColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getQuantitá));
-        costoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getCosto));
-        table.getTableColumns().addAll(codiceLottoColumn, nomeFarmacoColumn, codiceUIDColumn, quantitaColumn, costoColumn, infoOrderColumn);
+        pAttivoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getPrincipioAttivo));
+        table.getTableColumns().addAll(codiceLottoColumn, nomeFarmacoColumn, pAttivoColumn, codiceUIDColumn, quantitaColumn, infoOrderColumn);
         table.getFilters().addAll(
                 new StringFilter<>("Codice Lotto", Prodotto::getLotto),
                 new StringFilter<>("Nome Farmaco", Prodotto::getNome),
                 new IntegerFilter<>("Codice UID", Prodotto::getCodiceUID),
                 new IntegerFilter<>("Quantitá", Prodotto::getQuantitá),
-                new IntegerFilter<>("Costo", Prodotto::getCosto)
+                new StringFilter<>("Principio Attivo", Prodotto::getPrincipioAttivo)
         );
         table.setTableRowFactory(resource -> new MFXTableRow<>(table, resource) {{
             setPrefHeight(40);
