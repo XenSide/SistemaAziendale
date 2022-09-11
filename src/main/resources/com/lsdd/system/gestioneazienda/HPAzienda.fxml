@@ -71,16 +71,19 @@
                </graphic>
             </Label>
          </graphic></MFXButton>
-      <MFXButton buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="534.0" layoutY="171.0" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020" style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;">
+      <MFXButton fx:id="modificaButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="534.0"
+                 layoutY="171.0" onAction="#onClick" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
+                 style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;">
          <graphic>
-            <Label contentDisplay="RIGHT" graphicTextGap="55.0" lineSpacing="24.0" text="MODIFICA&#13;PRODUZIONE" textFill="WHITE">
+            <Label contentDisplay="RIGHT" graphicTextGap="55.0" lineSpacing="24.0" text="MODIFICA&#13;PRODUZIONE"
+                   textFill="WHITE">
                <font>
-                  <Font size="15.0" />
+                  <Font size="15.0"/>
                </font>
                <graphic>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../images/Edit.png" />
+                        <Image url="@../../../../images/Edit.png"/>
                      </image>
                   </ImageView>
                </graphic>

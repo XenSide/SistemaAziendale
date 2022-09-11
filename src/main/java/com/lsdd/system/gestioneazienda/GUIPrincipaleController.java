@@ -35,6 +35,8 @@ public class GUIPrincipaleController implements Initializable {
     private MFXButton listaOrdineButton;
     @FXML
     private MFXButton venditaButton;
+    @FXML
+    private MFXButton modificaButton;
 
     public void onClick(ActionEvent event) {
         if (event.getSource() == registraProdottiButton) {
@@ -43,6 +45,10 @@ public class GUIPrincipaleController implements Initializable {
             prodottoManager.onClickVendita();
         } else if (event.getSource() == ricercaButton) {
             prodottoManager.onClickRicerca();
+        } else if (event.getSource() == listaOrdineButton) {
+            prodottoManager.onClickListaOrdiniRicevuti();
+        } else if (event.getSource() == modificaButton) {
+            prodottoManager.onclickModificaProduzione();
         }
     }
 

@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @RequiredArgsConstructor
-public class GUIRicercaController implements Initializable {
-    private final String title = "RICERCA";
+public class GUIModificaProduzioneController implements Initializable {
+    private final String title = "MODIFICA PRODUZIONE";
     private final Stage stage;
     private final ProdottoManager prodottoManager;
     private final List<Prodotto> listaProdotti;
@@ -51,16 +51,14 @@ public class GUIRicercaController implements Initializable {
 
     public void setupTable() {
 
-        MFXTableColumn<Prodotto> codiceLottoColumn = new MFXTableColumn<>("Codice Lotto", true, Comparator.comparing(Prodotto::getLotto));
-        codiceLottoColumn.setPrefWidth(179);
         MFXTableColumn<Prodotto> nomeFarmacoColumn = new MFXTableColumn<>("Nome Farmaco", true, Comparator.comparing(Prodotto::getNome));
         nomeFarmacoColumn.setPrefWidth(179);
-        MFXTableColumn<Prodotto> codiceUIDColumn = new MFXTableColumn<>("Codice UID", true, Comparator.comparing(Prodotto::getCodiceUID));
-        codiceUIDColumn.setPrefWidth(179);
+        MFXTableColumn<Prodotto> pAttivoColumn = new MFXTableColumn<>("Principio Attivo", true, Comparator.comparing(Prodotto::getPrincipioAttivo));
+        pAttivoColumn.setPrefWidth(179);
         MFXTableColumn<Prodotto> quantitaColumn = new MFXTableColumn<>("Quantitá", true, Comparator.comparing(Prodotto::getQuantitá));
         quantitaColumn.setPrefWidth(179);
-        MFXTableColumn<Prodotto> costoColumn = new MFXTableColumn<>("Costo", true, Comparator.comparing(Prodotto::getCosto));
-        costoColumn.setPrefWidth(179);
+        MFXTableColumn<Prodotto> tempoColumn = new MFXTableColumn<>("Periodicità (gg)", true, Comparator.comparing(Prodotto::getDataProduzione));
+        tempoColumn.setPrefWidth(179);
         MFXTableColumn<Prodotto> infoOrderColumn = new MFXTableColumn<>("", false);
         infoOrderColumn.setRowCellFactory(param -> new MFXTableRowCell<>(prodotto -> prodotto) {
             private final Button infoOrderButton = new MFXButton("");
@@ -72,35 +70,34 @@ public class GUIRicercaController implements Initializable {
                     return;
                 }
 
-                Image infoButtonImage = new Image((getClass().getResourceAsStream("Info.png"))); // FIXME: 07/09/2022
+                Image infoButtonImage = new Image((getClass().getResourceAsStream("modifica.png"))); // FIXME: 07/09/2022
                 ImageView imageView = new ImageView(infoButtonImage);
                 imageView.setFitWidth(20);
                 imageView.setFitHeight(20);
                 infoOrderButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0)"); //trasparent
                 infoOrderButton.setGraphic(imageView);
                 setGraphic(infoOrderButton);
-                infoOrderButton.setOnAction(event -> prodottoManager.creaInfoProdotto(prodotto));
+                infoOrderButton.setOnAction(event -> prodottoManager.creaModificaProduzione(prodotto));
             }
         });
 
 
-        codiceLottoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getLotto));
         nomeFarmacoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getNome));
-        codiceUIDColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getCodiceUID));
+        pAttivoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getPrincipioAttivo));
         quantitaColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getQuantitá));
-        costoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getCosto));
-        table.getTableColumns().addAll(codiceLottoColumn, nomeFarmacoColumn, codiceUIDColumn, quantitaColumn, costoColumn, infoOrderColumn);
+        tempoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getDataProduzione));
+        table.getTableColumns().addAll(nomeFarmacoColumn, pAttivoColumn, quantitaColumn, tempoColumn, infoOrderColumn);
         table.getFilters().addAll(
-                new StringFilter<>("Codice Lotto", Prodotto::getLotto),
                 new StringFilter<>("Nome Farmaco", Prodotto::getNome),
-                new IntegerFilter<>("Codice UID", Prodotto::getCodiceUID),
-                new IntegerFilter<>("Quantitá", Prodotto::getQuantitá),
-                new IntegerFilter<>("Costo", Prodotto::getCosto)
+                new StringFilter<>("Principio Attivo", Prodotto::getPrincipioAttivo),
+                new IntegerFilter<>("Quantitá", Prodotto::getQuantitá)
         );
         table.setTableRowFactory(resource -> new MFXTableRow<>(table, resource) {{
             setPrefHeight(40);
             setAlignment(Pos.CENTER_LEFT);
         }});
+
+        System.out.println(table.tableRowFactoryProperty());
         table.autosizeColumnsOnInitialization();
         table.setItems(FXCollections.observableArrayList(listaProdotti));
 

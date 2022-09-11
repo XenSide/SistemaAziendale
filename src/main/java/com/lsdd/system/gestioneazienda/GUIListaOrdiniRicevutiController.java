@@ -14,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -28,8 +27,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @RequiredArgsConstructor
-public class GUIVenditaController implements Initializable {
-    private final String title = "VENDITA";
+public class GUIListaOrdiniRicevutiController implements Initializable {
+    private final boolean vendita; //if true = vendita, false = listaOrdiniRicevuti
 
     private final Stage stage;
     private final ProdottoManager prodottoManager;
@@ -47,8 +46,6 @@ public class GUIVenditaController implements Initializable {
     private Label titleLabel;
 
     public void onCancelButtonClick(ActionEvent actionEvent) {
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
     }
 
@@ -56,8 +53,8 @@ public class GUIVenditaController implements Initializable {
     public void setupTable() {
         MFXTableColumn<Ordine> codiceOrdineColumn = new MFXTableColumn<>("Codice Ordine", true, Comparator.comparing(Ordine::getCodiceOrdine));
         codiceOrdineColumn.setPrefWidth(179);
-        MFXTableColumn<Ordine> indirizzoFarmaciaColumn = new MFXTableColumn<>("Indirizzo Farmacia", true, Comparator.comparing(Ordine::getIndirizzoFarmacia));
-        indirizzoFarmaciaColumn.setPrefWidth(179);
+        MFXTableColumn<Ordine> dataOrdineColumn = new MFXTableColumn<>("Data Ordine", true, Comparator.comparing(Ordine::getDataOrdine));
+        dataOrdineColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> nomeFarmaciaColumn = new MFXTableColumn<>("Nome Farmacia", true, Comparator.comparing(Ordine::getNomeFarmacia));
         nomeFarmaciaColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> dataConsegnaColumn = new MFXTableColumn<>("Data di Consegna", true, Comparator.comparing(Ordine::getDataConsegna));
@@ -65,10 +62,8 @@ public class GUIVenditaController implements Initializable {
         MFXTableColumn<Ordine> statoColumn = new MFXTableColumn<>("Stato Ordine", true, Comparator.comparing(Ordine::getStatoOrdine));
         statoColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> infoOrderColumn = new MFXTableColumn<>("", false);
-        MFXTableColumn<Ordine> cancelOrderColumn = new MFXTableColumn<>("", false);
         infoOrderColumn.setRowCellFactory(param -> new MFXTableRowCell<>(order -> order) {
             private final Button infoOrderButton = new MFXButton("");
-            private final Button cancelOrderButton = new MFXButton("");
 
             @Override
             public void update(Ordine ordine) {
@@ -76,54 +71,37 @@ public class GUIVenditaController implements Initializable {
                     setGraphic(null);
                     return;
                 }
-
-                Image infoButtonImage = new Image((getClass().getResourceAsStream("Info.png"))); // FIXME: 07/09/2022
+                Image infoButtonImage;
+                if (vendita) {
+                    infoButtonImage = new Image((getClass().getResourceAsStream("sellList.png")));
+                } else {
+                    infoButtonImage = new Image((getClass().getResourceAsStream("info.png")));
+                }
                 ImageView imageView = new ImageView(infoButtonImage);
                 imageView.setFitWidth(20);
                 imageView.setFitHeight(20);
                 infoOrderButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0)"); //trasparent
                 infoOrderButton.setGraphic(imageView);
                 setGraphic(infoOrderButton);
-                infoOrderButton.setOnAction(event -> prodottoManager.creaInfoOrdine(ordine));
+                infoOrderButton.setOnAction(event -> prodottoManager.creaInfoOrdine(ordine, vendita));
             }
         });
-        cancelOrderColumn.setRowCellFactory(param -> new MFXTableRowCell<>(order -> order) {
-                    private final Button cancelOrderButton = new MFXButton("");
-
-                    @Override
-                    public void update(Ordine ordine) {
-                        if (ordine == null) {
-                            setGraphic(null);
-                            return;
-                        }
-                    Image cancelButtonImage = new Image((getClass().getResourceAsStream("cancel.png"))); // FIXME: 07/09/2022
-                    ImageView imageView = new ImageView(cancelButtonImage);
-                    imageView.setFitWidth(20);
-                    imageView.setFitHeight(20);
-                    cancelOrderButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0)"); //trasparent
-                    cancelOrderButton.setGraphic(imageView);
-                    setGraphic(cancelOrderButton);
-                    cancelOrderButton.setOnAction(event -> prodottoManager.cancellaOrdine(ordine));
-                    }
-                });
-
 
 
         codiceOrdineColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getCodiceOrdine));
-        indirizzoFarmaciaColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getIndirizzoFarmacia));
+        dataOrdineColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getDataOrdine));
         nomeFarmaciaColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getNomeFarmacia));
         dataConsegnaColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getDataConsegna));
         statoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getStatoOrdine));
-        table.getTableColumns().addAll(codiceOrdineColumn, indirizzoFarmaciaColumn, nomeFarmaciaColumn, dataConsegnaColumn, statoColumn, infoOrderColumn, cancelOrderColumn);
+        table.getTableColumns().addAll(codiceOrdineColumn, dataOrdineColumn, nomeFarmaciaColumn, dataConsegnaColumn, statoColumn, infoOrderColumn);
         table.getFilters().addAll(
                 new IntegerFilter<>("Codice Ordine", Ordine::getCodiceOrdine),
-                new StringFilter<>("Indirizzo Farmacia", Ordine::getIndirizzoFarmacia),
                 new StringFilter<>("Nome Farmacia", Ordine::getNomeFarmacia),
                 new IntegerFilter<>("Stato Ordine", Ordine::getStatoOrdine)
         );
         table.setTableRowFactory(resource -> new MFXTableRow<>(table, resource) {{
             setPrefHeight(40);
-            setAlignment(Pos.CENTER);
+            setAlignment(Pos.CENTER_LEFT);
         }});
         table.autosizeColumnsOnInitialization();
         table.setItems(FXCollections.observableArrayList(listaOrdini));
@@ -134,7 +112,11 @@ public class GUIVenditaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //FXML edit code here
-        titleLabel.setText(title);
+        if (vendita)
+            titleLabel.setText("VENDITA");
+        else
+            titleLabel.setText("LISTA ORDINI RICEVUTI");
+
         setupTable();
     }
 }

@@ -4,10 +4,7 @@ import com.lsdd.system.utils.Ordine;
 import com.lsdd.system.utils.Utils;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXListView;
-import io.github.palexdev.materialfx.controls.cell.MFXListCell;
-
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +22,7 @@ import java.util.ResourceBundle;
 
 @RequiredArgsConstructor
 public class GUIInfoOrdineController implements Initializable {
+    private final boolean vendita;
     private final Stage stage;
     private ProdottoManager prodottoManager;
 
@@ -65,10 +63,9 @@ public class GUIInfoOrdineController implements Initializable {
         if(event.getSource() == indietroButton) {
             stage.close();
         } else if (event.getSource() == vendiButton) {
-            boolean success = prodottoManager.vendiProdotto();
-            if (success){
+            if (prodottoManager.confermaVenditaOrdine(ordine)) {
                 Utils.showAlertInSameWindow("Vendita confermata", stage);
-            }else {
+            } else {
                 Utils.showAlertInSameWindow("Vendita fallita", stage);
             }
         }
@@ -77,6 +74,8 @@ public class GUIInfoOrdineController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //FXML edit code here
+        if (!vendita)
+            vendiButton.setDisable(true);
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         ordercodeLabel.setText(Utils.toDisplayCase(ordine.getCodiceOrdine().toString()));
         dataOrdineLabel.setText(Utils.toDisplayCase(df.format(ordine.getDataOrdine())));
