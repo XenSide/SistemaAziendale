@@ -1,10 +1,7 @@
 package com.lsdd.system.utils;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 public class Utente {
     @Getter
@@ -14,14 +11,27 @@ public class Utente {
     private final String email;
     private final String nome;
     private final String cognome;
-    private final String UIDFarmacia;
+    private Integer UIDFarmacia;
+
+    public Utente(int id, int type, String email, String nome, String cognome) {
+        this.id = id;
+        this.type = type;
+        this.email = email;
+        this.nome = nome;
+        this.cognome = cognome;
+    }
+
+    public Utente(int id, int type, String email, String nome, String cognome, Integer UIDFarmacia) {
+        this(id, type, email, nome, cognome);
+        this.UIDFarmacia = UIDFarmacia;
+    }
 
     public static Utente createInstance(int id, int type, String email, String name, String surname) {
         user = new Utente(id, type, email, name, surname, null);
         return user;
     }
 
-    public static Utente createInstance(int id, int type, String email, String name, String cognome, String UIDFarmacia) {
+    public static Utente createInstance(int id, int type, String email, String name, String cognome, Integer UIDFarmacia) {
         user = new Utente(id, type, email, name, cognome, UIDFarmacia);
         return user;
     }
