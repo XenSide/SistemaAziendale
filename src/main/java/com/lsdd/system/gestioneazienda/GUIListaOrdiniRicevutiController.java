@@ -31,7 +31,7 @@ public class GUIListaOrdiniRicevutiController implements Initializable {
     private final boolean vendita; //if true = vendita, false = listaOrdiniRicevuti
 
     private final Stage stage;
-    private final ProdottoManager prodottoManager;
+    private final ControlOrdiniA controlOrdiniA;
     private final List<Ordine> listaOrdini;
     @FXML
     private ResourceBundle resources;
@@ -44,6 +44,9 @@ public class GUIListaOrdiniRicevutiController implements Initializable {
 
     @FXML
     private Label titleLabel;
+
+    @FXML
+    private Label username;
 
     public void onCancelButtonClick(ActionEvent actionEvent) {
         stage.close();
@@ -83,7 +86,7 @@ public class GUIListaOrdiniRicevutiController implements Initializable {
                 infoOrderButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0)"); //trasparent
                 infoOrderButton.setGraphic(imageView);
                 setGraphic(infoOrderButton);
-                infoOrderButton.setOnAction(event -> prodottoManager.creaInfoOrdine(ordine, vendita));
+                infoOrderButton.setOnAction(event -> controlOrdiniA.creaInfoOrdine(ordine, vendita));
             }
         });
 
@@ -116,7 +119,7 @@ public class GUIListaOrdiniRicevutiController implements Initializable {
             titleLabel.setText("VENDITA");
         else
             titleLabel.setText("LISTA ORDINI RICEVUTI");
-
+        username.setText(controlOrdiniA.getUsername());
         setupTable();
     }
 }

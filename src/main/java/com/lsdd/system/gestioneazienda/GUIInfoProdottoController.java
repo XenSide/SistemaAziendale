@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 public class GUIInfoProdottoController implements Initializable {
     private final Prodotto prodotto;
     private final Stage stage;
+
     private ProdottoManager prodottoManager;
 
     private final FXMLLoader fxmlLoader;
@@ -69,6 +70,5 @@ public class GUIInfoProdottoController implements Initializable {
         qtaLabel.setText(prodotto.getQuantitá().toString());
         costoLabel.setText(prodotto.getCosto().toString() + "€");
         produzioneLabel.setText(df.format(prodotto.getDataProduzione()));
-        this.prodottoManager = new ProdottoManager(stage);
     }
 }

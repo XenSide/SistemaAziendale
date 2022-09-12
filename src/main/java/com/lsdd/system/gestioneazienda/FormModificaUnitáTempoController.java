@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class FormModificaUnitáTempoController implements Initializable {
     private final Stage stage;
-    private final ProdottoManager prodottoManager;
+    private final ControlOrdiniA controlOrdiniA;
     private final Prodotto prodotto;
     @FXML
     private ResourceBundle resources;
@@ -43,7 +43,7 @@ public class FormModificaUnitáTempoController implements Initializable {
 
     public void onClick(ActionEvent actionEvent) {
         if (actionEvent.getSource() == confirmButton) {
-            if (prodottoManager.modificaProduzioneProdotto(prodotto)) {
+            if (controlOrdiniA.modificaProduzioneProdotto(prodotto)) {
                 Utils.showAlert("Modifiche apportate con successo");
                 stage.close();
             } else {

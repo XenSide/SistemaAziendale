@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 public class GUIModificaProduzioneController implements Initializable {
     private final String title = "MODIFICA PRODUZIONE";
     private final Stage stage;
-    private final ProdottoManager prodottoManager;
+    private final ControlOrdiniA controlOrdiniA;
     private final List<Prodotto> listaProdotti;
     @FXML
     private ResourceBundle resources;
@@ -43,6 +43,9 @@ public class GUIModificaProduzioneController implements Initializable {
 
     @FXML
     private Label titleLabel;
+
+    @FXML
+    private Label username;
 
     public void onCancelButtonClick(ActionEvent actionEvent) {
         stage.close();
@@ -77,7 +80,7 @@ public class GUIModificaProduzioneController implements Initializable {
                 infoOrderButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0)"); //trasparent
                 infoOrderButton.setGraphic(imageView);
                 setGraphic(infoOrderButton);
-                infoOrderButton.setOnAction(event -> prodottoManager.creaModificaProduzione(prodotto));
+                infoOrderButton.setOnAction(event -> controlOrdiniA.creaModificaProduzione(prodotto));
             }
         });
 
@@ -96,8 +99,6 @@ public class GUIModificaProduzioneController implements Initializable {
             setPrefHeight(40);
             setAlignment(Pos.CENTER_LEFT);
         }});
-
-        System.out.println(table.tableRowFactoryProperty());
         table.autosizeColumnsOnInitialization();
         table.setItems(FXCollections.observableArrayList(listaProdotti));
 
@@ -107,6 +108,7 @@ public class GUIModificaProduzioneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //FXML edit code here
+        username.setText(controlOrdiniA.getUsername());
         titleLabel.setText(title);
         setupTable();
     }

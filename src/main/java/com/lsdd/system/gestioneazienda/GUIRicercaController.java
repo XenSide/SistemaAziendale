@@ -44,6 +44,9 @@ public class GUIRicercaController implements Initializable {
     @FXML
     private Label titleLabel;
 
+    @FXML
+    private Label username;
+
     public void onCancelButtonClick(ActionEvent actionEvent) {
         stage.close();
     }
@@ -110,6 +113,7 @@ public class GUIRicercaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //FXML edit code here
+        username.setText(prodottoManager.getUsername());
         titleLabel.setText(title);
         setupTable();
     }

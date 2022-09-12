@@ -1,7 +1,6 @@
 package com.lsdd.system.gestioneazienda;
 
 
-import com.lsdd.system.utils.Utils;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
@@ -11,7 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 
@@ -64,6 +63,8 @@ public class GUICaricamentoNuovoProdottoController implements Initializable {
     @FXML
     private MFXButton confirmButton;
 
+    @FXML
+    private Label username;
 
     public void onConfirmButtonClick(ActionEvent actionEvent) throws DateTimeParseException, ParseException {
 
@@ -71,14 +72,13 @@ public class GUICaricamentoNuovoProdottoController implements Initializable {
     }
 
 
-    public void onClick(ActionEvent actionEvent)
-    {
-        if(actionEvent.getSource() == cancelButton) {
+    public void onClick(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == cancelButton) {
             stage.close();
         } else if (actionEvent.getSource() == confirmButton) {
             try {
                 prodottoManager.controlloCaricoDelFarmaco(uidField.getText(), nomeField.getText(), lottoField.getText(),
-                        daBancoField.getText().equals("Si") ? true : false, quantitaField.getText(), costoField.getText(), pAttivoField.getText(),
+                        daBancoField.getText().equals("Si"), quantitaField.getText(), costoField.getText(), pAttivoField.getText(),
                         dataProduzioneField.getText(), dataScadenzaField.getText(), stage);
             }catch (Exception exception){
                 System.err.println(exception);
@@ -92,5 +92,7 @@ public class GUICaricamentoNuovoProdottoController implements Initializable {
         daBancoField.setItems(FXCollections.observableArrayList("Si", "No"));
         dataProduzioneField.setConverterSupplier(() -> new DateStringConverter("dd/MM/yyyy", dataProduzioneField.getLocale()));
         dataScadenzaField.setConverterSupplier(() -> new DateStringConverter("dd/MM/yyyy", dataScadenzaField.getLocale()));
+        username.setText(prodottoManager.getUsername());
+
     }
 }

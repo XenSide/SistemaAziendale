@@ -19,7 +19,8 @@ import java.util.ResourceBundle;
 public class ConfermaAnnullamentoController implements Initializable {
     private final Stage stage;
     private final String stringaErrore;
-    private final ProdottoManager prodottoManager;
+
+    private final ControlOrdiniA controlOrdiniA;
 
     private final Ordine ordine;
 
@@ -45,12 +46,12 @@ public class ConfermaAnnullamentoController implements Initializable {
             stage.close();
         } else if (actionEvent.getSource() == confirmButton) {
             try {
-                boolean success = prodottoManager.annullaOrdine(ordine  );
-                if (prodottoManager.annullaOrdine(ordine)) // FIXME: 10/09/2022
+                boolean success = controlOrdiniA.annullaOrdine(ordine);
+                if (controlOrdiniA.annullaOrdine(ordine)) // FIXME: 10/09/2022
                 {
                     Utils.showAlertInSameWindow("L'ordine è stato cancellato correttamente", stage);
                 } else {
-                    Utils.showAlertInSameWindow("Impossibile annullare l'ordine, poiché la consegna è prevista nei prossimi 2 giorni",stage);
+                    Utils.showAlertInSameWindow("Impossibile annullare l'ordine, poiché la consegna è prevista nei prossimi 2 giorni", stage);
                 }
 
             }catch (Exception exception){

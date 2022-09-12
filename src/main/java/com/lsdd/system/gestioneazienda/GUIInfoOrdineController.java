@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 public class GUIInfoOrdineController implements Initializable {
     private final boolean vendita;
     private final Stage stage;
-    private ProdottoManager prodottoManager;
+    private final ControlOrdiniA controlOrdiniA;
 
     private final FXMLLoader fxmlLoader;
 
@@ -63,7 +63,7 @@ public class GUIInfoOrdineController implements Initializable {
         if(event.getSource() == indietroButton) {
             stage.close();
         } else if (event.getSource() == vendiButton) {
-            if (prodottoManager.confermaVenditaOrdine(ordine)) {
+            if (controlOrdiniA.confermaVenditaOrdine(ordine)) {
                 Utils.showAlertInSameWindow("Vendita confermata", stage);
             } else {
                 Utils.showAlertInSameWindow("Vendita fallita", stage);
@@ -88,8 +88,5 @@ public class GUIInfoOrdineController implements Initializable {
         List<String> strings = new ArrayList<>();
         //strings.add(ordine.getProdotto());
         listView.setItems(FXCollections.observableArrayList(ordine.getProdotto()));
-
-
-        this.prodottoManager = new ProdottoManager(stage);
     }
 }
