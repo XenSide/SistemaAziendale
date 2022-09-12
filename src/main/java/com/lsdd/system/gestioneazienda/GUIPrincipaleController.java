@@ -1,12 +1,15 @@
 package com.lsdd.system.gestioneazienda;
 
 
+import com.lsdd.system.autenticazione.AuthManager;
+import com.lsdd.system.autenticazione.LoginBoundary;
 import com.lsdd.system.utils.Utente;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +19,7 @@ import java.util.ResourceBundle;
 
 @RequiredArgsConstructor
 public class GUIPrincipaleController implements Initializable {
+    private final AuthManager authManager;
     private final Utente utente;
     private final Stage stage;
 
@@ -43,6 +47,8 @@ public class GUIPrincipaleController implements Initializable {
 
     @FXML
     private Label username;
+    @FXML
+    private Button logoutButton;
 
     public void onClick(ActionEvent event) {
         if (event.getSource() == registraProdottiButton) {
@@ -55,6 +61,12 @@ public class GUIPrincipaleController implements Initializable {
             controlOrdiniA.onClickListaOrdiniRicevuti();
         } else if (event.getSource() == modificaButton) {
             controlOrdiniA.onclickModificaProduzione();
+        } else if (event.getSource() == logoutButton) {
+            try {
+                LoginBoundary.startStatic();
+                stage.close();
+            } catch (Exception e) {
+            }
         }
     }
 

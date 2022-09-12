@@ -51,7 +51,7 @@ public class AuthManager {
             switch (utente.getType()) {
                 case 1:
                     FXMLLoader fxmlLoader = new FXMLLoader(GUIPrincipaleBoundary.class.getResource("HPAzienda.fxml"));
-                    fxmlLoader.setController(new GUIPrincipaleController(utente, stage, fxmlLoader));
+                    fxmlLoader.setController(new GUIPrincipaleController(this, utente, stage, fxmlLoader));
                     new GUIPrincipaleBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
                 case 2:
                     //Farmacista

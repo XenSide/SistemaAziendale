@@ -21,8 +21,8 @@
          </font>
       </Label>
       <Region layoutX="810.5" layoutY="17.0" prefHeight="29.0" prefWidth="1.0" style="-fx-background-color: AB3434;" />
-      <Button graphicTextGap="23.0" layoutX="842.0" layoutY="14.0" mnemonicParsing="false"
-              style="-fx-background-color: #0000;" text="Logout" textFill="#ab3434">
+      <Button fx:id="logoutButton" graphicTextGap="23.0" layoutX="842.0" layoutY="14.0" mnemonicParsing="false"
+              onAction="#onClick" style="-fx-background-color: #0000;" text="Logout" textFill="#ab3434">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="19.0" x="842.0" y="20.0">
                <Image url="@../../../../images/Logout.png"/>
@@ -37,9 +37,9 @@
             <Image url="@../../../../images/Logo.png" />
          </image>
       </ImageView>
-      <Label layoutX="109.0" layoutY="20.0" prefHeight="24.0" prefWidth="103.0" text="LOREM IPSUM" textFill="#ab3434">
+      <Label layoutX="109.0" layoutY="20.5" prefHeight="24.0" prefWidth="103.0" text="LOREM IPSUM" textFill="#ab3434">
          <font>
-            <Font name="MS Outlook" size="15.0" />
+            <Font name="MS Outlook" size="15.0"/>
          </font>
       </Label>
       <MFXButton fx:id="registraProdottiButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" ellipsisString="" graphicTextGap="0.0" layoutX="222.0" layoutY="171.0" onAction="#onClick" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020" style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;" text="registraProdottiButton" textFill="WHITE">

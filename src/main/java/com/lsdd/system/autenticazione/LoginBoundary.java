@@ -22,4 +22,12 @@ public class LoginBoundary extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
         Utils.startStage(stage, scene);
     }
+
+    public static void startStatic() throws IOException { // FIXME: 12/09/2022 No, I don't think I will
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginBoundary.class.getResource("Login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.initStyle(StageStyle.TRANSPARENT);
+        Utils.startStage(stage, scene);
+    }
 }
