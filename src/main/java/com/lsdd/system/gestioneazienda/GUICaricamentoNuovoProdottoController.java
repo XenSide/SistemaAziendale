@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class GUICaricamentoNuovoProdottoController implements Initializable {
     private final Stage stage;
-    private final ProdottoManager prodottoManager;
+    private final ControlProdottiA controlProdottiA;
 
     @FXML
     private ResourceBundle resources;
@@ -77,7 +77,7 @@ public class GUICaricamentoNuovoProdottoController implements Initializable {
             stage.close();
         } else if (actionEvent.getSource() == confirmButton) {
             try {
-                prodottoManager.controlloCaricoDelFarmaco(uidField.getText(), nomeField.getText(), lottoField.getText(),
+                controlProdottiA.controlloCaricoDelFarmaco(uidField.getText(), nomeField.getText(), lottoField.getText(),
                         daBancoField.getText().equals("Si"), quantitaField.getText(), costoField.getText(), pAttivoField.getText(),
                         dataProduzioneField.getText(), dataScadenzaField.getText(), stage);
             }catch (Exception exception){
@@ -92,7 +92,7 @@ public class GUICaricamentoNuovoProdottoController implements Initializable {
         daBancoField.setItems(FXCollections.observableArrayList("Si", "No"));
         dataProduzioneField.setConverterSupplier(() -> new DateStringConverter("dd/MM/yyyy", dataProduzioneField.getLocale()));
         dataScadenzaField.setConverterSupplier(() -> new DateStringConverter("dd/MM/yyyy", dataScadenzaField.getLocale()));
-        username.setText(prodottoManager.getUsername());
+        username.setText(controlProdottiA.getUsername());
 
     }
 }

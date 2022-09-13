@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 public class GUIRicercaController implements Initializable {
     private final String title = "RICERCA";
     private final Stage stage;
-    private final ProdottoManager prodottoManager;
+    private final ControlProdottiA controlProdottiA;
     private final List<Prodotto> listaProdotti;
     @FXML
     private ResourceBundle resources;
@@ -82,7 +82,7 @@ public class GUIRicercaController implements Initializable {
                 infoOrderButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0)"); //trasparent
                 infoOrderButton.setGraphic(imageView);
                 setGraphic(infoOrderButton);
-                infoOrderButton.setOnAction(event -> prodottoManager.creaInfoProdotto(prodotto));
+                infoOrderButton.setOnAction(event -> controlProdottiA.creaInfoProdotto(prodotto));
             }
         });
 
@@ -113,7 +113,7 @@ public class GUIRicercaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //FXML edit code here
-        username.setText(prodottoManager.getUsername());
+        username.setText(controlProdottiA.getUsername());
         titleLabel.setText(title);
         setupTable();
     }

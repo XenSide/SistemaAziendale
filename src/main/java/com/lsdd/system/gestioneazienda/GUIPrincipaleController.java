@@ -24,7 +24,7 @@ public class GUIPrincipaleController implements Initializable {
     private final Stage stage;
 
     private final FXMLLoader fxmlLoader;
-    private ProdottoManager prodottoManager;
+    private ControlProdottiA controlProdottiA;
     private ControlOrdiniA controlOrdiniA;
 
     @FXML
@@ -52,9 +52,9 @@ public class GUIPrincipaleController implements Initializable {
 
     public void onClick(ActionEvent event) {
         if (event.getSource() == registraProdottiButton) {
-            prodottoManager.onClickRegistraProdotti();
+            controlProdottiA.onClickRegistraProdotti();
         } else if (event.getSource() == ricercaButton) {
-            prodottoManager.onClickRicerca();
+            controlProdottiA.onClickRicerca();
         } else if (event.getSource() == venditaButton) {
             controlOrdiniA.onClickVendita();
         } else if (event.getSource() == listaOrdineButton) {
@@ -74,7 +74,7 @@ public class GUIPrincipaleController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //FXML edit code here
         username.setText(utente.getNome());
-        this.prodottoManager = new ProdottoManager(stage, utente);
+        this.controlProdottiA = new ControlProdottiA(stage, utente);
         this.controlOrdiniA = new ControlOrdiniA(stage, utente);
     }
 }

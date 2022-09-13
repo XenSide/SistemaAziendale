@@ -20,7 +20,7 @@ public class GUIInfoProdottoController implements Initializable {
     private final Prodotto prodotto;
     private final Stage stage;
 
-    private ProdottoManager prodottoManager;
+    private ControlProdottiA controlProdottiA;
 
     private final FXMLLoader fxmlLoader;
 

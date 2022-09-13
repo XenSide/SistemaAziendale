@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class ProdottoManager {
+public class ControlProdottiA {
 
     private FXMLLoader fxmlLoader = new FXMLLoader();
     private final Stage stage;
