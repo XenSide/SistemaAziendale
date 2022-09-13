@@ -1,7 +1,7 @@
 package com.lsdd.system.autenticazione;
 
-import com.lsdd.system.gestioneazienda.GUIPrincipaleBoundary;
-import com.lsdd.system.gestioneazienda.GUIPrincipaleController;
+import com.lsdd.system.utils.GUIPrincipaleBoundary;
+import com.lsdd.system.utils.GUIPrincipaleController;
 import com.lsdd.system.utils.Utente;
 import com.lsdd.system.utils.Utils;
 import javafx.fxml.FXMLLoader;

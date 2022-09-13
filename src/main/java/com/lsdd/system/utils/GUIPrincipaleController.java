@@ -1,9 +1,10 @@
-package com.lsdd.system.gestioneazienda;
+package com.lsdd.system.utils;
 
 
 import com.lsdd.system.autenticazione.AuthManager;
 import com.lsdd.system.autenticazione.LoginBoundary;
-import com.lsdd.system.utils.Utente;
+import com.lsdd.system.gestioneazienda.ControlOrdiniA;
+import com.lsdd.system.gestioneazienda.ControlProdottiA;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

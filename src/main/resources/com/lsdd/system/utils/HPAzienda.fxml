@@ -22,7 +22,7 @@
       </Label>
       <Region layoutX="810.5" layoutY="17.0" prefHeight="29.0" prefWidth="1.0" style="-fx-background-color: AB3434;" />
       <Button fx:id="logoutButton" graphicTextGap="23.0" layoutX="842.0" layoutY="14.0" mnemonicParsing="false"
-              onAction="#onClick" style="-fx-background-color: #0000;" text="Logout" textFill="#ab3434">
+              onAction="#onClickA" style="-fx-background-color: #0000;" text="Logout" textFill="#ab3434">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="19.0" x="842.0" y="20.0">
                <Image url="@../../../../images/Logout.png"/>
@@ -42,39 +42,47 @@
             <Font name="MS Outlook" size="15.0"/>
          </font>
       </Label>
-      <MFXButton fx:id="registraProdottiButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" ellipsisString="" graphicTextGap="0.0" layoutX="222.0" layoutY="171.0" onAction="#onClick" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020" style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;" text="registraProdottiButton" textFill="WHITE">
+      <MFXButton fx:id="registraProdottiButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" ellipsisString=""
+                 graphicTextGap="0.0" layoutX="222.0" layoutY="171.0" onAction="#onClickA" prefHeight="72.0"
+                 prefWidth="244.0" rippleColor="#7e2020"
+                 style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;"
+                 text="registraProdottiButton" textFill="WHITE">
          <graphic>
-            <Label contentDisplay="RIGHT" graphicTextGap="28.0" lineSpacing="24.0" text="REGISTRAZIONE&#13;PRODOTTI" textFill="WHITE">
+            <Label contentDisplay="RIGHT" graphicTextGap="28.0" lineSpacing="24.0" text="REGISTRAZIONE&#13;PRODOTTI"
+                   textFill="WHITE">
                <font>
-                  <Font size="15.0" />
+                  <Font size="15.0"/>
                </font>
                <graphic>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../images/Codebar.png" />
+                        <Image url="@../../../../images/Codebar.png"/>
                      </image>
                   </ImageView>
                </graphic>
             </Label>
          </graphic>
       </MFXButton>
-      <MFXButton fx:id="ricercaButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="222.0" layoutY="277.0" onAction="#onClick" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020" style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;" text="ricercaButton">
+      <MFXButton fx:id="ricercaButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="222.0" layoutY="277.0"
+                 onAction="#onClickA" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
+                 style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;"
+                 text="ricercaButton">
          <graphic>
             <Label contentDisplay="RIGHT" graphicTextGap="68.0" text="RICERCA&#13;PRODOTTI" textFill="WHITE">
                <font>
-                  <Font size="15.0" />
+                  <Font size="15.0"/>
                </font>
                <graphic>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../images/Search.png" />
+                        <Image url="@../../../../images/Search.png"/>
                      </image>
                   </ImageView>
                </graphic>
             </Label>
          </graphic></MFXButton>
       <MFXButton fx:id="modificaButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="534.0"
-                 layoutY="171.0" onAction="#onClick" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
+                 layoutY="171.0" onAction="#onClickA" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
                  style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;">
          <graphic>
             <Label contentDisplay="RIGHT" graphicTextGap="55.0" lineSpacing="24.0" text="MODIFICA&#13;PRODUZIONE"
@@ -91,23 +99,26 @@
                </graphic>
             </Label>
          </graphic></MFXButton>
-      <MFXButton fx:id="listaOrdineButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="534.0" layoutY="277.0" onAction="#onClick" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020" style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;">
+      <MFXButton fx:id="listaOrdineButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="534.0"
+                 layoutY="277.0" onAction="#onClickA" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
+                 style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;">
          <graphic>
-            <Label contentDisplay="RIGHT" graphicTextGap="51.0" lineSpacing="24.0" text="LISTA ORDINI&#13;RICEVUTI" textFill="WHITE">
+            <Label contentDisplay="RIGHT" graphicTextGap="51.0" lineSpacing="24.0" text="LISTA ORDINI&#13;RICEVUTI"
+                   textFill="WHITE">
                <font>
-                  <Font size="15.0" />
+                  <Font size="15.0"/>
                </font>
                <graphic>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../images/OrderList.png" />
+                        <Image url="@../../../../images/OrderList.png"/>
                      </image>
                   </ImageView>
                </graphic>
             </Label>
          </graphic></MFXButton>
       <MFXButton fx:id="venditaButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="378.0" layoutY="383.0"
-                 onAction="#onClick" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
+                 onAction="#onClickA" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
                  style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;">
          <graphic>
             <Label contentDisplay="RIGHT" graphicTextGap="73.0" lineSpacing="24.0" text="VENDITA&#13;PRODOTTI"

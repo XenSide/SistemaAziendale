@@ -1,7 +1,6 @@
-package com.lsdd.system.gestioneazienda;
+package com.lsdd.system.utils;
 
 
-import com.lsdd.system.utils.Utils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
