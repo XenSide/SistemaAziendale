@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1000.0"
+            style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/18">
+   <children>
+      <Region layoutY="64.0" prefHeight="6.0" prefWidth="1000.0" style="-fx-background-color: #AB3434;"/>
+      <ImageView x="652.0" y="15.5">
+         <image>
+            <Image url="@../../../../images/UserIcon.png"/>
+         </image>
+      </ImageView>
+      <Label fx:id="username" alignment="CENTER" layoutX="702.0" layoutY="19.0" prefHeight="25.0" prefWidth="81.0"
+             text="Username" textFill="#ab3434">
+         <font>
+            <Font size="15.0"/>
+         </font>
+      </Label>
+      <Region layoutX="810.5" layoutY="17.0" prefHeight="29.0" prefWidth="1.0" style="-fx-background-color: AB3434;"/>
+      <Button fx:id="logoutButton" graphicTextGap="23.0" layoutX="842.0" layoutY="14.0" mnemonicParsing="false"
+              onAction="#onClickA" style="-fx-background-color: #0000;" text="Logout" textFill="#ab3434">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="19.0" x="842.0" y="20.0">
+               <Image url="@../../../../images/Logout.png"/>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="15.0"/>
+         </font>
+      </Button>
+      <ImageView fitHeight="39.0" fitWidth="39.0" x="53.0" y="12.5">
+         <image>
+            <Image url="@../../../../images/Logo.png"/>
+         </image>
+      </ImageView>
+      <Label layoutX="109.0" layoutY="20.5" prefHeight="24.0" prefWidth="103.0" text="LOREM IPSUM" textFill="#ab3434">
+         <font>
+            <Font name="MS Outlook" size="15.0"/>
+         </font>
+      </Label>
+      <MFXButton fx:id="registraProdottiButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" ellipsisString=""
+                 graphicTextGap="0.0" layoutX="222.0" layoutY="350.0" onAction="#onClickF" prefHeight="72.0"
+                 prefWidth="244.0" rippleColor="#7e2020"
+                 style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;"
+                 text="registraProdottiButton" textFill="WHITE">
+         <graphic>
+            <Label contentDisplay="RIGHT" graphicTextGap="79.0" lineSpacing="24.0" text="RICHIESTA&#13;PRODOTTI"
+                   textFill="WHITE">
+               <font>
+                  <Font size="15.0"/>
+               </font>
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../images/order.png"/>
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </graphic>
+      </MFXButton>
+      <MFXButton fx:id="ricercaButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="222.0" layoutY="243.0"
+                 onAction="#onClickF" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
+                 style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;"
+                 text="ricercaButton">
+         <graphic>
+            <Label contentDisplay="RIGHT" graphicTextGap="72.0" text="RICERCA&#13;PRODOTTI" textFill="WHITE">
+               <font>
+                  <Font size="15.0"/>
+               </font>
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../images/Search.png"/>
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </graphic>
+      </MFXButton>
+      <MFXButton fx:id="modificaButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="534.0"
+                 layoutY="350.0" onAction="#onClickF" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
+                 style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;">
+         <graphic>
+            <Label contentDisplay="RIGHT" graphicTextGap="77.0" lineSpacing="24.0" text="MODIFICA&#13;ORDINE"
+                   textFill="WHITE">
+               <font>
+                  <Font size="15.0"/>
+               </font>
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../images/Edit.png"/>
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </graphic>
+      </MFXButton>
+      <MFXButton fx:id="listaOrdineButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="534.0"
+                 layoutY="244.0" onAction="#onClickF" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
+                 style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;">
+         <graphic>
+            <Label contentDisplay="RIGHT" graphicTextGap="54.0" lineSpacing="24.0" text="LISTA ORDINI&#13;EFFETTUATI"
+                   textFill="WHITE">
+               <font>
+                  <Font size="15.0"/>
+               </font>
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../images/OrderList.png"/>
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </graphic>
+      </MFXButton>
+      <MFXButton fx:id="venditaButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="378.0" layoutY="456.0"
+                 onAction="#onClickF" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
+                 style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;">
+         <graphic>
+            <Label contentDisplay="RIGHT" graphicTextGap="73.0" lineSpacing="24.0" text="VENDITA&#13;PRODOTTI"
+                   textFill="WHITE">
+               <font>
+                  <Font size="15.0"/>
+               </font>
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../images/Sell.png"/>
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </graphic>
+      </MFXButton>
+      <MFXButton fx:id="stoccaggioButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="223.0"
+                 layoutY="144.0" onAction="#onClickF" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
+                 style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;"
+                 text="ricercaButton">
+         <graphic>
+            <Label contentDisplay="RIGHT" graphicTextGap="72.0" text="STOCCAGGIO" textFill="WHITE">
+               <font>
+                  <Font size="15.0"/>
+               </font>
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../images/Package.png"/>
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </graphic>
+      </MFXButton>
+      <MFXButton fx:id="confermaRicezioneButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="534.0"
+                 layoutY="144.0" onAction="#onClickF" prefHeight="72.0" prefWidth="244.0" rippleColor="#7e2020"
+                 style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;"
+                 text="ricercaButton">
+         <graphic>
+            <Label contentDisplay="RIGHT" graphicTextGap="72.0" text="CONFERMA&#13;RICEZIONE" textFill="WHITE">
+               <font>
+                  <Font size="15.0"/>
+               </font>
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../images/Check.png"/>
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </graphic>
+      </MFXButton>
+   </children>
+</AnchorPane>

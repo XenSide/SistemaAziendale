@@ -51,7 +51,27 @@ public class GUIPrincipaleController implements Initializable {
     @FXML
     private Button logoutButton;
 
-    public void onClick(ActionEvent event) {
+    public void onClickA(ActionEvent event) {
+        if (event.getSource() == registraProdottiButton) {
+            controlProdottiA.onClickRegistraProdotti();
+        } else if (event.getSource() == ricercaButton) {
+            controlProdottiA.onClickRicerca();
+        } else if (event.getSource() == venditaButton) {
+            controlOrdiniA.onClickVendita();
+        } else if (event.getSource() == listaOrdineButton) {
+            controlOrdiniA.onClickListaOrdiniRicevuti();
+        } else if (event.getSource() == modificaButton) {
+            controlOrdiniA.onclickModificaProduzione();
+        } else if (event.getSource() == logoutButton) {
+            try {
+                LoginBoundary.startStatic();
+                stage.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public void onClickF(ActionEvent event) {
         if (event.getSource() == registraProdottiButton) {
             controlProdottiA.onClickRegistraProdotti();
         } else if (event.getSource() == ricercaButton) {

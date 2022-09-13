@@ -27,7 +27,7 @@ public class AuthManager {
             //Verifier verifier = jargon2Verifier();
             //return verifier.hash(encodedHash).password(pass).verifyEncoded();
             // TODO: 12/09/2022 return Utente from DBMS
-            return new Utente(12, 1, "testquery", "Claudio", "Dalfino", "$argon2id$v=19$m=65536,t=3,p=4$MZ7a00EJJnnLl+D+X57Bqw$SpB3kSZAkmjIBfMjqaYUTw");
+            return new Utente(12, 2, "testquery", "Claudio", "Dalfino", "$argon2id$v=19$m=65536,t=3,p=4$MZ7a00EJJnnLl+D+X57Bqw$SpB3kSZAkmjIBfMjqaYUTw");
         } else {
             return null;
         }
@@ -54,6 +54,9 @@ public class AuthManager {
                     fxmlLoader.setController(new GUIPrincipaleController(this, utente, stage, fxmlLoader));
                     new GUIPrincipaleBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
                 case 2:
+                    fxmlLoader = new FXMLLoader(GUIPrincipaleBoundary.class.getResource("HPFarmacia.fxml"));
+                    fxmlLoader.setController(new GUIPrincipaleController(this, utente, stage, fxmlLoader));
+                    new GUIPrincipaleBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
                     //Farmacista
                 case 3:
                     //Corriere
