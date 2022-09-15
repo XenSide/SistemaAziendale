@@ -1,10 +1,10 @@
-package com.lsdd.system.utils;
+package com.lsdd.system.gestioneazienda;
 
 
 import com.lsdd.system.autenticazione.AuthManager;
-import com.lsdd.system.autenticazione.LoginBoundary;
-import com.lsdd.system.gestioneazienda.ControlOrdiniA;
-import com.lsdd.system.gestioneazienda.ControlProdottiA;
+import com.lsdd.system.utils.LogoutConfirmationBoundary;
+import com.lsdd.system.utils.LogoutConfirmationController;
+import com.lsdd.system.utils.Utente;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @RequiredArgsConstructor
-public class GUIPrincipaleController implements Initializable {
+public class GUIPrincipaleAziendaController implements Initializable {
     private final AuthManager authManager;
     private final Utente utente;
     private final Stage stage;
@@ -28,6 +28,7 @@ public class GUIPrincipaleController implements Initializable {
     private final FXMLLoader fxmlLoader;
     private ControlProdottiA controlProdottiA;
     private ControlOrdiniA controlOrdiniA;
+
 
     @FXML
     private ResourceBundle resources;
@@ -52,7 +53,8 @@ public class GUIPrincipaleController implements Initializable {
     @FXML
     private Button logoutButton;
 
-    public void onClickA(ActionEvent event) {
+
+    public void onClick(ActionEvent event) {
         if (event.getSource() == registraProdottiButton) {
             controlProdottiA.onClickRegistraProdotti();
         } else if (event.getSource() == ricercaButton) {
@@ -64,32 +66,12 @@ public class GUIPrincipaleController implements Initializable {
         } else if (event.getSource() == modificaButton) {
             controlOrdiniA.onclickModificaProduzione();
         } else if (event.getSource() == logoutButton) {
-            FXMLLoader fxmlLoader = new FXMLLoader(LogoutConfirmationBoundary.class.getResource("LogoutConfirmation.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(LogoutConfirmationBoundary.class.getResource("FormSelezionaUnita.fxml"));
             Stage newStage = new Stage();
             newStage.initStyle(StageStyle.TRANSPARENT);
             LogoutConfirmationController logoutConfirmationController = new LogoutConfirmationController(newStage, stage, "Sei sicuro di voler eseguire il logout?");
             fxmlLoader.setController(logoutConfirmationController);
             new LogoutConfirmationBoundary(newStage, fxmlLoader); //new Stage() per creare una nuova finestra
-        }
-    }
-
-    public void onClickF(ActionEvent event) {
-        if (event.getSource() == registraProdottiButton) {
-            controlProdottiA.onClickRegistraProdotti();
-        } else if (event.getSource() == ricercaButton) {
-            controlProdottiA.onClickRicerca();
-        } else if (event.getSource() == venditaButton) {
-            controlOrdiniA.onClickVendita();
-        } else if (event.getSource() == listaOrdineButton) {
-            controlOrdiniA.onClickListaOrdiniRicevuti();
-        } else if (event.getSource() == modificaButton) {
-            controlOrdiniA.onclickModificaProduzione();
-        } else if (event.getSource() == logoutButton) {
-            try {
-                LoginBoundary.startStatic();
-                stage.close();
-            } catch (Exception e) {
-            }
         }
     }
 

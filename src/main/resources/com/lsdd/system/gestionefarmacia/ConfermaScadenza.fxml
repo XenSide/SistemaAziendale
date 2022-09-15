@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="600.0" maxWidth="1000.0" prefHeight="600.0"
+            prefWidth="1000.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" xmlns="http://javafx.com/javafx/18">
+   <children>
+      <AnchorPane layoutX="290.0" layoutY="220.0" maxHeight="160.0" maxWidth="420.0" prefHeight="160.0"
+                  prefWidth="420.0" style="-fx-background-color: #FFFF;">
+         <children>
+            <Label fx:id="messaggioErrore" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="40.0"
+                   prefHeight="61.0" prefWidth="390.0"
+                   text="La data di scadenza del prodotto richiesto è&#13;inferiore a due mesi, vuoi confermare comunque?"
+                   textAlignment="CENTER" textFill="#ab3434" wrapText="true">
+               <font>
+                  <Font size="15.0"/>
+               </font>
+            </Label>
+            <MFXButton fx:id="cancelButton" buttonType="RAISED" layoutX="245.0" layoutY="107.0" onAction="#onClick"
+                       prefHeight="32.0" prefWidth="154.0" rippleAnimateShadow="true" rippleColor="#7e2020"
+                       style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #AB3434;"
+                       text="NO" textFill="WHITE">
+               <font>
+                  <Font size="16.0"/>
+               </font>
+            </MFXButton>
+            <Region prefHeight="22.0" prefWidth="420.0" style="-fx-background-color: #AB3434;"/>
+            <MFXButton fx:id="confirmButton" buttonType="RAISED" layoutX="21.0" layoutY="107.0" onAction="#onClick"
+                       prefHeight="32.0" prefWidth="167.0" rippleAnimateShadow="true" rippleColor="#7e2020"
+                       style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #AB3434;"
+                       text="SI" textFill="WHITE">
+               <font>
+                  <Font size="16.0"/>
+               </font>
+            </MFXButton>
+         </children>
+         <opaqueInsets>
+            <Insets/>
+         </opaqueInsets>
+         <padding>
+            <Insets top="5.0"/>
+         </padding>
+      </AnchorPane>
+   </children>
+   <opaqueInsets>
+      <Insets/>
+   </opaqueInsets>
+   <padding>
+      <Insets top="5.0"/>
+   </padding>
+</AnchorPane>

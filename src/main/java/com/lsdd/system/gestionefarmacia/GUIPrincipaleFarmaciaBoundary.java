@@ -1,17 +1,18 @@
-package com.lsdd.system.utils;
+package com.lsdd.system.gestionefarmacia;
 
 
+import com.lsdd.system.utils.Utils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class GUIPrincipaleBoundary extends Application {
+public class GUIPrincipaleFarmaciaBoundary extends Application {
     private final Stage stage;
     private final FXMLLoader fxmlLoader;
 
-    public GUIPrincipaleBoundary(Stage stage, FXMLLoader fxmlLoader) {
+    public GUIPrincipaleFarmaciaBoundary(Stage stage, FXMLLoader fxmlLoader) {
         this.stage = stage;
         this.fxmlLoader = fxmlLoader;
 

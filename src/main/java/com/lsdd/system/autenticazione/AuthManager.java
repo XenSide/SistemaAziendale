@@ -1,7 +1,9 @@
 package com.lsdd.system.autenticazione;
 
-import com.lsdd.system.utils.GUIPrincipaleBoundary;
-import com.lsdd.system.utils.GUIPrincipaleController;
+import com.lsdd.system.gestioneazienda.GUIPrincipaleAziendaBoundary;
+import com.lsdd.system.gestioneazienda.GUIPrincipaleAziendaController;
+import com.lsdd.system.gestionefarmacia.GUIPrincipaleFarmaciaBoundary;
+import com.lsdd.system.gestionefarmacia.GUIPrincipaleFarmaciaController;
 import com.lsdd.system.utils.Utente;
 import com.lsdd.system.utils.Utils;
 import javafx.fxml.FXMLLoader;
@@ -49,17 +51,20 @@ public class AuthManager {
         Utente utente = controlloCredenziali(email, password);
         if (utente instanceof Utente) {
             switch (utente.getType()) {
-                case 1:
-                    FXMLLoader fxmlLoader = new FXMLLoader(GUIPrincipaleBoundary.class.getResource("HPAzienda.fxml"));
-                    fxmlLoader.setController(new GUIPrincipaleController(this, utente, stage, fxmlLoader));
-                    new GUIPrincipaleBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
-                case 2:
-                    fxmlLoader = new FXMLLoader(GUIPrincipaleBoundary.class.getResource("HPFarmacia.fxml"));
-                    fxmlLoader.setController(new GUIPrincipaleController(this, utente, stage, fxmlLoader));
-                    new GUIPrincipaleBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
-                    //Farmacista
-                case 3:
-                    //Corriere
+                case 1: //Amministratore
+                    System.out.println(utente.getType());
+                    FXMLLoader fxmlLoader = new FXMLLoader(GUIPrincipaleAziendaBoundary.class.getResource("HPAzienda.fxml"));
+                    fxmlLoader.setController(new GUIPrincipaleAziendaController(this, utente, stage, fxmlLoader));
+                    new GUIPrincipaleAziendaBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+                    break;
+                case 2: //Farmacista
+                    fxmlLoader = new FXMLLoader(GUIPrincipaleFarmaciaBoundary.class.getResource("HPFarmacia.fxml"));
+                    fxmlLoader.setController(new GUIPrincipaleFarmaciaController(this, utente, stage, fxmlLoader));
+                    new GUIPrincipaleFarmaciaBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+                    break;
+
+                case 3: //Corriere
+                    break;
             }
         } else {
             Utils.showAlert("I dati inseriti sono errati!");

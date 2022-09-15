@@ -29,6 +29,19 @@ public class Prodotto {
 
     }
 
+    public Prodotto(Prodotto prodotto) {
+        this.codiceUID = prodotto.getCodiceUID();
+        this.nome = prodotto.getNome();
+        this.lotto = prodotto.getLotto();
+        this.daBanco = prodotto.isDaBanco();
+        this.quantitá = prodotto.getQuantitá();
+        this.costo = prodotto.getCosto();
+        this.principioAttivo = prodotto.getPrincipioAttivo();
+        this.dataProduzione = prodotto.getDataProduzione();
+        this.dataScadenza = prodotto.getDataScadenza();
+    }
+
+
     public Prodotto(Integer codiceUID, String nome, String lotto, boolean daBanco, Integer quantitá, Integer costo, String principioAttivo, Date dataProduzione, Date dataScadenza) {
         this.codiceUID = codiceUID;
         this.nome = nome;
