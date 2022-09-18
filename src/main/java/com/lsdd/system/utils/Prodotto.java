@@ -14,7 +14,7 @@ public class Prodotto {
     private String lotto;
     private boolean daBanco;
     private Integer quantitá;
-    private Integer costo;
+    private Double costo;
     private String principioAttivo;
     private Date dataProduzione;
     private Date dataScadenza;
@@ -42,7 +42,7 @@ public class Prodotto {
     }
 
 
-    public Prodotto(Integer codiceUID, String nome, String lotto, boolean daBanco, Integer quantitá, Integer costo, String principioAttivo, Date dataProduzione, Date dataScadenza) {
+    public Prodotto(Integer codiceUID, String nome, String lotto, boolean daBanco, Integer quantitá, Double costo, String principioAttivo, Date dataProduzione, Date dataScadenza) {
         this.codiceUID = codiceUID;
         this.nome = nome;
         this.lotto = lotto;

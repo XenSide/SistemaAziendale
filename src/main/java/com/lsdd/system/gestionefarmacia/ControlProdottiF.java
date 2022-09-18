@@ -46,11 +46,11 @@ public class ControlProdottiF {
         Stage stage = new Stage();
         // TODO: 13/09/2022 Query per caricare la lista prodotti
         Date data = new Date(122, 9, 15);
-        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina = new Prodotto(123, "oki", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina1 = new Prodotto(123, "giorgiomorto", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina2 = new Prodotto(123, "lunapersa", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina3 = new Prodotto(123, "antoninodisperato", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina = new Prodotto(123, "oki", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina1 = new Prodotto(123, "giorgiomorto", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina2 = new Prodotto(123, "lunapersa", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina3 = new Prodotto(123, "antoninodisperato", "A123", true, 3, 3.2, "Augmento", data, data);
         prodotti.add(augmentin);
         prodotti.add(augmentina);
         prodotti.add(augmentina1);
@@ -106,11 +106,11 @@ public class ControlProdottiF {
         fxmlLoader = new FXMLLoader(GUIRicercaController.class.getResource("tableView.fxml"));
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
         Date data = new Date(1662477550);
-        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
         List<Prodotto> prodottos = new ArrayList<>();
         prodottos.add(augmentin);
         prodottos.add(augmentina);
