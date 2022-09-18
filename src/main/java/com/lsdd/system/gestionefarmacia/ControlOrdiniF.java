@@ -28,11 +28,11 @@ public class ControlOrdiniF {
         fxmlLoader = new FXMLLoader(GUIListaOrdiniEffettuatiController.class.getResource("tableView.fxml"));
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
         Date data = new Date(1662477550);
-        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
         List<Ordine> ordines = new ArrayList<>();
         List<Prodotto> prodottos = new ArrayList<>();
         prodottos.add(augmentin);
@@ -40,8 +40,8 @@ public class ControlOrdiniF {
         prodottos.add(augmentina1);
         prodottos.add(augmentina2);
         prodottos.add(augmentina3);
-        ordines.add(new Ordine(1, "bobbina", "viavai", prodottos, data, data, 1, 1));
-        ordines.add(new Ordine(1, "Antonina", "viavai", prodottos, data, data, 1, 1));
+        ordines.add(new Ordine(1,1, "bobbina", "90100","viavai", prodottos, data, data, 1, 0));
+        ordines.add(new Ordine(1,1, "Antonina","90100", "viavai", prodottos, data, data, 1, 1));
         fxmlLoader.setController(new GUIModificaOrdineController(stage, this, ordines));
         new GUIModificaOrdineBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
@@ -75,11 +75,11 @@ public class ControlOrdiniF {
         fxmlLoader = new FXMLLoader(GUIListaOrdiniEffettuatiController.class.getResource("tableView.fxml"));
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
         Date data = new Date(1662477550);
-        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
         List<Ordine> ordines = new ArrayList<>();
         List<Prodotto> prodottos = new ArrayList<>();
         prodottos.add(augmentin);
@@ -87,8 +87,8 @@ public class ControlOrdiniF {
         prodottos.add(augmentina1);
         prodottos.add(augmentina2);
         prodottos.add(augmentina3);
-        ordines.add(new Ordine(1, "bobbina", "viavai", prodottos, data, data, 1, 1));
-        ordines.add(new Ordine(1, "Antonina", "viavai", prodottos, data, data, 1, 1));
+        ordines.add(new Ordine(1,1, "bobbina", "90100","viavai", prodottos, data, data, 1, 0));
+        ordines.add(new Ordine(1,1, "Antonina","90100", "viavai", prodottos, data, data, 1, 1));
         fxmlLoader.setController(new GUIListaOrdiniEffettuatiController(false, stage, this, ordines));
         new GUIListaOrdiniEffettuatiBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
@@ -103,11 +103,11 @@ public class ControlOrdiniF {
         fxmlLoader = new FXMLLoader(GUIListaOrdiniEffettuatiBoundary.class.getResource("tableView.fxml"));
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
         Date data = new Date(1662477550);
-        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
         List<Ordine> ordines = new ArrayList<>();
         List<Prodotto> prodottos = new ArrayList<>();
         prodottos.add(augmentin);
@@ -115,8 +115,8 @@ public class ControlOrdiniF {
         prodottos.add(augmentina1);
         prodottos.add(augmentina2);
         prodottos.add(augmentina3);
-        ordines.add(new Ordine(1, "bobbina", "viavai", prodottos, data, data, 1, 1));
-        ordines.add(new Ordine(1, "Antonina", "viavai", prodottos, data, data, 1, 1));
+        ordines.add(new Ordine(1,1, "bobbina", "90100","viavai", prodottos, data, data, 1, 0));
+        ordines.add(new Ordine(1,1, "Antonina","90100", "viavai", prodottos, data, data, 1, 1));
         fxmlLoader.setController(new GUIListaOrdiniEffettuatiController(true, stage, this, ordines));
         new GUIListaOrdiniEffettuatiBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }

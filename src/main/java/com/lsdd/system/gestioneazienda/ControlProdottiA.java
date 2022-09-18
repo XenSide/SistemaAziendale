@@ -38,11 +38,11 @@ public class ControlProdottiA {
         fxmlLoader = new FXMLLoader(GUIRicercaController.class.getResource("tableView.fxml"));
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
         Date data = new Date(1662477550);
-        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
         List<Prodotto> prodottos = new ArrayList<>();
         prodottos.add(augmentin);
         prodottos.add(augmentina);
@@ -59,7 +59,7 @@ public class ControlProdottiA {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Prodotto prodotto = null;
         try {
-            prodotto = new Prodotto(Integer.parseInt(uid), nome, lotto, daBanco, Integer.parseInt(quantita), Integer.parseInt(costo), pAttivo, formatter.parse(dataProduzione), formatter.parse(dataScadenza));
+            prodotto = new Prodotto(Integer.parseInt(uid), nome, lotto, daBanco, Integer.parseInt(quantita), Double.parseDouble(costo), pAttivo, formatter.parse(dataProduzione), formatter.parse(dataScadenza));
             Boolean query = true; // FIXME: 07/09/2022 query per salvare
             if (query) {
             Utils.showAlert("Caricamento effettuato con successo");

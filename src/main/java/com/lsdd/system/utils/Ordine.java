@@ -12,7 +12,9 @@ import java.util.List;
 @AllArgsConstructor
 public class Ordine {
     private Integer codiceOrdine;
+    private Integer idFarmacia;
     private String nomeFarmacia;
+    private String cap;
     private String indirizzoFarmacia;
     private List<Prodotto> prodotto;
     private Date dataConsegna;
