@@ -29,6 +29,8 @@ public class GUIPrincipaleFarmaciaController implements Initializable {
 
     private ControlProdottiF controlProdottiF;
 
+    private ControlOrdiniF controlOrdiniF;
+
     @FXML
     private ResourceBundle resources;
 
@@ -62,13 +64,13 @@ public class GUIPrincipaleFarmaciaController implements Initializable {
         if (event.getSource() == richiestaProdottiButton) {
             controlProdottiF.onClickRichiestaProdotti();
         } else if (event.getSource() == ricercaButton) {
-            //controlProdottiF.onClickRicerca();
+            controlProdottiF.onClickRicerca();
         } else if (event.getSource() == venditaButton) {
-            //controlOrdiniF.onClickVendita();
+            controlOrdiniF.onClickVendita();
         } else if (event.getSource() == listaOrdineButton) {
-            //controlOrdiniF.onClickListaOrdiniRicevuti();
+            controlOrdiniF.onClickListaOrdiniEffetuati();
         } else if (event.getSource() == modificaButton) {
-            //controlOrdiniF.onclickModificaProduzione();
+            controlOrdiniF.onClickModificaOrdine();
         } else if (event.getSource() == logoutButton) {
             FXMLLoader fxmlLoader = new FXMLLoader(LogoutConfirmationBoundary.class.getResource("FormSelezionaUnita.fxml"));
             Stage newStage = new Stage();
@@ -84,6 +86,6 @@ public class GUIPrincipaleFarmaciaController implements Initializable {
         //FXML edit code here
         username.setText(utente.getNome());
         this.controlProdottiF = new ControlProdottiF(stage, utente);
-        //this.controlOrdiniF = new ControlOrdiniF(stage, utente);
+        this.controlOrdiniF = new ControlOrdiniF(stage, utente);
     }
 }

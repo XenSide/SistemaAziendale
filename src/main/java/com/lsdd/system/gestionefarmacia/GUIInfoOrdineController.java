@@ -1,4 +1,4 @@
-package com.lsdd.system.gestioneazienda;
+package com.lsdd.system.gestionefarmacia;
 
 import com.lsdd.system.utils.Ordine;
 import com.lsdd.system.utils.Utils;
@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 public class GUIInfoOrdineController implements Initializable {
     private final boolean vendita;
     private final Stage stage;
-    private final ControlOrdiniA controlOrdiniA;
+    private final ControlOrdiniF controlOrdiniF;
 
     private final FXMLLoader fxmlLoader;
 
@@ -59,12 +59,11 @@ public class GUIInfoOrdineController implements Initializable {
     @FXML
     private MFXListView listView;
 
-    public void onClick(ActionEvent event){
-        if(event.getSource() == indietroButton) {
+    public void onClick(ActionEvent event) {
+        if (event.getSource() == indietroButton) {
             stage.close();
         } else if (event.getSource() == vendiButton) {
-            if (controlOrdiniA.confermaVenditaOrdine(ordine)) {
-                // TODO: 18/09/2022 query per vendere
+            if (controlOrdiniF.confermaVenditaOrdine(ordine)) {
                 Utils.showAlertInSameWindow("Vendita confermata", stage);
             } else {
                 Utils.showAlertInSameWindow("Vendita fallita", stage);

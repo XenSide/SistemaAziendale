@@ -14,9 +14,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @RequiredArgsConstructor
-public class FormSelezionaUnitaController implements Initializable {
+public class FormSelezionaQTAController implements Initializable {
     private final Prodotto prodotto;
-    private final ControlProdottiF controlProdottiF;
+    private final ControlOrdiniF controlOrdiniF;
 
     private final Stage stage;
 
@@ -44,7 +44,7 @@ public class FormSelezionaUnitaController implements Initializable {
             stage.close();
         else if (actionEvent.getSource() == confirmButton) {
             try {
-                controlProdottiF.richiestaProdotti(prodotto, stage, Integer.parseInt(qtaField.getText()));
+                //controlOrdiniF.richiestaProdotti(prodotto, stage, Integer.parseInt(qtaField.getText()));
             } catch (Exception e) {
             }
         }

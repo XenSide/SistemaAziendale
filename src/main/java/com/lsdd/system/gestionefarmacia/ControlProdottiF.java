@@ -1,5 +1,7 @@
 package com.lsdd.system.gestionefarmacia;
 
+import com.lsdd.system.gestioneazienda.GUIInfoProdottoBoundary;
+import com.lsdd.system.gestioneazienda.GUIInfoProdottoController;
 import com.lsdd.system.utils.Prodotto;
 import com.lsdd.system.utils.Richiesta;
 import com.lsdd.system.utils.Utente;
@@ -58,7 +60,7 @@ public class ControlProdottiF {
         new GUIRichiestaProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
 
-    public void RichiestaProdotti(Prodotto prodotto, Stage stage, Integer qtaRichiesta) {
+    public void richiestaProdotti(Prodotto prodotto, Stage stage, Integer qtaRichiesta) {
         Prodotto prodottoLocal = new Prodotto(prodotto);
         prodottoLocal.setQuantitá(qtaRichiesta);
         richiesta.aggiungiProdotto(prodottoLocal);
@@ -91,17 +93,13 @@ public class ControlProdottiF {
             new ConfermaDateDiverseBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
         }
     }
-}
 
-
-
-    /*public void onClickRegistraProdotti() {
-        fxmlLoader = new FXMLLoader(GUICaricamentoNuovoProdottoController.class.getResource("registrazioneProdotti.fxml"));
+    public void creaInfoProdotto(Prodotto prodotto) {
+        fxmlLoader = new FXMLLoader(GUIInfoProdottoController.class.getResource("infoProdottoPanel.fxml"));
         Stage stage = new Stage();
-        fxmlLoader.setController(new GUICaricamentoNuovoProdottoController(stage, this));
-        new GUICaricamentoNuovoProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+        fxmlLoader.setController(new GUIInfoProdottoController(prodotto, stage, fxmlLoader));
+        new GUIInfoProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
-
 
     public void onClickRicerca() {
         Stage stage = new Stage();
@@ -122,6 +120,18 @@ public class ControlProdottiF {
         fxmlLoader.setController(new GUIRicercaController(stage, this, prodottos));
         new GUIRicercaBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
+}
+
+
+
+    /*public void onClickRegistraProdotti() {
+        fxmlLoader = new FXMLLoader(GUICaricamentoNuovoProdottoController.class.getResource("registrazioneProdotti.fxml"));
+        Stage stage = new Stage();
+        fxmlLoader.setController(new GUICaricamentoNuovoProdottoController(stage, this));
+        new GUICaricamentoNuovoProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+    }
+
+
 
     public void controlloCaricoDelFarmaco(String uid, String nome, String lotto, Boolean daBanco,
                                           String quantita, String costo, String pAttivo, String dataProduzione,
