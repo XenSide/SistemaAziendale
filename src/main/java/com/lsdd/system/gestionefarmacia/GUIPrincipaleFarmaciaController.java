@@ -72,7 +72,7 @@ public class GUIPrincipaleFarmaciaController implements Initializable {
         } else if (event.getSource() == modificaButton) {
             controlOrdiniF.onClickModificaOrdine();
         } else if (event.getSource() == logoutButton) {
-            FXMLLoader fxmlLoader = new FXMLLoader(LogoutConfirmationBoundary.class.getResource("FormSelezionaUnita.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(LogoutConfirmationBoundary.class.getResource("LogoutConfirmation.fxml"));
             Stage newStage = new Stage();
             newStage.initStyle(StageStyle.TRANSPARENT);
             LogoutConfirmationController logoutConfirmationController = new LogoutConfirmationController(newStage, stage, "Sei sicuro di voler eseguire il logout?");

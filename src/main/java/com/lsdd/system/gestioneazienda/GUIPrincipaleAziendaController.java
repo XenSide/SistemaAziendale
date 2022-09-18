@@ -66,7 +66,7 @@ public class GUIPrincipaleAziendaController implements Initializable {
         } else if (event.getSource() == modificaButton) {
             controlOrdiniA.onclickModificaProduzione();
         } else if (event.getSource() == logoutButton) {
-            FXMLLoader fxmlLoader = new FXMLLoader(LogoutConfirmationBoundary.class.getResource("FormSelezionaUnita.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(LogoutConfirmationBoundary.class.getResource("LogoutConfirmation.fxml"));
             Stage newStage = new Stage();
             newStage.initStyle(StageStyle.TRANSPARENT);
             LogoutConfirmationController logoutConfirmationController = new LogoutConfirmationController(newStage, stage, "Sei sicuro di voler eseguire il logout?");
