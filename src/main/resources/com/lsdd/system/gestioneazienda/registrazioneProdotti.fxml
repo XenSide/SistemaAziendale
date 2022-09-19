@@ -28,9 +28,9 @@
             <Image url="@../../../../images/Logo.png" />
          </image>
       </ImageView>
-      <Label layoutX="109.0" layoutY="20.5" prefHeight="24.0" prefWidth="103.0" text="LOREM IPSUM" textFill="#ab3434">
+      <Label layoutX="109.0" layoutY="20.5" prefHeight="24.0" prefWidth="103.0" text="LSDD" textFill="#ab3434">
          <font>
-            <Font name="MS Outlook" size="15.0" />
+            <Font name="MS Outlook" size="15.0"/>
          </font>
       </Label>
       <MFXTextField fx:id="uidField" borderGap="20.0" floatMode="DISABLED" floatingText="UID" floatingTextGap="10.0" layoutX="53.0" layoutY="195.0" prefHeight="42.0" prefWidth="250.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #AB3434; -fx-text-fill: #ab3434; -fx-border-width: 2;">

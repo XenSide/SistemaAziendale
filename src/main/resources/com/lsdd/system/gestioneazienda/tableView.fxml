@@ -18,18 +18,18 @@
       </ImageView>
       <Label fx:id="username" alignment="CENTER" layoutX="870.0" layoutY="19.0" prefHeight="25.0" prefWidth="81.0"
              text="Username" textFill="#ab3434">
-          <font>
-              <Font size="15.0"/>
-          </font>
+         <font>
+            <Font size="15.0"/>
+         </font>
       </Label>
       <ImageView fitHeight="39.0" fitWidth="39.0" x="53.0" y="12.5">
          <image>
             <Image url="@../../../../images/Logo.png" />
          </image>
       </ImageView>
-      <Label layoutX="109.0" layoutY="20.5" prefHeight="24.0" prefWidth="103.0" text="LOREM IPSUM" textFill="#ab3434">
+      <Label layoutX="109.0" layoutY="20.5" prefHeight="24.0" prefWidth="103.0" text="LSDD" textFill="#ab3434">
          <font>
-            <Font name="MS Outlook" size="15.0" />
+            <Font name="MS Outlook" size="15.0"/>
          </font>
       </Label>
       <Label layoutX="697.0" layoutY="160.0" textFill="#ab3434">
@@ -50,7 +50,7 @@
       <MFXTableView fx:id="table" layoutX="53.0" layoutY="168.0" prefHeight="311.0" prefWidth="894.0" style="-fx-border-color: AB3434; -fx-border-radius: 20; -fx-background-radius: 20;" />
       <Label fx:id="titleLabel" layoutX="53.0" layoutY="114.0" text="ERRORE" textFill="#ab3434">
          <font>
-             <Font size="24.0"/>
+            <Font size="24.0"/>
          </font>
       </Label>
    </children>
