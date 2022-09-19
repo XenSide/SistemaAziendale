@@ -1,9 +1,7 @@
 package com.lsdd.system.gestioneazienda;
 
-import com.lsdd.system.utils.Ordine;
-import com.lsdd.system.utils.Prodotto;
-import com.lsdd.system.utils.Utente;
-import com.lsdd.system.utils.Utils;
+import com.lsdd.system.utils.*;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
@@ -36,9 +34,10 @@ public class ControlProdottiA {
     public void onClickRicerca() {
         Stage stage = new Stage();
         fxmlLoader = new FXMLLoader(GUIRicercaController.class.getResource("tableView.fxml"));
-        // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
+        // DONE: 07/09/2022 QUERY PER PREDERE PRODOTTO
+
         Date data = new Date(1662477550);
-        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
+        /*Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
         Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
         Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
         Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
@@ -48,19 +47,29 @@ public class ControlProdottiA {
         prodottos.add(augmentina);
         prodottos.add(augmentina1);
         prodottos.add(augmentina2);
-        prodottos.add(augmentina3);
-        fxmlLoader.setController(new GUIRicercaController(stage, this, prodottos));
-        new GUIRicercaBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+        prodottos.add(augmentina3);*/
+
+        DDBMS.getAzienda().getProdotti().whenComplete((prodottos,throwable)->{
+        if (throwable != null)
+            throwable.printStackTrace();
+    }).thenAccept(prodottos  -> {
+        Platform.runLater(() -> {
+            fxmlLoader.setController(new GUIRicercaController(stage, this, prodottos));
+            new GUIRicercaBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+        });
+    });
+        //fxmlLoader.setController(new GUIRicercaController(stage, this, prodottos));
+        //new GUIRicercaBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
 
     public void controlloCaricoDelFarmaco(String uid, String nome, String lotto, Boolean daBanco,
                                           String quantita, String costo, String pAttivo, String dataProduzione,
                                           String dataScadenza, Stage stage) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Prodotto prodotto = null;
         try {
-            prodotto = new Prodotto(Integer.parseInt(uid), nome, lotto, daBanco, Integer.parseInt(quantita), Double.parseDouble(costo), pAttivo, formatter.parse(dataProduzione), formatter.parse(dataScadenza));
-            Boolean query = true; // FIXME: 07/09/2022 query per salvare
+            prodotto = new Prodotto(Integer.parseInt(uid), nome, lotto, daBanco, Integer.parseInt(quantita), Double.parseDouble(costo), pAttivo, Date.valueOf(dataProduzione), Date.valueOf(dataScadenza));
+            DDBMS.getAzienda().caricoProdotto(prodotto);
+            Boolean query = true; // DONE: 07/09/2022 query per salvare
             if (query) {
             Utils.showAlert("Caricamento effettuato con successo");
             stage.close();
@@ -83,12 +92,14 @@ public class ControlProdottiA {
 
 
     public boolean annullaOrdine(Ordine ordine) {
-        // TODO: 10/09/2022 query annullamento ordine
+        // DONE: 10/09/2022 query annullamento ordine
+        DDBMS.getAzienda().annullaOrdine(ordine.getCodiceOrdine());
         return false;
     }
 
     public boolean confermaVenditaOrdine(Ordine ordine) {
-        // TODO: 10/09/2022 query vendita ordine
+        // DONE: 10/09/2022 query vendita ordine
+        DDBMS.getAzienda().confermaOrdine(ordine.getCodiceOrdine(), (ordine.getTipoOrdine()==0));
         return false;
     }
 
@@ -177,7 +188,8 @@ public class ControlProdottiA {
     }*/
 
     public boolean modificaProduzioneProdotto(Prodotto prodotto) {
-        // TODO: 11/09/2022 Query per salvare la nuova produzione
+        // DONE: 11/09/2022 Query per salvare la nuova produzione
+        DDBMS.getAzienda().modificaProduzioneProdotto(prodotto.getCodiceUID(),prodotto.getQuantitá(),prodotto.getPeriodicita());
         return true;
     }
 }

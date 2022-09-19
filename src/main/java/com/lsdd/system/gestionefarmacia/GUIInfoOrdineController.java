@@ -76,7 +76,7 @@ public class GUIInfoOrdineController implements Initializable {
         //FXML edit code here
         if (!vendita)
             vendiButton.setDisable(true);
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         ordercodeLabel.setText(Utils.toDisplayCase(ordine.getCodiceOrdine().toString()));
         dataOrdineLabel.setText(Utils.toDisplayCase(df.format(ordine.getDataOrdine())));
         indirizzoLabel.setText(Utils.toDisplayCase(ordine.getIndirizzoFarmacia()));

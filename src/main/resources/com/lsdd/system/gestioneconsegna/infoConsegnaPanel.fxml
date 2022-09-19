@@ -12,12 +12,12 @@
       <AnchorPane layoutX="100.0" layoutY="100.0" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #FFFF;">
          <children>
             <Region prefHeight="22.0" prefWidth="800.0" style="-fx-background-color: #AB3434;" />
-            <Label layoutX="39.0" layoutY="53.0" text="DETTAGLI PRODOTTO" textFill="#ab3434">
+            <Label layoutX="39.0" layoutY="53.0" text="DETTAGLI CONSEGNA" textFill="#ab3434">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="40.0" layoutY="230.0" text="PRINCIPIO ATTIVO" textFill="#ab3434">
+            <Label layoutX="40.0" layoutY="230.0" text="NOME FARMACIA" textFill="#ab3434">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -27,77 +27,62 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="241.0" layoutY="136.0" text="CODICE UID" textFill="#ab3434">
+            <Label layoutX="241.0" layoutY="136.0" text="INDIRIZZO FARMACIA" textFill="#ab3434">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="uidLabel" layoutX="242.0" layoutY="168.0" text="Errore" textFill="#ab3434">
+            <Label fx:id="indirizzoLabel" layoutX="242.0" layoutY="168.0" text="Errore" textFill="#ab3434">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="400.0" layoutY="136.0" text="NOME FARMACO" textFill="#ab3434">
+            <Label layoutX="400.0" layoutY="136.0" text="CAP" textFill="#ab3434">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lottoLabel" layoutX="401.0" layoutY="168.0" text="Errore" textFill="#ab3434">
+            <Label fx:id="capLabel" layoutX="401.0" layoutY="168.0" text="Errore" textFill="#ab3434">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="556.0" layoutY="136.0" text="DATA DI SCADENZA" textFill="#ab3434">
+            <Label layoutX="556.0" layoutY="136.0" text="DATA DI CONSEGNA" textFill="#ab3434">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="scadenzaLabel" layoutX="557.0" layoutY="168.0" text="Errore" textFill="#ab3434">
+            <Label fx:id="dataLabel" layoutX="557.0" layoutY="168.0" text="Errore" textFill="#ab3434">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="40.0" layoutY="136.0" text="LOTTO" textFill="#ab3434">
+            <Label layoutX="40.0" layoutY="136.0" text="DESTINATARIO" textFill="#ab3434">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="pAttivoLabel" layoutX="41.0" layoutY="262.0" text="Errore" textFill="#ab3434">
+            <Label fx:id="destinatarioLabel" layoutX="41.0" layoutY="262.0" text="Errore" textFill="#ab3434">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="241.0" layoutY="230.0" text="QUANTITÁ" textFill="#ab3434">
+            <Label layoutX="241.0" layoutY="230.0" text="ID CONSEGNA" textFill="#ab3434">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="qtaLabel" layoutX="242.0" layoutY="262.0" text="Errore" textFill="#ab3434">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="400.0" layoutY="230.0" text="COSTO" textFill="#ab3434">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Label>
-            <Label fx:id="costoLabel" layoutX="401.0" layoutY="262.0" text="Errore" textFill="#ab3434">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="556.0" layoutY="230.0" text="DATA PRODUZIONE" textFill="#ab3434">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Label>
-            <Label fx:id="produzioneLabel" layoutX="557.0" layoutY="262.0" text="Errore" textFill="#ab3434">
+            <Label fx:id="idcLabel" layoutX="242.0" layoutY="262.0" text="Errore" textFill="#ab3434">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <MFXButton fx:id="confirmButton" buttonType="RAISED" defaultButton="true" layoutX="668.0" layoutY="345.0" onAction="#onClick" prefHeight="32.0" prefWidth="86.0" style="-fx-background-color: #AB3434; -fx-border-radius: 20; -fx-background-radius: 20;" text="OK" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </MFXButton>
+            <MFXButton fx:id="firmaButton" buttonType="RAISED" defaultButton="true" layoutX="550.0" layoutY="345.0" onAction="#onClick" prefHeight="32.0" prefWidth="86.0" style="-fx-background-color: #AB3434; -fx-border-radius: 20; -fx-background-radius: 20;" text="FIRMA" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>

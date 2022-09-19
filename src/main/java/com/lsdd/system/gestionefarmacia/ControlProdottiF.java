@@ -2,9 +2,9 @@ package com.lsdd.system.gestionefarmacia;
 
 import com.lsdd.system.gestioneazienda.GUIInfoProdottoBoundary;
 import com.lsdd.system.gestioneazienda.GUIInfoProdottoController;
-import com.lsdd.system.utils.Prodotto;
-import com.lsdd.system.utils.Richiesta;
-import com.lsdd.system.utils.Utente;
+import com.lsdd.system.gestioneazienda.GUIRicercaBoundary;
+import com.lsdd.system.utils.*;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
@@ -44,7 +44,16 @@ public class ControlProdottiF {
     public void onClickRichiestaProdotti() {
         fxmlLoader = new FXMLLoader(GUIRichiestaProdottoController.class.getResource("tableView2Pulsanti.fxml"));
         Stage stage = new Stage();
-        // TODO: 13/09/2022 Query per caricare la lista prodotti
+        // DONE: 13/09/2022 Query per caricare la lista prodotti
+        DDBMS.getAzienda().getProdotti().whenComplete((prodottos,throwable)->{
+            if (throwable != null)
+                throwable.printStackTrace();
+        }).thenAccept(prodottos  -> {
+            Platform.runLater(() -> {
+                fxmlLoader.setController(new GUIRichiestaProdottoController(stage, this, prodottos));
+                new GUIRichiestaProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+            });});
+        /*
         Date data = new Date(122, 9, 15);
         Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
         Prodotto augmentina = new Prodotto(123, "oki", "A123", true, 3, 3.2, "Augmento", data, data);
@@ -58,6 +67,8 @@ public class ControlProdottiF {
         prodotti.add(augmentina3);
         fxmlLoader.setController(new GUIRichiestaProdottoController(stage, this, prodotti));
         new GUIRichiestaProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+
+         */
     }
 
     public void richiestaProdotti(Prodotto prodotto, Stage stage, Integer qtaRichiesta) {
@@ -104,7 +115,17 @@ public class ControlProdottiF {
     public void onClickRicerca() {
         Stage stage = new Stage();
         fxmlLoader = new FXMLLoader(GUIRicercaController.class.getResource("tableView.fxml"));
-        // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
+        DDBMS.getFarmacia().getProdotti().whenComplete((prodottos, throwable)->{
+            if (throwable != null)
+                throwable.printStackTrace();
+        }).thenAccept(prodottos  -> {
+            Platform.runLater(() -> {
+                fxmlLoader.setController(new com.lsdd.system.gestionefarmacia.GUIRicercaController(stage, this, prodottos));
+                new GUIRicercaBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+            });
+        });
+        /*
+        // DONE: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
         Date data = new Date(1662477550);
         Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
         Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
@@ -119,12 +140,13 @@ public class ControlProdottiF {
         prodottos.add(augmentina3);
         fxmlLoader.setController(new GUIRicercaController(stage, this, prodottos));
         new GUIRicercaBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+        */
     }
-}
 
 
 
-    /*public void onClickRegistraProdotti() {
+    public void onClickRegistraProdotti() {
+        System.out.println("aaa");
         fxmlLoader = new FXMLLoader(GUICaricamentoNuovoProdottoController.class.getResource("registrazioneProdotti.fxml"));
         Stage stage = new Stage();
         fxmlLoader.setController(new GUICaricamentoNuovoProdottoController(stage, this));
@@ -135,12 +157,13 @@ public class ControlProdottiF {
 
     public void controlloCaricoDelFarmaco(String uid, String nome, String lotto, Boolean daBanco,
                                           String quantita, String costo, String pAttivo, String dataProduzione,
-                                          String dataScadenza, Stage stage) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                                          String dataScadenza, Stage stage) throws Exception {
+
         Prodotto prodotto = null;
         try {
-            prodotto = new Prodotto(Integer.parseInt(uid), nome, lotto, daBanco, Integer.parseInt(quantita), Integer.parseInt(costo), pAttivo, formatter.parse(dataProduzione), formatter.parse(dataScadenza));
-            Boolean query = true; // FIXME: 07/09/2022 query per salvare
+            prodotto = new Prodotto(Integer.parseInt(uid), nome, lotto, daBanco, Integer.parseInt(quantita), Double.parseDouble(costo), pAttivo, Date.valueOf(dataProduzione), Date.valueOf(dataScadenza));
+            DDBMS.getFarmacia().caricoProdotto(prodotto);
+            Boolean query = true; // DONE: 07/09/2022 query per salvare
             if (query) {
             Utils.showAlert("Caricamento effettuato con successo");
             stage.close();
@@ -154,35 +177,41 @@ public class ControlProdottiF {
         System.out.println(prodotto);
     }
 
-    public void creaInfoProdotto(Prodotto prodotto) {
+   /* public void creaInfoProdotto(Prodotto prodotto) {
         fxmlLoader = new FXMLLoader(GUIInfoProdottoController.class.getResource("infoProdottoPanel.fxml"));
         Stage stage = new Stage();
         fxmlLoader.setController(new GUIInfoProdottoController(prodotto, stage, fxmlLoader));
         new GUIInfoProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
-    }
+    }*/
 
 
     public boolean annullaOrdine(Ordine ordine) {
-        // TODO: 10/09/2022 query annullamento ordine
-        return false;
+        // DONE: 10/09/2022 query annullamento ordine
+        try {
+            DDBMS.getAzienda().annullaOrdine(ordine.getCodiceOrdine());
+        }catch (Exception e){e.printStackTrace();return false;}
+        return true;
     }
 
     public boolean confermaVenditaOrdine(Ordine ordine) {
-        // TODO: 10/09/2022 query vendita ordine
-        return false;
+        try {
+        DDBMS.getAzienda().confermaOrdine(ordine.getCodiceOrdine(),(ordine.getTipoOrdine()==0));
+        // DONE: 10/09/2022 query vendita ordine
+        }catch (Exception e){e.printStackTrace();return false;}
+        return true;
     }
 
-/*
-    public void onClickListaOrdiniRicevuti() {
+
+    /*public void onClickListaOrdiniEffetuati() {
         Stage stage = new Stage();
-        fxmlLoader = new FXMLLoader(GUIListaOrdiniRicevutiController.class.getResource("tableView.fxml"));
+        fxmlLoader = new FXMLLoader(GUIListaOrdiniEffettuatiController.class.getResource("tableView.fxml"));
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
         Date data = new Date(1662477550);
-        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
         List<Ordine> ordines = new ArrayList<>();
         List<Prodotto> prodottos = new ArrayList<>();
         prodottos.add(augmentin);
@@ -190,34 +219,34 @@ public class ControlProdottiF {
         prodottos.add(augmentina1);
         prodottos.add(augmentina2);
         prodottos.add(augmentina3);
-        ordines.add(new Ordine(1, "bobbina", "viavai", prodottos, data, data, 1, 1));
-        ordines.add(new Ordine(1, "Antonina", "viavai", prodottos, data, data, 1, 1));
-        fxmlLoader.setController(new GUIListaOrdiniRicevutiController(false, stage, this, ordines));
-        new GUIListaOrdiniRicevutiBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
-    }
-    public void creaInfoOrdine(Ordine ordine, boolean vendita) {
+        ordines.add(new Ordine(1,1, "bobbina", "90100","viavai", prodottos, data, data, 1, 0));
+        ordines.add(new Ordine(1,1, "Antonina","90100", "viavai", prodottos, data, data, 2, 1));
+        fxmlLoader.setController(new GUIListaOrdiniEffettuatiController(false, stage, this, ordines);
+        new GUIListaOrdiniEffettuatiBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+    }*/
+    /*public void creaInfoOrdine(Ordine ordine, boolean vendita) {
         fxmlLoader = new FXMLLoader(GUIInfoOrdineController.class.getResource("infoOrdinePanel.fxml"));
         Stage stage = new Stage();
         fxmlLoader.setController(new GUIInfoOrdineController(vendita, stage, this, fxmlLoader, ordine));
         new GUIInfoOrdineBoundary(stage, fxmlLoader);
-    }
-    public void cancellaOrdine(Ordine ordine) {
+    }*/
+    /*public void cancellaOrdine(Ordine ordine) {
         fxmlLoader = new FXMLLoader(GUIInfoOrdineController.class.getResource("ConfermaAnnullamentoOrdine.fxml"));
         Stage stage = new Stage();
         fxmlLoader.setController(new ConfermaAnnullamentoController(stage,
                 "Sei sicuro di voler annullare l'ordine?", this, ordine));
         new ConfermaAnnullamentoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
-    }
-    public void onClickVendita() {
+    }*/
+    /*public void onClickVendita() {
         Stage stage = new Stage();
-        fxmlLoader = new FXMLLoader(GUIListaOrdiniRicevutiController.class.getResource("tableView.fxml"));
+        fxmlLoader = new FXMLLoader(GUIListaOrdiniEffettuatiController.class.getResource("tableView.fxml"));
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
         Date data = new Date(1662477550);
-        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
+        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
         List<Ordine> ordines = new ArrayList<>();
         List<Prodotto> prodottos = new ArrayList<>();
         prodottos.add(augmentin);
@@ -225,40 +254,10 @@ public class ControlProdottiF {
         prodottos.add(augmentina1);
         prodottos.add(augmentina2);
         prodottos.add(augmentina3);
-        ordines.add(new Ordine(1, "bobbina", "viavai", prodottos, data, data, 1, 1));
-        ordines.add(new Ordine(1, "Antonina", "viavai", prodottos, data, data, 1, 1));
-        fxmlLoader.setController(new GUIListaOrdiniRicevutiController(true, stage, this, ordines));
-        new GUIListaOrdiniRicevutiBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
-    }
-    public void onclickModificaProduzione() {
-        Stage stage = new Stage();
-        fxmlLoader = new FXMLLoader(GUIModificaProduzioneBoundary.class.getResource("tableView.fxml"));
-        // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
-        Date data = new Date(1662477550);
-        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina1 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina2 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        Prodotto augmentina3 = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
-        List<Prodotto> prodottos = new ArrayList<>();
-        prodottos.add(augmentin);
-        prodottos.add(augmentina);
-        prodottos.add(augmentina1);
-        prodottos.add(augmentina2);
-        prodottos.add(augmentina3);
-        fxmlLoader.setController(new GUIModificaProduzioneController(stage, this, prodottos));
-        new GUIModificaProduzioneBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
-    }
-   public void creaModificaProduzione(Prodotto prodotto) {
-        fxmlLoader = new FXMLLoader(FormModificaUnitáTempoBoundary.class.getResource("modificaProduzionePanel.fxml"));
-        Stage stage = new Stage();
-        fxmlLoader.setController(new FormModificaUnitáTempoController(stage, this, prodotto));
-        new GUIInfoOrdineBoundary(stage, fxmlLoader);
+        ordines.add(new Ordine(1,1, "bobbina", "90100","viavai", prodottos, data, data, 1, 0));
+        ordines.add(new Ordine(1,1, "Antonina","90100", "viavai", prodottos, data, data, 2, 1));
+        fxmlLoader.setController(new GUIListaOrdiniEffettuatiController(true, stage, this, ordines));
+        new GUIListaOrdiniEffettuatiBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }*/
-/*
-    public boolean modificaProduzioneProdotto(Prodotto prodotto) {
-        // TODO: 11/09/2022 Query per salvare la nuova produzione
-        return true;
-    }
-    */
+}
 

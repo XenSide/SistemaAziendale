@@ -1,6 +1,7 @@
 package com.lsdd.system.gestionefarmacia;
 
 
+import com.lsdd.system.utils.DDBMS;
 import com.lsdd.system.utils.Prodotto;
 import com.lsdd.system.utils.Richiesta;
 import com.lsdd.system.utils.Utils;
@@ -60,7 +61,8 @@ public class GUIRichiestaProdottoController implements Initializable {
         if (actionEvent.getSource() == confirmButton) {
             System.out.println(richiesta);
             if (richiesta.getSize() != 0) {
-                // TODO: 15/09/2022 QUERY PER SALVARE RICHIESTA
+                // DONE: 15/09/2022 QUERY PER SALVARE RICHIESTA
+                DDBMS.getAzienda().richiestaProdotti(richiesta,false);
             } else {
                 Utils.showAlert("La selezione dei prodotti era vuota");
             }

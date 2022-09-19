@@ -1,6 +1,7 @@
-package com.lsdd.system.gestioneazienda;
+package com.lsdd.system.gestionefarmacia;
 
 
+import com.lsdd.system.gestioneazienda.ControlProdottiA;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
@@ -22,7 +23,7 @@ import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class GUICaricamentoNuovoProdottoController implements Initializable {
     private final Stage stage;
-    private final ControlProdottiA controlProdottiA;
+    private final ControlProdottiF controlProdottiA;
 
     @FXML
     private ResourceBundle resources;
@@ -73,6 +74,7 @@ public class GUICaricamentoNuovoProdottoController implements Initializable {
 
 
     public void onClick(ActionEvent actionEvent) {
+        System.out.println("test");
         if (actionEvent.getSource() == cancelButton) {
             stage.close();
         } else if (actionEvent.getSource() == confirmButton) {
