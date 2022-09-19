@@ -346,7 +346,7 @@ public class DDBMS {
                     iDOrdine = resultSet.getInt("IDOrdine");
 
                     if (iDOrdine != idLastOrder && idLastOrder != -1) {
-                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, 0));
+                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, 0));
                         prodottiOrdineList.clear();
                     }
                     //ordine
@@ -375,7 +375,7 @@ public class DDBMS {
                     //prodottoList.add(new Prodotto(iD, lotto, nome, principioAttivo, daBanco, unita, costo, produzione, scadenza));
                 }
                 if (idLastOrder != -1) {
-                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, 0));
+                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, 0));
                     prodottiOrdineList.clear();
                 }
                 return ordiniList;
@@ -400,7 +400,7 @@ public class DDBMS {
                     iDOrdine = resultSet.getInt("IDOrdine");
 
                     if (iDOrdine != idLastOrder && idLastOrder != -1) {
-                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, periodicita));
+                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, periodicita));
                         prodottiOrdineList.clear();
                     }
                     idLastOrder = iDOrdine;
@@ -422,7 +422,7 @@ public class DDBMS {
                     //prodottoList.add(new Prodotto(iD, lotto, nome, principioAttivo, daBanco, unita, costo, produzione, scadenza));
                 }
                 if (idLastOrder != -1) {
-                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, periodicita));
+                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, periodicita));
                     prodottiOrdineList.clear();
                 }
                 return ordiniList;
@@ -448,7 +448,7 @@ public class DDBMS {
                     iDOrdine = resultSet.getInt("IDOrdine");
 
                     if (iDOrdine != idLastOrder && idLastOrder != -1) {
-                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, 0));
+                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, 0));
                         prodottiOrdineList.clear();
                     }
                     idLastOrder = iDOrdine;
@@ -468,7 +468,7 @@ public class DDBMS {
                     prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false  , quantità  , null, null, null, null));
                 }
                 if (idLastOrder != -1) {
-                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, 0));
+                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, 0));
                     prodottiOrdineList.clear();
                 }
                 return ordiniList;
@@ -494,7 +494,7 @@ public class DDBMS {
                     iDOrdine = resultSet.getInt("IDOrdine");
 
                     if (iDOrdine != idLastOrder && idLastOrder != -1) {
-                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, periodicita));
+                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, periodicita));
                         prodottiOrdineList.clear();
                     }
                     idLastOrder = iDOrdine;
@@ -515,7 +515,7 @@ public class DDBMS {
                     prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false, quantità, null,  null, null, null));
                 }
                 if (idLastOrder != -1) {
-                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, periodicita));
+                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, periodicita));
                     prodottiOrdineList.clear();
                 }
                 return ordiniList;
@@ -540,7 +540,7 @@ public class DDBMS {
                     iDOrdine = resultSet.getInt("IDOrdine");
 
                     if (iDOrdine != idLastOrder && idLastOrder != -1) {
-                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, 0));
+                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, 0));
                         prodottiOrdineList.clear();
                     }
                     idLastOrder = iDOrdine;
@@ -560,7 +560,7 @@ public class DDBMS {
                     prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false, quantità, null, null, null, null));
                 }
                 if (idLastOrder != -1) {
-                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, 0));
+                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, 0));
                     prodottiOrdineList.clear();
                 }
                 return ordiniList;
@@ -586,7 +586,7 @@ public class DDBMS {
                     iDOrdine = resultSet.getInt("IDOrdine");
 
                     if (iDOrdine != idLastOrder && idLastOrder != -1) {
-                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, 0));
+                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, 0));
                         prodottiOrdineList.clear();
                     }
                     idLastOrder = iDOrdine;
@@ -606,7 +606,7 @@ public class DDBMS {
                     prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false  , quantità  , null, null, null, null));
                 }
                 if (idLastOrder != -1) {
-                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, 0));
+                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, 0));
                     prodottiOrdineList.clear();
                 }
                 return ordiniList;
@@ -632,7 +632,7 @@ public class DDBMS {
                     iDOrdine = resultSet.getInt("IDOrdine");
 
                     if (iDOrdine != idLastOrder && idLastOrder != -1) {
-                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, periodicita));
+                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, periodicita));
                         prodottiOrdineList.clear();
                     }
                     idLastOrder = iDOrdine;
@@ -653,7 +653,7 @@ public class DDBMS {
                     prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false  , quantità  , null, null, null, null));
                 }
                 if (idLastOrder != -1) {
-                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, periodicita));
+                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, periodicita));
                     prodottiOrdineList.clear();
                 }
                 return ordiniList;
@@ -695,7 +695,7 @@ public class DDBMS {
                     iDOrdine = resultSet.getInt("IDOrdine");
 
                     if (iDOrdine != idLastOrder && idLastOrder != -1) {
-                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, periodicita));
+                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, periodicita));
                         prodottiOrdineList.clear();
                     }
                     idLastOrder = iDOrdine;
@@ -716,7 +716,7 @@ public class DDBMS {
                     prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, true,  quantità,null, null, null, null));
                 }
                 if (idLastOrder != -1) {
-                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, periodicita));
+                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, periodicita));
                     prodottiOrdineList.clear();
                 }
                 return ordiniList;

@@ -31,7 +31,7 @@ public class ControlOrdiniF {
         fxmlLoader = new FXMLLoader(GUIListaOrdiniEffettuatiController.class.getResource("tableView.fxml"));
         // DONE: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
 
-        /*DDBMS.getAzienda().getListaOrdiniEffettuati(utente.getUIDFarmacia()).whenComplete((ordines1,throwable)->{
+        DDBMS.getAzienda().getListaOrdiniEffettuati(utente.getUIDFarmacia()).whenComplete((ordines1,throwable)->{
             if (throwable != null)
                 throwable.printStackTrace();
         }).thenAccept(ordines1  -> {
@@ -45,8 +45,8 @@ public class ControlOrdiniF {
                         fxmlLoader.setController(new GUIModificaOrdineController(stage, this, ordines));
                         new GUIModificaOrdineBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
                     });});
-            });});*/
-
+            });});
+/*
         Date data = new Date(1662477550);
         Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
         Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3.2, "Augmento", data, data);
@@ -64,7 +64,7 @@ public class ControlOrdiniF {
         ordines.add(new Ordine(1, 1, "Antonina", "90100", "viavai", prodottos, data, data, 1, 1));
         fxmlLoader.setController(new GUIModificaOrdineController(stage, this, ordines));
         new GUIModificaOrdineBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
-
+*/
     }
 
     public void onClickVenditaProdotti(List<Prodotto> prodotto) {
