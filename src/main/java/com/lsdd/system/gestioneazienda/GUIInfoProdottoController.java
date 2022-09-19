@@ -61,7 +61,7 @@ public class GUIInfoProdottoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         pAttivoLabel.setText(Utils.toDisplayCase(prodotto.getPrincipioAttivo()));
         uidLabel.setText(Utils.toDisplayCase((prodotto.getCodiceUID().toString())));
         lottoLabel.setText(Utils.toDisplayCase(prodotto.getLotto()));

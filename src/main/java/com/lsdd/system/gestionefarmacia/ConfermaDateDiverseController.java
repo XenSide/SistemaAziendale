@@ -1,6 +1,7 @@
 package com.lsdd.system.gestionefarmacia;
 
 
+import com.lsdd.system.utils.DDBMS;
 import com.lsdd.system.utils.Prodotto;
 import com.lsdd.system.utils.Richiesta;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -49,7 +50,8 @@ public class ConfermaDateDiverseController implements Initializable {
             } else {
                 richiesta.pop();
             }
-            // TODO: 15/09/2022 QUERY PER SALVARE RICHIESTAlocal
+            // DONE: 15/09/2022 QUERY PER SALVARE RICHIESTAlocal
+            DDBMS.getAzienda().richiestaProdotti(richiestaLocal,false);
             stage.close();
         } else {
             //STESSADATA

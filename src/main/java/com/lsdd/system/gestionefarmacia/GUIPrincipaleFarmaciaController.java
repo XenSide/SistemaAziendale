@@ -32,6 +32,9 @@ public class GUIPrincipaleFarmaciaController implements Initializable {
     private ControlOrdiniF controlOrdiniF;
 
     @FXML
+    private MFXButton registraProdottiButton;
+
+    @FXML
     private ResourceBundle resources;
 
     @FXML
@@ -63,6 +66,8 @@ public class GUIPrincipaleFarmaciaController implements Initializable {
     public void onClick(ActionEvent event) {
         if (event.getSource() == richiestaProdottiButton) {
             controlProdottiF.onClickRichiestaProdotti();
+        }else if (event.getSource() == registraProdottiButton) {
+            controlProdottiF.onClickRegistraProdotti();
         } else if (event.getSource() == ricercaButton) {
             controlProdottiF.onClickRicerca();
         } else if (event.getSource() == venditaButton) {
@@ -71,6 +76,8 @@ public class GUIPrincipaleFarmaciaController implements Initializable {
             controlOrdiniF.onClickListaOrdiniEffetuati();
         } else if (event.getSource() == modificaButton) {
             controlOrdiniF.onClickModificaOrdine();
+        }else if(event.getSource()==confermaRicezioneButton){
+            controlOrdiniF.onClickListaConfermaRicezione();//TODO: letteralmente da fare
         } else if (event.getSource() == logoutButton) {
             FXMLLoader fxmlLoader = new FXMLLoader(LogoutConfirmationBoundary.class.getResource("LogoutConfirmation.fxml"));
             Stage newStage = new Stage();

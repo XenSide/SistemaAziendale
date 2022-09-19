@@ -59,6 +59,10 @@ public class Prodotto {
         nome = Utils.toDisplayCase(nome);
         return nome + " " + quantitá;
     }
+    public String toString2() {
+        return "codice: "+codiceUID+"; nome: "+nome+"; lotto: "+lotto+"; da banco: "+daBanco+ "; quantità: "+quantitá+"; costo: "+costo+"; produzione: "+dataProduzione+"; scadenza: "+dataScadenza  ;
+
+    }
 
 }
 

@@ -5,7 +5,6 @@ import lombok.Getter;
 
 import java.sql.Date;
 
-@AllArgsConstructor
 @Getter
 public class Consegna {
     Integer iDConsegna;
@@ -14,5 +13,19 @@ public class Consegna {
     String nomeFarmacia;
     String cap;
     String indirizzo;
+    String destinatario;
+
+    public Consegna(Integer iDConsegna, Date dataConsegna, Integer iDFarmacia, String nomeFarmacia, String cap, String indirizzo) {
+        this.iDConsegna = iDConsegna;
+        this.dataConsegna = dataConsegna;
+        this.iDFarmacia = iDFarmacia;
+        this.nomeFarmacia = nomeFarmacia;
+        this.cap = cap;
+        this.indirizzo = indirizzo;
+    }
+    public void setDestinatario(String destinatario){
+        this.destinatario=destinatario;
+    }
+
 
 }

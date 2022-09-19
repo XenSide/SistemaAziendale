@@ -1,5 +1,6 @@
 package com.lsdd.system.utils;
 
+import com.kosprov.jargon2.api.Jargon2;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import javafx.application.Platform;
@@ -15,6 +16,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.kosprov.jargon2.api.Jargon2.jargon2Verifier;
+
 
 public class DDBMS {
     @Getter(lazy = true)
@@ -23,7 +26,7 @@ public class DDBMS {
     @Getter(lazy = true)
     private static final DDBMS farmacia = new DDBMS("farmacia", 30003, "giorgio", "giorgiosimone");
 
-    private final String host = "129.152.17.152";
+    private final String host = "129.152.9.162";
     private final String database;
     private final String username;
     private final String password;
@@ -103,8 +106,8 @@ public class DDBMS {
             e.printStackTrace();
         }
     }
-
-    public CompletableFuture<Utente> controlloCredenziali(String email, String password) {
+    /*
+    public CompletableFuture<String> getpassword(String email) {
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM account WHERE EMAIL=? AND PASSWORD=?")) {
@@ -121,6 +124,31 @@ public class DDBMS {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        }, executor);
+    }*/
+    public CompletableFuture<Utente> controlloCredenziali(String email, String password) {
+        return CompletableFuture.supplyAsync(() -> {
+            try (Connection connection = getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM account WHERE EMAIL=?")) {
+                preparedStatement.setString(1, email);
+                //preparedStatement.setString(2, password);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()){
+                    Jargon2.Verifier verifier = jargon2Verifier();
+                    String encodedHash=resultSet.getString("password");
+                    boolean matches = verifier.hash(encodedHash).password(password.getBytes()).verifyEncoded();
+                    if (matches){
+                        if (resultSet.getInt("tipo_account") == 2) {
+                            String IDFarmacia = this.getFarmaciaFromUserId(resultSet.getInt("IDAccount")).join().get(0);
+                            return Utente.createInstance(resultSet.getInt("IDAccount"), resultSet.getInt("tipo_account"), resultSet.getString("email"), resultSet.getString("nome"), resultSet.getString("cognome"), password, Integer.valueOf(IDFarmacia));
+                        }
+                        return Utente.createInstance(resultSet.getInt("IDAccount"), resultSet.getInt("tipo_account"), resultSet.getString("email"), resultSet.getString("nome"), resultSet.getString("cognome"), password);
+                    }
+                } else return null;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            return null;
         }, executor);
     }
 
@@ -171,7 +199,8 @@ public class DDBMS {
 
     //id int, nome str, lotto str, dabanco bool, quantità int, costo float, principio string, data produzione e scadenza date
     public void caricoProdotto(Prodotto p) {
-        boolean azienda = this == DDBMS.getAzienda(); //controlla da chi viene chiamato il metodo
+        //System.out.println(p.toString2()+"aaa");
+        boolean isazienda = this == DDBMS.getAzienda(); //controlla da chi viene chiamato il metodo
         CompletableFuture.runAsync(() -> {
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO prodotto (IDProdotto, nome, principio_attivo, daBanco, costo) VALUES (?,?,?,?,?)");
@@ -180,7 +209,7 @@ public class DDBMS {
                 preparedStatement.setInt(1, p.getCodiceUID());
                 preparedStatement.setString(2, p.getNome());
                 preparedStatement.setString(3, p.getPrincipioAttivo());
-                preparedStatement.setBoolean(4, p.isDaBanco()   );
+                preparedStatement.setBoolean(4, p.isDaBanco());
                 preparedStatement.setDouble(5, p.getCosto());
                 preparedStatement1.setInt(1, p.getCodiceUID());
                 preparedStatement1.setInt(2, p.getQuantitá() * 100);
@@ -190,12 +219,13 @@ public class DDBMS {
                 preparedStatement2.setDate(4, (Date) p.getDataProduzione());
                 preparedStatement2.setDate(5, (Date) p.getDataScadenza());
                 preparedStatement.executeUpdate();
-                if (azienda) preparedStatement1.executeUpdate(); //esegue solo se il metodo viene chiamato da azienda
+                if (isazienda) preparedStatement1.executeUpdate(); //esegue solo se il metodo viene chiamato da azienda
                 preparedStatement2.executeUpdate();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }, executor);
+
     }
 
     public void modificaProduzioneProdotto(int iD, int qta, int tempo) {
@@ -246,8 +276,10 @@ public class DDBMS {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     int iD = resultSet.getInt("IDProdotto");
-                    String lotto = resultSet.getString("lotto");
+                    String lotto = resultSet.getString("IDLotto");
                     String nome = resultSet.getString("nome");
+                    int iend = nome.indexOf("«");
+                    if(iend!=-1) nome = nome.substring(0,iend);
                     String principioAttivo = resultSet.getString("principio_attivo");
                     boolean daBanco = resultSet.getBoolean("daBanco");
                     int unita = resultSet.getInt("quantità");
@@ -529,6 +561,99 @@ public class DDBMS {
         }, executor);
     }
 
+    public CompletableFuture<List<Ordine>> getListaOrdiniDaConfermare(int iDFarmacia) {
+        return CompletableFuture.supplyAsync(() -> {
+            try (Connection connection = getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.*, f.nome, f.cap, f.indirizzo, c.data_consegna, op.IDProdotto, p.nome, op.quantità, op.lotto FROM ordine o, farmacia f, consegna c, prodotto p, ordine_prodotto op " +
+                         "WHERE o.IDFarmacia=? AND o.IDOrdine=c.IDOrdine AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto AND o.stato_ordine=2 AND c.stato_consegna=3 ORDER BY IDOrdine")) {
+                preparedStatement.setInt(1, iDFarmacia); //prende gli ordini effettuati dalla farmacia che richiama il metodo
+                List<Ordine> ordiniList = new ArrayList<>();
+                List<Prodotto> prodottiOrdineList = new ArrayList<>();
+                ResultSet resultSet = preparedStatement.executeQuery();
+                int idLastOrder = -1, iDOrdine=-1, stato=-1, iDProdotto=-1, quantità=-1;
+                String nomeFarmacia=null, cap=null, indirizzo=null, lotto=null,nome=null ;
+                Date data_creazione=null,dataConsegna = null;
+                while (resultSet.next()) {
+                    iDOrdine = resultSet.getInt("IDOrdine");
+
+                    if (iDOrdine != idLastOrder && idLastOrder != -1) {
+                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, 0));
+                        prodottiOrdineList.clear();
+                    }
+                    idLastOrder = iDOrdine;
+                    data_creazione = resultSet.getDate("data_creazione");
+                    stato = resultSet.getInt("stato_ordine");
+                    //iDFarmacia = resultSet.getInt("IDFarmacia");
+                    nomeFarmacia = resultSet.getString("nome");
+                    cap = resultSet.getString("cap");
+                    indirizzo = resultSet.getString("indirizzo");
+                    dataConsegna = resultSet.getDate("data_consegna");
+
+                    iDProdotto = resultSet.getInt("IDProdotto");
+                    nomeFarmacia = resultSet.getString("nome");
+                    quantità = resultSet.getInt("quantità");
+                    lotto = resultSet.getString("lotto");
+
+                    prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false  , quantità  , null, null, null, null));
+                }
+                if (idLastOrder != -1) {
+                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, 0));
+                    prodottiOrdineList.clear();
+                }
+                return ordiniList;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }, executor);
+    }
+
+    public CompletableFuture<List<Ordine>> getListaOrdiniPeriodiciDaConfermare(int iDFarmacia) {
+        return CompletableFuture.supplyAsync(() -> {
+            try (Connection connection = getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.*, f.nome, f.cap, f.indirizzo, c.data_consegna, op.IDProdotto, p.nome, op.quantità, op.lotto FROM ordine_periodico o, farmacia f, consegna c, prodotto p, ordine_prodotto op " +
+                         "WHERE o.IDFarmacia=? AND o.IDOrdine=c.IDOrdine AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto AND o.stato_ordine=2 AND c.stato_consegna=3 ORDER BY IDOrdine")) {
+                preparedStatement.setInt(1, iDFarmacia); //prende gli ordini effettuati dalla farmacia che richiama il metodo
+                List<Ordine> ordiniList = new ArrayList<>();
+                List<Prodotto> prodottiOrdineList = new ArrayList<>();
+                ResultSet resultSet = preparedStatement.executeQuery();
+                int idLastOrder = -1, iDOrdine=-1, stato=-1, iDProdotto=-1, quantità=-1, periodicita=-1;
+                String nomeFarmacia=null, cap=null, indirizzo=null, lotto=null,nome=null ;
+                Date data_creazione=null,dataConsegna = null;
+                while (resultSet.next()) {
+                    iDOrdine = resultSet.getInt("IDOrdine");
+
+                    if (iDOrdine != idLastOrder && idLastOrder != -1) {
+                        ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, periodicita));
+                        prodottiOrdineList.clear();
+                    }
+                    idLastOrder = iDOrdine;
+                    data_creazione = resultSet.getDate("data_creazione");
+                    periodicita = resultSet.getInt("periodicità_ordine_giorni");
+                    stato = resultSet.getInt("stato_ordine");
+                    //iDFarmacia = resultSet.getInt("IDFarmacia");
+                    nomeFarmacia = resultSet.getString("nome");
+                    cap = resultSet.getString("cap");
+                    indirizzo = resultSet.getString("indirizzo");
+                    dataConsegna = resultSet.getDate("data_consegna");
+
+                    iDProdotto = resultSet.getInt("IDProdotto");
+                    nomeFarmacia = resultSet.getString("nome");
+                    quantità = resultSet.getInt("quantità");
+                    lotto = resultSet.getString("lotto");
+
+                    prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false  , quantità  , null, null, null, null));
+                }
+                if (idLastOrder != -1) {
+                    ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, periodicita));
+                    prodottiOrdineList.clear();
+                }
+                return ordiniList;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }, executor);
+    }
+
     public void confermaOrdine(int iDOrdine, boolean periodico) {
         String tabella = (periodico) ? "ordine_periodico" : "ordine";
         CompletableFuture.runAsync(() -> {
@@ -617,7 +742,7 @@ public class DDBMS {
         }, executor);
     }
 
-    public void creaNotifica(int iDordine) {//creata quando il farmacista conferma la ricezione
+    public void creaNotifica(int iDordine) {//creata quando il farmacista conferma la ricezione ma mancano cose
         CompletableFuture.runAsync(() -> {
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO notifica (IDOrdine, data_creazione_notifica) VALUES (?,CURRENT_TIMESTAMP)")) {
@@ -634,8 +759,41 @@ public class DDBMS {
     //modifica ordine
     //vendita prodotti
 
-    public void confermaRicezione(Ordine ordine, boolean periodico) { //TODO: creare una consegna diversa per ogni ordine periodico quando viene consegnata la precendete; DELETARE DAL DBMS AZIENDALE LE COSE ARRIVATE
+    public void confermaRicezione(Ordine ordine, boolean periodico) { //TODO:DELETARE DAL DBMS AZIENDALE LE COSE ARRIVATE
         String tabella = (periodico) ? "ordine_periodico" : "ordine";
+        CompletableFuture.runAsync(() -> {
+            /*
+            String query = "";
+            for (int i = 0; i < ordine.getProdotto().size(); i++) {
+                query += "(" + ordine.getProdotto().get(i).getLotto();
+                query += "," + ordine.getProdotto().get(i).getCodiceUID();
+                query += "," + ordine.getProdotto().get(i).getQuantitá();
+                query += "," + ordine.getProdotto().get(i).getDataProduzione();
+                query += "," + ordine.getProdotto().get(i).getDataScadenza() + "),";
+            }
+            query = query.substring(0, query.length() - 1) + " ";
+            */
+            try (Connection connection = getConnection();
+                 //Connection connection2 = farmacia.getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement("UDPATE ? SET stato_ordine = 3 WHERE IDOrdine = ?");
+                 //PreparedStatement preparedStatement1 = connection2.prepareStatement("INSERT INTO lotto(IDLotto, IDProdotto, quantità, data_produzione, data_scadenza) VALUES " + query);
+                 PreparedStatement preparedStatement2 = connection.prepareStatement("INSERT INTO consegna (IDCorriere, IDOrdine, stato_consegna) SELECT IDCorriere, ?, 1 FROM consegna GROUP BY IDCorriere ORDER BY count(*) LIMIT 1")) {
+                preparedStatement.setString(1, tabella);
+                preparedStatement.setInt(2, ordine.getCodiceOrdine());
+                preparedStatement2.setInt(1, ordine.getCodiceOrdine());
+                //preparedStatement1.setInt(1, iDOrdine);
+
+                preparedStatement.executeUpdate();
+                //preparedStatement1.executeUpdate();
+                preparedStatement2.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }, executor);
+    }
+
+    public void caricaSpedizione(Ordine ordine) { //ho separato questa da metodo conferma ricezione
         CompletableFuture.runAsync(() -> {
             String query = "";
             for (int i = 0; i < ordine.getProdotto().size(); i++) {
@@ -646,28 +804,18 @@ public class DDBMS {
                 query += "," + ordine.getProdotto().get(i).getDataScadenza() + "),";
             }
             query = query.substring(0, query.length() - 1) + " ";
-
             try (Connection connection = getConnection();
-                 Connection connection2 = farmacia.getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement("UDPATE ? SET stato_ordine = 3 WHERE IDOrdine = ?");
-                 PreparedStatement preparedStatement1 = connection2.prepareStatement("INSERT INTO lotto(IDLotto, IDProdotto, quantità, data_produzione, data_scadenza) VALUES " + query);
-                 PreparedStatement preparedStatement2 = connection.prepareStatement("INSERT INTO consegna (IDCorriere, IDOrdine, stato_consegna) SELECT IDCorriere, ?, 1 FROM consegna GROUP BY IDCorriere ORDER BY count(*) LIMIT 1")) {
-                preparedStatement.setString(1, tabella);
-                preparedStatement.setInt(2, ordine.getCodiceOrdine());
-                preparedStatement2.setInt(1, ordine.getCodiceOrdine());
-                //preparedStatement1.setInt(1, iDOrdine);
-
-                preparedStatement.executeUpdate();
+                 PreparedStatement preparedStatement1 = connection.prepareStatement("INSERT INTO lotto(IDLotto, IDProdotto, quantità, data_produzione, data_scadenza) VALUES " + query)) {
                 preparedStatement1.executeUpdate();
-                preparedStatement2.executeUpdate();
-
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }, executor);
+
     }
 
-    public void modificaOrdine(Ordine ordine) {
+
+        public void modificaOrdine(Ordine ordine) {
         CompletableFuture.runAsync(() -> {
             for (int i = 0; i < ordine.getProdotto().size(); i++) {
                 try (Connection connection = getConnection();
