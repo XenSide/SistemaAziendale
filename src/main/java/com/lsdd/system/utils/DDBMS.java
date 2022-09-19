@@ -721,7 +721,7 @@ public class DDBMS {
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("SELECT c.IDConsegna, c.data_consegna, f.IDFarmacia, f.nome, f.cap, f.indirizzo FROM ordine o, ordine_periodico op, farmacia f, consegna c " +
-                         "WHERE (o.IDFarmacia=f.IDFarmacia OR op.IDFarmacia=f.IDFarmacia) AND (o.IDOrdine=c.IDOrdine OR op.IDOrdine=c.IDOrdine) AND (o.stato_consegna=1 OR o.stato_consegna=2) AND data_consegna>CURRENT_TIMESTAMP AND IDCorriere=? ORDER BY data_consegna")) {
+                         "WHERE (o.IDFarmacia=f.IDFarmacia OR op.IDFarmacia=f.IDFarmacia) AND (o.IDOrdine=c.IDOrdine OR op.IDOrdine=c.IDOrdine) AND (c.stato_consegna=1 OR c.stato_consegna=2) AND data_consegna>CURRENT_TIMESTAMP AND IDCorriere=? ORDER BY data_consegna")) {
                 List<Consegna> consegneList = new ArrayList<>();
                 preparedStatement.setInt(1, idcorriere);
                 ResultSet resultSet = preparedStatement.executeQuery();

@@ -164,7 +164,7 @@ public class ControlOrdiniF {
         new GUIListaOrdiniEffettuatiBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }
 
-    public void onClickListaConfermaRicezione() {
+    public void onClickListaConfermaRicezione() {//TODO:  faretutto
 
     }
 

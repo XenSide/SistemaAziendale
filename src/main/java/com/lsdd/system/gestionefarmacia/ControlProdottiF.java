@@ -77,7 +77,7 @@ public class ControlProdottiF {
         richiesta.aggiungiProdotto(prodottoLocal);
         prodotti.remove(prodotto);
         long day = 24 * 60 * 60 * 1000;
-        long twoMonthsFromNow = System.currentTimeMillis() + day * 7;
+        long twoMonthsFromNow = System.currentTimeMillis() + day * 60;
         if (prodotto.getDataScadenza().getTime() < twoMonthsFromNow) {
             Stage stage1 = new Stage();
             fxmlLoader = new FXMLLoader(ConfermaDataScadenzaController.class.getResource("ConfermaScadenza.fxml"));
