@@ -52,7 +52,7 @@ public class ControlConsegna {
         new GUIFirmaBoundary(stage, fxmlLoader);
     }
 
-    public void firma(MFXTextField firmaField) {
-        //DDBMS.getAzienda().
+    public void firma(int id,String firma) {
+        DDBMS.getAzienda().firmaConsegna(id,firma);
     }
 }

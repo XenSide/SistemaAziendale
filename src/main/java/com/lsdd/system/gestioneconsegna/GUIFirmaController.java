@@ -36,6 +36,8 @@ public class GUIFirmaController implements Initializable {
     @FXML
     private MFXButton deleteFirmaButton;
     @FXML
+    private MFXButton cancelButton;
+    @FXML
     private Label nomeLabel;
 
     @FXML
@@ -55,10 +57,13 @@ public class GUIFirmaController implements Initializable {
     public void onClick(ActionEvent event){
         if(event.getSource() == confirmButton) {
             stage.close();
-            controlConsegna.firma(firmaField);
-        }
-        if (event.getSource() == deleteFirmaButton) {
+            if(firmaField.getText().length()!=0){
+            controlConsegna.firma(consegna.getIDConsegna(), firmaField.getText());
+            }else Utils.showAlert("devi inserire una firma per continuare");
+        }else if (event.getSource() == deleteFirmaButton) {
             firmaField.clear();
+        }else if (event.getSource() == cancelButton){
+            stage.close();
         }
     }
 

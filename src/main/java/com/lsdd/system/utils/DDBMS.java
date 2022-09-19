@@ -778,7 +778,7 @@ public class DDBMS {
                  //Connection connection2 = farmacia.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("UDPATE ? SET stato_ordine = 3 WHERE IDOrdine = ?");
                  //PreparedStatement preparedStatement1 = connection2.prepareStatement("INSERT INTO lotto(IDLotto, IDProdotto, quantità, data_produzione, data_scadenza) VALUES " + query);
-                 PreparedStatement preparedStatement2 = connection.prepareStatement("INSERT INTO consegna (IDCorriere, IDOrdine, stato_consegna) SELECT IDCorriere, ?, 1 FROM consegna GROUP BY IDCorriere ORDER BY count(*) LIMIT 1")) {
+                 PreparedStatement preparedStatement2 = connection.prepareStatement("INSERT INTO consegna (IDCorriere, IDOrdine, stato_consegna) SELECT IDCorriere, ?, 2 FROM consegna GROUP BY IDCorriere ORDER BY count(*) LIMIT 1")) {
                 preparedStatement.setString(1, tabella);
                 preparedStatement.setInt(2, ordine.getCodiceOrdine());
                 preparedStatement2.setInt(1, ordine.getCodiceOrdine());
@@ -793,7 +793,24 @@ public class DDBMS {
             }
         }, executor);
     }
+    public void firmaConsegna(int idConsegna, String firma) { //TODO:DELETARE DAL DBMS AZIENDALE LE COSE ARRIVATE
 
+        CompletableFuture.runAsync(() -> {
+
+            try (Connection connection = getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement("UDPATE consegna SET (stato_consegna = 3, firma=?, data_ricezione_consegna=CURRENT_TIMESTAMP) WHERE IDConsegna = ?")) {
+                preparedStatement.setString(1, firma);
+                preparedStatement.setInt(2, idConsegna );
+
+                preparedStatement.executeUpdate();
+                //preparedStatement1.executeUpdate();
+
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }, executor);
+    }
     public void caricaSpedizione(Ordine ordine) { //ho separato questa da metodo conferma ricezione
         CompletableFuture.runAsync(() -> {
             String query = "";
@@ -816,7 +833,7 @@ public class DDBMS {
     }
 
 
-        public void modificaOrdine(Ordine ordine) {
+    public void modificaOrdine(Ordine ordine) {
         CompletableFuture.runAsync(() -> {
             for (int i = 0; i < ordine.getProdotto().size(); i++) {
                 try (Connection connection = getConnection();
