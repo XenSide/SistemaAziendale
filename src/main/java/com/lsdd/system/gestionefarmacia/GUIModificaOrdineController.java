@@ -80,7 +80,7 @@ public class GUIModificaOrdineController implements Initializable {
                     return;
                 }
 
-                Image infoButtonImage = new Image((getClass().getResourceAsStream("checkmark.png"))); // FIXME: 07/09/2022
+                Image infoButtonImage = new Image((getClass().getResourceAsStream("checkmark.png")));
                 ImageView imageView = new ImageView(infoButtonImage);
                 imageView.setFitWidth(20);
                 imageView.setFitHeight(20);

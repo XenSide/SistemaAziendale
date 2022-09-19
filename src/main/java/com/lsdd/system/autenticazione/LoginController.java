@@ -49,7 +49,7 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    public void onPasswordKeyPressed(KeyEvent event) { // FIXME: 9/1/2022 repetition of same class due to missing event
+    public void onPasswordKeyPressed(KeyEvent event) {
         //Stage stage = (Stage) close.getScene().getWindow(); // get stage from button instead of Event
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         AuthManager authManager = new AuthManager(stage);

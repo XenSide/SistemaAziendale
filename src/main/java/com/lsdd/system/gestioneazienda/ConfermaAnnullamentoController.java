@@ -47,8 +47,7 @@ public class ConfermaAnnullamentoController implements Initializable {
         } else if (actionEvent.getSource() == confirmButton) {
             try {
                 boolean success = controlOrdiniA.annullaOrdine(ordine);
-                if (controlOrdiniA.annullaOrdine(ordine)) // FIXME: 10/09/2022
-                {
+                if (controlOrdiniA.annullaOrdine(ordine)) {
                     Utils.showAlertInSameWindow("L'ordine è stato cancellato correttamente", stage);
                 } else {
                     Utils.showAlertInSameWindow("Impossibile annullare l'ordine, poiché la consegna è prevista nei prossimi 2 giorni", stage);

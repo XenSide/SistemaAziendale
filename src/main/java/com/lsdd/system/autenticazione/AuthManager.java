@@ -7,13 +7,10 @@ import com.lsdd.system.gestioneconsegna.GUIPrincipaleCorriereController;
 import com.lsdd.system.gestionefarmacia.GUIPrincipaleFarmaciaBoundary;
 import com.lsdd.system.gestionefarmacia.GUIPrincipaleFarmaciaController;
 import com.lsdd.system.utils.DDBMS;
-import com.lsdd.system.utils.Utente;
 import com.lsdd.system.utils.Utils;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 import javafx.application.Platform;
-
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 
 import static com.kosprov.jargon2.api.Jargon2.*;
 
@@ -124,7 +121,6 @@ public class AuthManager {
         });
     }
 
-    // TODO:fixare
     public void deleteStage(Stage stage) {
         stage.close();
     }
