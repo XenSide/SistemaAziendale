@@ -43,7 +43,7 @@
                 <Font name="MS Outlook" size="15.0"/>
             </font>
         </Label>
-        <MFXButton fx:id="registraProdottiButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" ellipsisString=""
+        <MFXButton fx:id="listaConsegneButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" ellipsisString=""
                    graphicTextGap="0.0" layoutX="378.0" layoutY="264.0" onAction="#onClick" prefHeight="72.0"
                    prefWidth="244.0" rippleColor="#7e2020"
                    style="-fx-background-color: #AB3434; -fx-background-radius: 20; -fx-border-radius: 20;"
