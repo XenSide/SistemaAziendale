@@ -99,7 +99,7 @@ public class GUIModificaProduzioneController implements Initializable {
             setPrefHeight(40);
             setAlignment(Pos.CENTER_LEFT);
         }});
-        table.autosizeColumnsOnInitialization();
+        //table.autosizeColumnsOnInitialization();
         table.setItems(FXCollections.observableArrayList(listaProdotti));
 
 
