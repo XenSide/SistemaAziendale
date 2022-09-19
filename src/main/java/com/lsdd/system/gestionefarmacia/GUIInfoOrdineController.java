@@ -87,6 +87,7 @@ public class GUIInfoOrdineController implements Initializable {
 
         List<String> strings = new ArrayList<>();
         //strings.add(ordine.getProdotto());
+        System.out.println(ordine.getProdotto().get(0).getQuantitá());
         listView.setItems(FXCollections.observableArrayList(ordine.getProdotto()));
     }
 }
