@@ -13,6 +13,7 @@ import java.io.IOException;
 public class LoginBoundary extends Application {
     public static void main(String[] args) {
         launch();
+
     }
 
     @Override

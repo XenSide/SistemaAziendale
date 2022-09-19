@@ -352,13 +352,13 @@ public class DDBMS {
                     data_creazione = resultSet.getDate("data_creazione");
                     stato = resultSet.getInt("stato_ordine");
                     iDFarmacia = resultSet.getInt("IDFarmacia");
-                    nomeFarmacia = resultSet.getString("nome");
+                    nomeFarmacia = resultSet.getString("f.nome");
                     cap = resultSet.getString("cap");
                     indirizzo = resultSet.getString("indirizzo");
                     dataConsegna = resultSet.getDate("data_consegna");
 
                     iDProdotto = resultSet.getInt("IDProdotto");
-                    nome = resultSet.getString("nome");
+                    nome = resultSet.getString("p.nome");
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
@@ -405,7 +405,7 @@ public class DDBMS {
                     dataConsegna = resultSet.getDate("data_consegna");
 
                     iDProdotto = resultSet.getInt("IDProdotto");
-                    nomeFarmacia = resultSet.getString("nome");
+                    nome = resultSet.getString("p.nome");
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
@@ -452,7 +452,7 @@ public class DDBMS {
                     dataConsegna = resultSet.getDate("data_consegna");
 
                     iDProdotto = resultSet.getInt("IDProdotto");
-                    nomeFarmacia = resultSet.getString("nome");
+                    nome = resultSet.getString("p.nome");
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
@@ -499,7 +499,7 @@ public class DDBMS {
                     dataConsegna = resultSet.getDate("data_consegna");
 
                     iDProdotto = resultSet.getInt("IDProdotto");
-                    nomeFarmacia = resultSet.getString("nome");
+                    nome = resultSet.getString("p.nome");
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
@@ -544,7 +544,7 @@ public class DDBMS {
                     dataConsegna = resultSet.getDate("data_consegna");
 
                     iDProdotto = resultSet.getInt("IDProdotto");
-                    nomeFarmacia = resultSet.getString("nome");
+                    nome = resultSet.getString("p.nome");
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
@@ -590,7 +590,7 @@ public class DDBMS {
                     dataConsegna = resultSet.getDate("data_consegna");
 
                     iDProdotto = resultSet.getInt("IDProdotto");
-                    nomeFarmacia = resultSet.getString("nome");
+                    nome = resultSet.getString("p.nome");
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
@@ -637,7 +637,7 @@ public class DDBMS {
                     dataConsegna = resultSet.getDate("data_consegna");
 
                     iDProdotto = resultSet.getInt("IDProdotto");
-                    nomeFarmacia = resultSet.getString("nome");
+                    nome = resultSet.getString("p.nome");
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
@@ -700,7 +700,7 @@ public class DDBMS {
                     dataConsegna = resultSet.getDate("data_consegna");
 
                     iDProdotto = resultSet.getInt("IDProdotto");
-                    nomeFarmacia = resultSet.getString("nome");
+                    nome = resultSet.getString("p.nome");
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
@@ -719,9 +719,9 @@ public class DDBMS {
 
     public CompletableFuture<List<Consegna>> getListaConsegne(int idcorriere) { //TODOd: lista consegne, where id corriere = id corriere and stato_consegna=2 OR stato consegna= 1, when idcorriere wiew the list stato_consegna goes from 2 to 1
         return CompletableFuture.supplyAsync(() -> {
+            Consegna c;
             try (Connection connection = getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT c.IDConsegna, c.data_consegna, f.IDFarmacia, f.nome, f.cap, f.indirizzo FROM ordine o, ordine_periodico op, farmacia f, consegna c " +
-                         "WHERE (o.IDFarmacia=f.IDFarmacia OR op.IDFarmacia=f.IDFarmacia) AND (o.IDOrdine=c.IDOrdine OR op.IDOrdine=c.IDOrdine) AND (c.stato_consegna=1 OR c.stato_consegna=2) AND data_consegna>CURRENT_TIMESTAMP AND IDCorriere=? ORDER BY data_consegna")) {
+                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT DISTINCT c.IDConsegna, c.data_consegna, f.IDFarmacia, f.nome, f.cap, f.indirizzo, a.cognome, a.nome FROM ordine o, ordine_periodico op, farmacia f, consegna c ,account a, farmacia_account fa WHERE (o.IDFarmacia=f.IDFarmacia OR op.IDFarmacia=f.IDFarmacia) AND f.IDFarmacia=fa.IDFarmacia AND fa.IDAccount=a.IDAccount AND (o.IDOrdine=c.IDOrdine OR op.IDOrdine=c.IDOrdine) AND (c.stato_consegna=1 OR c.stato_consegna=2)  AND IDCorriere=? ORDER BY data_consegna")) { //AND data_consegna>CURRENT_TIMESTAMP  :FIXME: aggiungere alla query
                 List<Consegna> consegneList = new ArrayList<>();
                 preparedStatement.setInt(1, idcorriere);
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -732,8 +732,9 @@ public class DDBMS {
                     String nomeFarmacia = resultSet.getString("nome");
                     String cap = resultSet.getString("cap");
                     String indirizzo = resultSet.getString("indirizzo");
-
-                    consegneList.add(new Consegna(iDConsegna, dataConsegna, iDFarmacia, nomeFarmacia, cap, indirizzo));
+                    c=new Consegna(iDConsegna, dataConsegna, iDFarmacia, nomeFarmacia, cap, indirizzo);
+                    c.setDestinatario(resultSet.getString("cognome")+" "+resultSet.getString("a.nome"));
+                    consegneList.add(c);
                 }
                 return consegneList;
             } catch (SQLException e) {
@@ -884,7 +885,7 @@ public class DDBMS {
                 query += "," + ric.getProdotti().get(i).getQuantitá();
                 query += "," + ric.getProdotti().get(i).getLotto() + "),";
             }
-            query = query.substring(0, query.length() - 1) + " ";
+            query = query.substring(0, query.length() - 1) + ";";
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ? (IDOrdine, data_creazione, stato_ordine, IDFarmacia) VALUES (?, CURRENT_TIMESTAMP, 1, ?)");
                  PreparedStatement preparedStatement1 = connection.prepareStatement("INSERT INTO ordine_prodotto (IDOrdine, IDProdotto, quantità, lotto) VALUES " + query);
@@ -920,5 +921,4 @@ public class DDBMS {
             }
         }, executor);
     }
-
 }
