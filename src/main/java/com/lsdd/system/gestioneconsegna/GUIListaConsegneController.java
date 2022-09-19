@@ -35,7 +35,7 @@ public class GUIListaConsegneController implements Initializable {
 
     private final Stage stage;
     private final ControlConsegna controlConsegna;
-    private final List<Consegna> listaOrdini;
+    private final List<Consegna> listaConsegne;
     @FXML
     private ResourceBundle resources;
 
@@ -55,16 +55,16 @@ public class GUIListaConsegneController implements Initializable {
         stage.close();
     }
 
-/*TODO: sistemare tutto
+//TODO: sistemare tutto
 
- /*
+
     public void setupTable() {
-        MFXTableColumn<Consegna> codiceOrdineColumn = new MFXTableColumn<>("Nome Farmacia", true, Comparator.comparing(Consegna::getNomeFarmacia));
-        codiceOrdineColumn.setPrefWidth(179);
-        MFXTableColumn<Consegna> dataOrdineColumn = new MFXTableColumn<>("Indirizzo", true, Comparator.comparing(Consegna::getIndirizzo));
-        dataOrdineColumn.setPrefWidth(179);
-        MFXTableColumn<Consegna> nomeFarmaciaColumn = new MFXTableColumn<>("cap", true, Comparator.comparing(Consegna::getCap));
-        nomeFarmaciaColumn.setPrefWidth(179);
+        MFXTableColumn<Consegna> nomeFarmacia = new MFXTableColumn<>("Nome Farmacia", true, Comparator.comparing(Consegna::getNomeFarmacia));
+        nomeFarmacia.setPrefWidth(179);
+        MFXTableColumn<Consegna> indirizzo = new MFXTableColumn<>("Indirizzo", true, Comparator.comparing(Consegna::getIndirizzo));
+        indirizzo.setPrefWidth(179);
+        MFXTableColumn<Consegna> cap = new MFXTableColumn<>("cap", true, Comparator.comparing(Consegna::getCap));
+        cap.setPrefWidth(179);
         MFXTableColumn<Consegna> dataConsegnaColumn = new MFXTableColumn<>("Data di Consegna", true, Comparator.comparing(Consegna::getDataConsegna));
         dataConsegnaColumn.setPrefWidth(179);
         MFXTableColumn<Consegna> infoOrderColumn = new MFXTableColumn<>("", false);
@@ -73,16 +73,15 @@ public class GUIListaConsegneController implements Initializable {
 
             @Override
             public void update(Consegna consegna) {
-                if (ordine == null) {
+                System.out.println("aaaaa"+ consegna.getDestinatario());
+                if (consegna == null) {
                     setGraphic(null);
                     return;
                 }
                 Image infoButtonImage;
-                if (vendita) {
-                    infoButtonImage = new Image((getClass().getResourceAsStream("sellList.png")));
-                } else {
+
                     infoButtonImage = new Image((getClass().getResourceAsStream("info.png")));
-                }
+
                 ImageView imageView = new ImageView(infoButtonImage);
                 imageView.setFitWidth(20);
                 imageView.setFitHeight(20);
@@ -91,29 +90,29 @@ public class GUIListaConsegneController implements Initializable {
                 setGraphic(infoOrderButton);
                 infoOrderButton.setOnAction(event -> controlConsegna.creaInfoConsegna(consegna, true));//(consegna.getDataConsegna()== new Date(System.currentTimeMillis()))));
             }
+
         });
 
-
-        codiceOrdineColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getCodiceOrdine));
-        dataOrdineColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getDataOrdine));
-        nomeFarmaciaColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getNomeFarmacia));
-        dataConsegnaColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getDataConsegna));
-        statoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getStatoOrdine));
-        table.getTableColumns().addAll(codiceOrdineColumn, dataOrdineColumn, nomeFarmaciaColumn, dataConsegnaColumn, statoColumn, infoOrderColumn);
+        nomeFarmacia.setRowCellFactory(order -> new MFXTableRowCell<>(Consegna::getNomeFarmacia));
+        indirizzo.setRowCellFactory(order -> new MFXTableRowCell<>(Consegna::getIndirizzo));
+        cap.setRowCellFactory(order -> new MFXTableRowCell<>(Consegna::getCap));
+        dataConsegnaColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Consegna::getDataConsegna));
+        table.getTableColumns().addAll(nomeFarmacia , indirizzo, cap, dataConsegnaColumn, infoOrderColumn);
         table.getFilters().addAll(
-                new IntegerFilter<>("Codice Ordine", Ordine::getCodiceOrdine),
-                new StringFilter<>("Nome Farmacia", Ordine::getNomeFarmacia),
-                new IntegerFilter<>("Stato Ordine", Ordine::getStatoOrdine)
+                new IntegerFilter<>("Codice Consegna", Consegna::getIDConsegna),
+                new StringFilter<>("Nome Farmacia", Consegna::getNomeFarmacia),
+                new StringFilter<>("Indirrizzo", Consegna::getIndirizzo),
+                new StringFilter<>("Destinatario", Consegna::getDestinatario)
         );
         table.setTableRowFactory(resource -> new MFXTableRow<>(table, resource) {{
             setPrefHeight(40);
             setAlignment(Pos.CENTER_LEFT);
         }});
         table.autosizeColumnsOnInitialization();
-        table.setItems(FXCollections.observableArrayList(listaOrdini));
+        table.setItems(FXCollections.observableArrayList(listaConsegne));
 
 
-    }*/
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -121,8 +120,8 @@ public class GUIListaConsegneController implements Initializable {
         if (vendita)
             titleLabel.setText("VENDITA");
         else
-            titleLabel.setText("LISTA ORDINI RICEVUTI");
+            titleLabel.setText("LISTA CONSEGNE");
         username.setText(controlConsegna.getUsername());
-        //setupTable();
+        setupTable();
     }
 }

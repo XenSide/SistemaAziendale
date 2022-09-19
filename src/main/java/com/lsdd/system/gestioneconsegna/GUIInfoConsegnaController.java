@@ -20,7 +20,7 @@ public class GUIInfoConsegnaController implements Initializable {
     private final Consegna consegna;
     private final Stage stage;
 
-    private ControlConsegna controlConsegna;
+    private final ControlConsegna controlConsegna;
 
     private final FXMLLoader fxmlLoader;
 

@@ -1,6 +1,7 @@
 package com.lsdd.system.gestioneconsegna;
 
 import com.lsdd.system.utils.*;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -30,6 +31,7 @@ public class ControlConsegna {
                 throwable.printStackTrace();
         }).thenAccept(ordines  -> {
             Platform.runLater(() -> {
+
                 fxmlLoader.setController(new GUIListaConsegneController(false, stage, this, ordines));
                 new GUIListaConsegneBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
             });});
@@ -39,10 +41,18 @@ public class ControlConsegna {
     public void creaInfoConsegna(Consegna consegna, boolean firma) {
         fxmlLoader = new FXMLLoader(GUIInfoConsegnaController.class.getResource("infoConsegnaPanel.fxml"));
         Stage stage = new Stage();
-        fxmlLoader.setController(new GUIInfoConsegnaController(consegna, stage, fxmlLoader));
+        fxmlLoader.setController(new GUIInfoConsegnaController(consegna, stage, this, fxmlLoader));
         new GUIInfoConsegnaBoundary(stage, fxmlLoader);
     }
 
-    public void onClickfirma(Consegna consegna){}
+    public void onClickfirma(Consegna consegna){
+        fxmlLoader = new FXMLLoader(GUIFirmaController.class.getResource("firmaPanel.fxml"));
+        Stage stage = new Stage();
+        fxmlLoader.setController(new GUIFirmaController(consegna, stage, this, fxmlLoader));
+        new GUIFirmaBoundary(stage, fxmlLoader);
+    }
 
+    public void firma(MFXTextField firmaField) {
+        //DDBMS.getAzienda().
+    }
 }
