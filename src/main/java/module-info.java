@@ -16,5 +16,6 @@ module com.sysaz.sistemaaziendale {
     exports com.lsdd.system.utils;
     opens com.lsdd.system.utils to javafx.fxml;
     opens com.lsdd.system.gestionefarmacia to javafx.fxml;
+    opens com.lsdd.system.gestioneconsegna to javafx.fxml;
 
 }

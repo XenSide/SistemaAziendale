@@ -73,7 +73,7 @@ public class GUIModificaProduzioneController implements Initializable {
                     return;
                 }
 
-                Image infoButtonImage = new Image((getClass().getResourceAsStream("modifica.png"))); // FIXME: 07/09/2022
+                Image infoButtonImage = new Image((getClass().getResourceAsStream("modifica.png")));
                 ImageView imageView = new ImageView(infoButtonImage);
                 imageView.setFitWidth(20);
                 imageView.setFitHeight(20);
@@ -99,7 +99,7 @@ public class GUIModificaProduzioneController implements Initializable {
             setPrefHeight(40);
             setAlignment(Pos.CENTER_LEFT);
         }});
-        table.autosizeColumnsOnInitialization();
+        //table.autosizeColumnsOnInitialization();
         table.setItems(FXCollections.observableArrayList(listaProdotti));
 
 

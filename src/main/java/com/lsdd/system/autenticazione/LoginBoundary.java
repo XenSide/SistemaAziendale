@@ -23,7 +23,7 @@ public class LoginBoundary extends Application {
         Utils.startStage(stage, scene);
     }
 
-    public static void startStatic() throws IOException { // FIXME: 12/09/2022 No, I don't think I will
+    public static void startStatic() throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(LoginBoundary.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
