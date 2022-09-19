@@ -1,15 +1,13 @@
 package com.lsdd.system.gestioneconsegna;
 
-import com.lsdd.system.utils.*;
+import com.lsdd.system.utils.Consegna;
+import com.lsdd.system.utils.DDBMS;
+import com.lsdd.system.utils.Utente;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
-
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 @RequiredArgsConstructor
 public class ControlConsegna {
@@ -46,7 +44,7 @@ public class ControlConsegna {
     }
 
     public void onClickfirma(Consegna consegna){
-        fxmlLoader = new FXMLLoader(GUIFirmaController.class.getResource("firmaPanel.fxml"));
+        fxmlLoader = new FXMLLoader(GUIFirmaController.class.getResource("firma.fxml"));
         Stage stage = new Stage();
         fxmlLoader.setController(new GUIFirmaController(consegna, stage, this, fxmlLoader));
         new GUIFirmaBoundary(stage, fxmlLoader);

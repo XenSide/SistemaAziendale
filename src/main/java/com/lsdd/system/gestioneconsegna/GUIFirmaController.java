@@ -13,8 +13,6 @@ import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class GUIFirmaController implements Initializable {
@@ -35,6 +33,8 @@ public class GUIFirmaController implements Initializable {
     private MFXButton confirmButton;
     @FXML
     private MFXButton deleteFirmaButton;
+    @FXML
+    private Label titleLabel;
     @FXML
     private MFXButton cancelButton;
     @FXML
@@ -70,12 +70,6 @@ public class GUIFirmaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        nomeLabel.setText(Utils.toDisplayCase(consegna.getNomeFarmacia()));
-        indirizzoLabel.setText(Utils.toDisplayCase(consegna.getIndirizzo()));
-        capLabel.setText(Utils.toDisplayCase(consegna.getCap()));
-        dataLabel.setText(df.format(consegna.getDataConsegna()));
-        destinatarioLabel.setText(Utils.toDisplayCase(consegna.getDestinatario()));
-        idcLabel.setText(consegna.getIDConsegna().toString());
+        titleLabel.setText("FIRMA");
     }
 }
