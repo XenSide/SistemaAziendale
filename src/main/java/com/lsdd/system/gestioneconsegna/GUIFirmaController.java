@@ -1,7 +1,6 @@
 package com.lsdd.system.gestioneconsegna;
 
 import com.lsdd.system.utils.Consegna;
-import com.lsdd.system.utils.Utils;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
@@ -13,8 +12,6 @@ import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
 
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class GUIFirmaController implements Initializable {
@@ -36,7 +33,7 @@ public class GUIFirmaController implements Initializable {
     @FXML
     private MFXButton deleteFirmaButton;
     @FXML
-    private Label nomeLabel;
+    private Label titleLabel;
 
     @FXML
     private Label indirizzoLabel;
@@ -65,12 +62,6 @@ public class GUIFirmaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        nomeLabel.setText(Utils.toDisplayCase(consegna.getNomeFarmacia()));
-        indirizzoLabel.setText(Utils.toDisplayCase(consegna.getIndirizzo()));
-        capLabel.setText(Utils.toDisplayCase(consegna.getCap()));
-        dataLabel.setText(df.format(consegna.getDataConsegna()));
-        destinatarioLabel.setText(Utils.toDisplayCase(consegna.getDestinatario()));
-        idcLabel.setText(consegna.getIDConsegna().toString());
+        titleLabel.setText("FIRMA");
     }
 }
