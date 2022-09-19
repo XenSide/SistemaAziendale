@@ -123,5 +123,6 @@ public class AuthManager {
 
     public void deleteStage(Stage stage) {
         stage.close();
+        System.exit(1);
     }
 }
