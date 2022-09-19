@@ -332,15 +332,16 @@ public class DDBMS {
     public CompletableFuture<List<Ordine>> getListaOrdiniRicevuti() {
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connection = getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.*, f.nome, f.cap, f.indirizzo, c.data_consegna, op.IDProdotto, p.nome, op.quantità, op.lotto FROM ordine o, farmacia f, consegna c, prodotto p, ordine_prodotto op " +
-                         "WHERE o.IDFarmacia=f.IDFarmacia AND o.IDOrdine=c.IDOrdine AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto ORDER BY IDOrdine")) {
+                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.*, f.nome, f.cap, f.indirizzo, c.data_consegna, op.IDProdotto, p.nome, op.quantità, op.lotto, p.daBanco, p.costo, p.principio_attivo, l.data_produzione, l.data_scadenza FROM ordine o, farmacia f, consegna c, prodotto p, ordine_prodotto op, lotto l " +
+                         "WHERE o.IDFarmacia=f.IDFarmacia  AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto AND op.lotto=l.IDLotto ORDER BY IDOrdine")) {//AND o.IDOrdine=c.IDOrdine
                 List<Ordine> ordiniList = new ArrayList<>();
                 List<Prodotto> prodottiOrdineList = new ArrayList<>();
                 ResultSet resultSet = preparedStatement.executeQuery();
                 int idLastOrder = -1, iDOrdine=-1, stato=-1, iDFarmacia=-1, iDProdotto=-1, quantità=-1;
-                String nomeFarmacia=null, cap=null, indirizzo=null, lotto=null,nome=null ;
-                Date data_creazione=null,dataConsegna = null;
-
+                String nomeFarmacia=null, cap=null, indirizzo=null, lotto=null,nome=null,pAttivo=null ;
+                Date data_creazione=null,dataConsegna = null,dataProduzione=null,dataScadenza=null;
+                boolean daBanco=false;
+                Double costo=null;
                 while (resultSet.next()) {
                     iDOrdine = resultSet.getInt("IDOrdine");
 
@@ -348,6 +349,7 @@ public class DDBMS {
                         ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, prodottiOrdineList, dataConsegna, data_creazione, stato, 0));
                         prodottiOrdineList.clear();
                     }
+                    //ordine
                     idLastOrder = iDOrdine;
                     data_creazione = resultSet.getDate("data_creazione");
                     stato = resultSet.getInt("stato_ordine");
@@ -357,12 +359,19 @@ public class DDBMS {
                     indirizzo = resultSet.getString("indirizzo");
                     dataConsegna = resultSet.getDate("data_consegna");
 
+                    //prodotto
                     iDProdotto = resultSet.getInt("IDProdotto");
                     nome = resultSet.getString("p.nome");
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
+                    daBanco=resultSet.getBoolean("daBanco");
+                    costo=resultSet.getDouble("costo");
+                    pAttivo=resultSet.getString("principio_attivo");
+                    dataProduzione=resultSet.getDate("data_produzione");;
+                    dataScadenza=resultSet.getDate("data_scadenza");;
 
-                    prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false  , quantità, null, null, null, null));
+
+                    prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, daBanco  , quantità, costo, pAttivo, dataProduzione, dataScadenza));
                     //prodottoList.add(new Prodotto(iD, lotto, nome, principioAttivo, daBanco, unita, costo, produzione, scadenza));
                 }
                 if (idLastOrder != -1) {
@@ -380,7 +389,7 @@ public class DDBMS {
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.*, f.nome, f.cap, f.indirizzo, c.data_consegna, op.IDProdotto, p.nome, op.quantità, op.lotto FROM ordine_periodico o, farmacia f, consegna c, prodotto p, ordine_prodotto op " +
-                         "WHERE o.IDFarmacia=f.IDFarmacia AND o.IDOrdine=c.IDOrdine AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto ORDER BY IDOrdine")) {
+                         "WHERE o.IDFarmacia=f.IDFarmacia AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto ORDER BY IDOrdine")) {//AND o.IDOrdine=c.IDOrdine
                 List<Ordine> ordiniList = new ArrayList<>();
                 List<Prodotto> prodottiOrdineList = new ArrayList<>();
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -427,7 +436,7 @@ public class DDBMS {
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.*, f.nome, f.cap, f.indirizzo, c.data_consegna, op.IDProdotto, p.nome, op.quantità, op.lotto FROM ordine o, farmacia f, consegna c, prodotto p, ordine_prodotto op " +
-                         "WHERE o.IDFarmacia=? AND o.IDOrdine=c.IDOrdine AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto ORDER BY IDOrdine")) {
+                         "WHERE o.IDFarmacia=? AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto ORDER BY IDOrdine")) {//AND o.IDOrdine=c.IDOrdine
                 preparedStatement.setInt(1, iDFarmacia); //prende gli ordini effettuati dalla farmacia che richiama il metodo
                 List<Ordine> ordiniList = new ArrayList<>();
                 List<Prodotto> prodottiOrdineList = new ArrayList<>();
@@ -473,7 +482,7 @@ public class DDBMS {
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.*, f.nome, f.cap, f.indirizzo, c.data_consegna, op.IDProdotto, p.nome, op.quantità, op.lotto FROM ordine_periodico o, farmacia f, consegna c, prodotto p, ordine_prodotto op " +
-                         "WHERE o.IDFarmacia=? AND o.IDOrdine=c.IDOrdine AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto ORDER BY IDOrdine")) {
+                         "WHERE o.IDFarmacia=? AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto ORDER BY IDOrdine")) {//AND o.IDOrdine=c.IDOrdine
                 preparedStatement.setInt(1, iDFarmacia); //prende gli ordini effettuati dalla farmacia che richiama il metodo
                 List<Ordine> ordiniList = new ArrayList<>();
                 List<Prodotto> prodottiOrdineList = new ArrayList<>();
@@ -520,7 +529,7 @@ public class DDBMS {
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.*, f.nome, f.cap, f.indirizzo, c.data_consegna, op.IDProdotto, p.nome, op.quantità, op.lotto FROM ordine o, farmacia f, consegna c, prodotto p, ordine_prodotto op " +
-                         "WHERE o.IDFarmacia=f.IDFarmacia AND o.IDOrdine=c.IDOrdine AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto AND o.stato_ordine=1 ORDER BY IDOrdine")) {
+                         "WHERE o.IDFarmacia=f.IDFarmacia AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto AND o.stato_ordine=1 ORDER BY IDOrdine")) {//AND o.IDOrdine=c.IDOrdine
                 List<Ordine> ordiniList = new ArrayList<>();
                 List<Prodotto> prodottiOrdineList = new ArrayList<>();
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -565,7 +574,7 @@ public class DDBMS {
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.*, f.nome, f.cap, f.indirizzo, c.data_consegna, op.IDProdotto, p.nome, op.quantità, op.lotto FROM ordine o, farmacia f, consegna c, prodotto p, ordine_prodotto op " +
-                         "WHERE o.IDFarmacia=? AND o.IDOrdine=c.IDOrdine AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto AND o.stato_ordine=2 AND c.stato_consegna=3 ORDER BY IDOrdine")) {
+                         "WHERE o.IDFarmacia=? AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto AND o.stato_ordine=2 AND c.stato_consegna=3 ORDER BY IDOrdine")) {//AND o.IDOrdine=c.IDOrdine
                 preparedStatement.setInt(1, iDFarmacia); //prende gli ordini effettuati dalla farmacia che richiama il metodo
                 List<Ordine> ordiniList = new ArrayList<>();
                 List<Prodotto> prodottiOrdineList = new ArrayList<>();
@@ -611,7 +620,7 @@ public class DDBMS {
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.*, f.nome, f.cap, f.indirizzo, c.data_consegna, op.IDProdotto, p.nome, op.quantità, op.lotto FROM ordine_periodico o, farmacia f, consegna c, prodotto p, ordine_prodotto op " +
-                         "WHERE o.IDFarmacia=? AND o.IDOrdine=c.IDOrdine AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto AND o.stato_ordine=2 AND c.stato_consegna=3 ORDER BY IDOrdine")) {
+                         "WHERE o.IDFarmacia=? AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto AND o.stato_ordine=2 AND c.stato_consegna=3 ORDER BY IDOrdine")) {//AND o.IDOrdine=c.IDOrdine
                 preparedStatement.setInt(1, iDFarmacia); //prende gli ordini effettuati dalla farmacia che richiama il metodo
                 List<Ordine> ordiniList = new ArrayList<>();
                 List<Prodotto> prodottiOrdineList = new ArrayList<>();
@@ -675,7 +684,7 @@ public class DDBMS {
         return CompletableFuture.supplyAsync(() -> {
             try (Connection connection = getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.*, f.nome, f.cap, f.indirizzo, c.data_consegna, op.IDProdotto, p.nome, op.quantità, op.lotto FROM ordine_periodico o, farmacia f, consegna c, prodotto p, ordine_prodotto op " +
-                         "WHERE o.IDFarmacia=f.IDFarmacia AND o.IDOrdine=c.IDOrdine AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto AND o.stato_ordine=1 ORDER BY IDOrdine")) {
+                         "WHERE o.IDFarmacia=f.IDFarmacia AND o.IDOrdine=op.IDOrdine AND op.IDProdotto=p.IDProdotto AND o.stato_ordine=1 ORDER BY IDOrdine")) {//AND o.IDOrdine=c.IDOrdine
                 List<Ordine> ordiniList = new ArrayList<>();
                 List<Prodotto> prodottiOrdineList = new ArrayList<>();
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -794,11 +803,11 @@ public class DDBMS {
         }, executor);
     }
     public void firmaConsegna(int idConsegna, String firma) { //TODO:DELETARE DAL DBMS AZIENDALE LE COSE ARRIVATE
-
+        System.out.println(idConsegna+" VVVVVVVVVVVVVVVVVVV"+firma);
         CompletableFuture.runAsync(() -> {
 
             try (Connection connection = getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement("UDPATE consegna SET (stato_consegna = 3, firma=?, data_ricezione_consegna=CURRENT_TIMESTAMP) WHERE IDConsegna = ?")) {
+                 PreparedStatement preparedStatement = connection.prepareStatement("UPDATE consegna SET (stato_consegna = 3, firma=?, data_ricezione_consegna=CURRENT_TIMESTAMP) WHERE IDConsegna = ?")) {
                 preparedStatement.setString(1, firma);
                 preparedStatement.setInt(2, idConsegna );
 

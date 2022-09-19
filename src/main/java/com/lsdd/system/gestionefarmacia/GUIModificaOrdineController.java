@@ -59,6 +59,7 @@ public class GUIModificaOrdineController implements Initializable {
 
 
     public void setupTable() {
+        System .out .println(   listaOrdini.get(0).getCodiceOrdine()+ " idordine:prodotto " +listaOrdini.get(0).getProdotto());
         MFXTableColumn<Ordine> codiceOrdineColumn = new MFXTableColumn<>("Codice Ordine", true, Comparator.comparing(Ordine::getCodiceOrdine));
         codiceOrdineColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> dataOrdineColumn = new MFXTableColumn<>("Data Ordine", true, Comparator.comparing(Ordine::getDataOrdine));

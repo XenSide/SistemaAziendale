@@ -129,7 +129,8 @@ public class ControlOrdiniA {
     public boolean confermaVenditaOrdine(Ordine ordine) {
         // DONE: 10/09/2022 query vendita ordine
         try {
-            DDBMS.getAzienda().annullaOrdine(ordine.getCodiceOrdine());
+            //TODO: porcodio
+            //DDBMS.getAzienda().annullaOrdine(ordine.getCodiceOrdine());
         }catch (Exception e){e.printStackTrace();return false;}
         return true;
     }

@@ -59,6 +59,7 @@ public class GUIFirmaController implements Initializable {
             stage.close();
             if(firmaField.getText().length()!=0){
             controlConsegna.firma(consegna.getIDConsegna(), firmaField.getText());
+            stage.close();
             }else Utils.showAlert("devi inserire una firma per continuare");
         }else if (event.getSource() == deleteFirmaButton) {
             firmaField.clear();
