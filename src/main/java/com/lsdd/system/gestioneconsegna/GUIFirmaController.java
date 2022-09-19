@@ -1,6 +1,7 @@
 package com.lsdd.system.gestioneconsegna;
 
 import com.lsdd.system.utils.Consegna;
+import com.lsdd.system.utils.Utils;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
@@ -34,6 +35,10 @@ public class GUIFirmaController implements Initializable {
     private MFXButton deleteFirmaButton;
     @FXML
     private Label titleLabel;
+    @FXML
+    private MFXButton cancelButton;
+    @FXML
+    private Label nomeLabel;
 
     @FXML
     private Label indirizzoLabel;
@@ -52,10 +57,13 @@ public class GUIFirmaController implements Initializable {
     public void onClick(ActionEvent event){
         if(event.getSource() == confirmButton) {
             stage.close();
-            controlConsegna.firma(firmaField);
-        }
-        if (event.getSource() == deleteFirmaButton) {
+            if(firmaField.getText().length()!=0){
+            controlConsegna.firma(consegna.getIDConsegna(), firmaField.getText());
+            }else Utils.showAlert("devi inserire una firma per continuare");
+        }else if (event.getSource() == deleteFirmaButton) {
             firmaField.clear();
+        }else if (event.getSource() == cancelButton){
+            stage.close();
         }
     }
 
