@@ -59,7 +59,7 @@ public class GUIModificaOrdineController implements Initializable {
 
 
     public void setupTable() {
-        System .out .println(   listaOrdini.get(0).getCodiceOrdine()+ " idordine:prodotto " +listaOrdini.get(0).getProdotto());
+        //System .out .println(   listaOrdini.get(0).getCodiceOrdine()+ " idordine:prodotto " +listaOrdini.get(0).getProdotto());
         MFXTableColumn<Ordine> codiceOrdineColumn = new MFXTableColumn<>("Codice Ordine", true, Comparator.comparing(Ordine::getCodiceOrdine));
         codiceOrdineColumn.setPrefWidth(179);
         MFXTableColumn<Ordine> dataOrdineColumn = new MFXTableColumn<>("Data Ordine", true, Comparator.comparing(Ordine::getDataOrdine));
@@ -88,7 +88,7 @@ public class GUIModificaOrdineController implements Initializable {
                 infoOrderButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0)"); //trasparent
                 infoOrderButton.setGraphic(imageView);
                 setGraphic(infoOrderButton);
-                infoOrderButton.setOnAction(event -> controlOrdiniF.onClickModificaProdotti(ordine.getProdotto()));
+                infoOrderButton.setOnAction(event -> controlOrdiniF.onClickModificaProdotti(ordine,true));
             }
         });
 

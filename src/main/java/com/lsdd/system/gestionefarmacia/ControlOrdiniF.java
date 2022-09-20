@@ -67,21 +67,31 @@ public class ControlOrdiniF {
 */
     }
 
-    public void onClickVenditaProdotti(List<Prodotto> prodotto) {
+    public void onClickVenditaProdotti(List<Prodotto> prodotto) {//TODO:RIFARE
         fxmlLoader = new FXMLLoader(FormSelezionaProdottoBoundary.class.getResource("selezionaProdotto.fxml"));
         Stage stage = new Stage();
-        fxmlLoader.setController(new FormSelezionaProdottoController(prodotto, this, stage));
+        Ordine ordine=new Ordine(); ordine.setProdotto(prodotto);
+        fxmlLoader.setController(new FormSelezionaProdottoController(false,ordine, this, stage));
         new FormSelezionaProdottoBoundary(stage, fxmlLoader);
     }
 
-    public void onClickModificaProdotti(List<Prodotto> prodotto) {
+    public void onClickModificaProdotti(Ordine ordine,boolean modifica) {
         //PANNELLO GROSSO
         fxmlLoader = new FXMLLoader(FormSelezionaProdottoBoundary.class.getResource("selezionaProdotto.fxml"));
         Stage stage = new Stage();
-        fxmlLoader.setController(new FormSelezionaProdottoController(prodotto, this, stage));
+        fxmlLoader.setController(new FormSelezionaProdottoController(modifica,ordine, this, stage));
         new FormSelezionaProdottoBoundary(stage, fxmlLoader);
     }
+    public void modificaOrdine(Ordine ordine){
+        DDBMS.getAzienda().modificaOrdine(ordine);
+        Utils.showAlert("ordine modificato");
+    }
+    public void confermaRicezione(Ordine ordine){
 
+        DDBMS.getAzienda().confermaRicezione(ordine,(ordine.getTipoOrdine()==0));
+        DDBMS.getFarmacia().caricaSpedizione(ordine);
+        Utils.showAlert("ordine confermato e caricato");
+    }
 
     public void creaModificaQta(Prodotto prodotto) {
         //PANNELLO PICCOLO
@@ -147,7 +157,7 @@ public class ControlOrdiniF {
         return true;
     }
 
-    public void onClickVendita() {//TODO: da cambiare completamente
+    /*public void onClickVendita() {//TODO: da cambiare completamente
         Stage stage = new Stage();
         fxmlLoader = new FXMLLoader(GUIListaOrdiniEffettuatiBoundary.class.getResource("tableView.fxml"));
         // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
@@ -168,10 +178,28 @@ public class ControlOrdiniF {
         ordines.add(new Ordine(1, 1, "Antonina", "90100", "viavai", prodottos, data, data, 1, 1));
         fxmlLoader.setController(new GUIListaOrdiniEffettuatiController(true, stage, this, ordines));
         new GUIListaOrdiniEffettuatiBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
-    }
+    }*/
 
     public void onClickListaConfermaRicezione() {
+        Stage stage = new Stage();
+        fxmlLoader = new FXMLLoader(GUIConfermaRicezioneController.class.getResource("tableView.fxml"));
+        // DONE: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
 
+        DDBMS.getAzienda().getListaOrdiniEffettuati(utente.getUIDFarmacia()).whenComplete((ordines1,throwable)->{
+            if (throwable != null)
+                throwable.printStackTrace();
+        }).thenAccept(ordines1  -> {
+            Platform.runLater(() -> {
+                DDBMS.getAzienda().getListaOrdiniPeriodiciEffettuati(utente.getUIDFarmacia()).whenComplete((ordines2,throwable)->{
+                    if (throwable != null)
+                        throwable.printStackTrace();
+                }).thenAccept(ordines  -> {
+                    Platform.runLater(() -> {
+                        ordines.addAll(ordines1);
+                        fxmlLoader.setController(new GUIConfermaRicezioneController(false,stage, this, ordines));
+                        new GUIConfermaRicezioneBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+                    });});
+            });});
     }
 
     public void richiestaProdotti(Prodotto prodotto, Stage stage, Integer qtaRichiesta) {

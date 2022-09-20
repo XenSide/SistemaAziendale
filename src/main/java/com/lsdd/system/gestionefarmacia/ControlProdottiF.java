@@ -84,7 +84,7 @@ public class ControlProdottiF {
             fxmlLoader.setController(new ConfermaDataScadenzaController(prodotto, stage1, richiesta, "La data di scadenza del prodotto richiesto è inferiore a due mesi, vuoi confermare comunque?", this, prodotto.getQuantitá()));
             new ConfermaDataScadenzaBoundary(stage1, fxmlLoader); //new Stage() per creare una nuova finestra
             stage.close();
-        } else {
+        } else if(!richiesta.isFattura()) {
             stage.close();
             checkDateDiverse(richiesta, prodotto.getQuantitá());
             if (prodotto.getQuantitá() - richiesta.getFirst().getQuantitá() < 0)
@@ -184,7 +184,35 @@ public class ControlProdottiF {
         new GUIInfoProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
     }*/
 
+    public void onClickVendiProdotti() {
+        fxmlLoader = new FXMLLoader(GUIRichiestaProdottoController.class.getResource("tableView2Pulsanti.fxml"));
+        Stage stage = new Stage();
+        // DONE: 13/09/2022 Query per caricare la lista prodotti
+        DDBMS.getFarmacia().getProdotti().whenComplete((prodottos,throwable)->{
+            if (throwable != null)
+                throwable.printStackTrace();
+        }).thenAccept(prodottos  -> {
+            Platform.runLater(() -> {
+                fxmlLoader.setController(new GUIVenditaController(stage, this, prodottos));
+                new GUIRichiestaProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+            });});
+        /*
+        Date data = new Date(122, 9, 15);
+        Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina = new Prodotto(123, "oki", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina1 = new Prodotto(123, "giorgiomorto", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina2 = new Prodotto(123, "lunapersa", "A123", true, 3, 3.2, "Augmento", data, data);
+        Prodotto augmentina3 = new Prodotto(123, "antoninodisperato", "A123", true, 3, 3.2, "Augmento", data, data);
+        prodotti.add(augmentin);
+        prodotti.add(augmentina);
+        prodotti.add(augmentina1);
+        prodotti.add(augmentina2);
+        prodotti.add(augmentina3);
+        fxmlLoader.setController(new GUIRichiestaProdottoController(stage, this, prodotti));
+        new GUIRichiestaProdottoBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
 
+         */
+    }
     public boolean annullaOrdine(Ordine ordine) {
         // DONE: 10/09/2022 query annullamento ordine
         try {

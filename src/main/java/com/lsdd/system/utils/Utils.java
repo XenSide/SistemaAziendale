@@ -9,6 +9,7 @@ import javafx.stage.StageStyle;
 
 
 public class Utils {
+    public static boolean aBoolean;
 
     public static void startStage(Stage stage, Scene scene) {
         stage.setResizable(false);
@@ -52,6 +53,15 @@ public class Utils {
             capNext = (ACTIONABLE_DELIMITERS.indexOf((int) c) >= 0); // explicit cast not needed
         }
         return sb.toString();
+    }
+    public static boolean showConfirm(String stringa){
+        FXMLLoader fxmlLoader = new FXMLLoader(AlertBoundary.class.getResource("confermaOperazione.fxml"));
+        Stage stageDatiErrati = new Stage();
+        stageDatiErrati.initStyle(StageStyle.TRANSPARENT);
+        AlertController alertController = new AlertController(stageDatiErrati,stringa);
+        fxmlLoader.setController(alertController);
+        new AlertBoundary(stageDatiErrati, fxmlLoader); //new Stage() per creare una nuova finestra
+        return aBoolean;
     }
 }
 

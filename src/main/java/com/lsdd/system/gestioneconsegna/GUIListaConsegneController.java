@@ -55,7 +55,7 @@ public class GUIListaConsegneController implements Initializable {
         stage.close();
     }
 
-//TODO: sistemare tutto
+//DONE: sistemare tutto
 
 
     public void setupTable() {

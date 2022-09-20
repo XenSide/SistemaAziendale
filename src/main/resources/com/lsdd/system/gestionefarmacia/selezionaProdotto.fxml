@@ -29,7 +29,7 @@
                 <MFXButton fx:id="confirmButton" buttonType="RAISED" defaultButton="true" layoutX="258.0"
                            layoutY="328.0" onAction="#onClick" prefHeight="37.0" prefWidth="152.0"
                            style="-fx-background-color: #AB3434; -fx-border-radius: 20; -fx-background-radius: 20;"
-                           text="VENDI" textFill="WHITE">
+                           text="CONFERMA" textFill="WHITE">
                     <font>
                         <Font size="16.0"/>
                     </font>

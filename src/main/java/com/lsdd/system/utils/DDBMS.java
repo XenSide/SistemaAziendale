@@ -286,7 +286,7 @@ public class DDBMS {
                     double costo = resultSet.getDouble("costo");
                     Date produzione = Date.valueOf(resultSet.getString("data_produzione"));
                     Date scadenza = Date.valueOf(resultSet.getString("data_scadenza"));
-                    prodottoList.add(new Prodotto(iD, lotto, nome, daBanco, unita, costo, principioAttivo, produzione, scadenza));
+                    prodottoList.add(new Prodotto(iD, nome, lotto, daBanco, unita, costo, principioAttivo, produzione, scadenza));
                 }
                 return prodottoList;
 
@@ -371,7 +371,7 @@ public class DDBMS {
                     dataScadenza=resultSet.getDate("data_scadenza");;
 
 
-                    prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, daBanco  , quantità, costo, pAttivo, dataProduzione, dataScadenza));
+                    prodottiOrdineList.add(new Prodotto(iDProdotto, nome, lotto, daBanco  , quantità, costo, pAttivo, dataProduzione, dataScadenza));
                     //prodottoList.add(new Prodotto(iD, lotto, nome, principioAttivo, daBanco, unita, costo, produzione, scadenza));
                 }
                 if (idLastOrder != -1) {
@@ -418,7 +418,7 @@ public class DDBMS {
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
-                    prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false, quantità    , null, null, null, null));
+                    prodottiOrdineList.add(new Prodotto(iDProdotto, nome, lotto, false, quantità    , null, null, null, null));
                     //prodottoList.add(new Prodotto(iD, lotto, nome, principioAttivo, daBanco, unita, costo, produzione, scadenza));
                 }
                 if (idLastOrder != -1) {
@@ -465,7 +465,7 @@ public class DDBMS {
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
-                    prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false  , quantità  , null, null, null, null));
+                    prodottiOrdineList.add(new Prodotto(iDProdotto, nome, lotto, false  , quantità  , null, null, null, null));
                 }
                 if (idLastOrder != -1) {
                     ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, 0));
@@ -512,7 +512,7 @@ public class DDBMS {
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
-                    prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false, quantità, null,  null, null, null));
+                    prodottiOrdineList.add(new Prodotto(iDProdotto, nome, lotto, false, quantità, null,  null, null, null));
                 }
                 if (idLastOrder != -1) {
                     ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, periodicita));
@@ -557,7 +557,7 @@ public class DDBMS {
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
-                    prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false, quantità, null, null, null, null));
+                    prodottiOrdineList.add(new Prodotto(iDProdotto,nome, lotto, false, quantità, null, null, null, null));
                 }
                 if (idLastOrder != -1) {
                     ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, 0));
@@ -603,7 +603,7 @@ public class DDBMS {
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
-                    prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false  , quantità  , null, null, null, null));
+                    prodottiOrdineList.add(new Prodotto(iDProdotto, nome, lotto, false  , quantità  , null, null, null, null));
                 }
                 if (idLastOrder != -1) {
                     ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, 0));
@@ -650,7 +650,7 @@ public class DDBMS {
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
-                    prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, false  , quantità  , null, null, null, null));
+                    prodottiOrdineList.add(new Prodotto(iDProdotto, nome, lotto, false  , quantità  , null, null, null, null));
                 }
                 if (idLastOrder != -1) {
                     ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, periodicita));
@@ -713,7 +713,7 @@ public class DDBMS {
                     quantità = resultSet.getInt("quantità");
                     lotto = resultSet.getString("lotto");
 
-                    prodottiOrdineList.add(new Prodotto(iDProdotto, lotto, nome, true,  quantità,null, null, null, null));
+                    prodottiOrdineList.add(new Prodotto(iDProdotto, nome, lotto, true,  quantità,null, null, null, null));
                 }
                 if (idLastOrder != -1) {
                     ordiniList.add(new Ordine(idLastOrder, iDFarmacia, nomeFarmacia, cap, indirizzo, new ArrayList<Prodotto>(prodottiOrdineList), dataConsegna, data_creazione, stato, periodicita));
@@ -795,14 +795,14 @@ public class DDBMS {
 
                 preparedStatement.executeUpdate();
                 //preparedStatement1.executeUpdate();
-                preparedStatement2.executeUpdate();
+                if(periodico)preparedStatement2.executeUpdate();
 
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }, executor);
     }
-    public void firmaConsegna(int idConsegna, String firma) { //TODO:DELETARE DAL DBMS AZIENDALE LE COSE ARRIVATE
+    public void firmaConsegna(int idConsegna, String firma) {
         System.out.println(idConsegna+" VVVVVVVVVVVVVVVVVVV"+firma);
         CompletableFuture.runAsync(() -> {
 
@@ -858,7 +858,7 @@ public class DDBMS {
         }, executor);
     }
 
-    public void venditaProdotti(Fattura fat, int stato) { //TODO: DELETARE LE COSE VENDUTE
+    public void venditaProdotti(Richiesta fat, int stato) { //TODO: DELETARE LE COSE VENDUTE
         CompletableFuture.runAsync(() -> {
             int iDfat=-1;
             try (Connection connection = getConnection();

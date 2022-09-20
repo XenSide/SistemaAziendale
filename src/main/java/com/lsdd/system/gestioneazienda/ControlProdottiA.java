@@ -107,7 +107,7 @@ public class ControlProdottiA {
     public void onClickListaOrdiniRicevuti() {
         Stage stage = new Stage();
         fxmlLoader = new FXMLLoader(GUIListaOrdiniRicevutiController.class.getResource("tableView.fxml"));
-        // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
+        // DONE: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
         Date data = new Date(1662477550);
         Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
         Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
@@ -142,7 +142,7 @@ public class ControlProdottiA {
     public void onClickVendita() {
         Stage stage = new Stage();
         fxmlLoader = new FXMLLoader(GUIListaOrdiniRicevutiController.class.getResource("tableView.fxml"));
-        // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
+        // DONE: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
         Date data = new Date(1662477550);
         Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
         Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);
@@ -164,7 +164,7 @@ public class ControlProdottiA {
     public void onclickModificaProduzione() {
         Stage stage = new Stage();
         fxmlLoader = new FXMLLoader(GUIModificaProduzioneBoundary.class.getResource("tableView.fxml"));
-        // TODO: 07/09/2022 QUERY PER PREDERE ORDINE E PRODOTTO
+
         Date data = new Date(1662477550);
         Prodotto augmentin = new Prodotto(123, "augmentin", "A123", true, 3, 3, "Augmento", data, data);
         Prodotto augmentina = new Prodotto(123, "augmentinos", "A123", true, 3, 3, "Augmento", data, data);

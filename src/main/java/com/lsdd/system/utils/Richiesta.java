@@ -17,6 +17,7 @@ public class Richiesta {
 
     private Integer idFarmacia;
     private Date data;
+    private boolean fattura=false;
 
     public Richiesta(LinkedList<Prodotto> prodotti, Integer idFarmacia, Date data) {
         this.prodotti = prodotti;

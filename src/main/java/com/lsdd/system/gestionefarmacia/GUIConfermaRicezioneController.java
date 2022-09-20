@@ -27,12 +27,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @RequiredArgsConstructor
-public class GUIConfermaRicezioneController implements Initializable { //TODO: tutta la classe, ho copiato lista ordini effettuati perche è molto simile
+public class GUIConfermaRicezioneController implements Initializable { //DONE: tutta la classe, ho copiato lista ordini effettuati perche è molto simile
     private final boolean vendita; //if true = vendita, false = listaOrdiniRicevuti
 
     private final Stage stage;
     private final ControlOrdiniF controlOrdiniF;
     private final List<Ordine> listaOrdini;
+
     @FXML
     private ResourceBundle resources;
 
@@ -74,19 +75,15 @@ public class GUIConfermaRicezioneController implements Initializable { //TODO: t
                     setGraphic(null);
                     return;
                 }
-                Image infoButtonImage;
-                if (vendita) {
-                    infoButtonImage = new Image((getClass().getResourceAsStream("sellList.png")));
-                } else {
-                    infoButtonImage = new Image((getClass().getResourceAsStream("info.png")));
-                }
+
+                Image infoButtonImage = new Image((getClass().getResourceAsStream("checkmark.png")));
                 ImageView imageView = new ImageView(infoButtonImage);
                 imageView.setFitWidth(20);
                 imageView.setFitHeight(20);
                 infoOrderButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0)"); //trasparent
                 infoOrderButton.setGraphic(imageView);
                 setGraphic(infoOrderButton);
-                infoOrderButton.setOnAction(event -> controlOrdiniF.creaInfoOrdine(ordine, vendita));
+                infoOrderButton.setOnAction(event -> controlOrdiniF.onClickModificaProdotti(ordine,false));
             }
         });
 

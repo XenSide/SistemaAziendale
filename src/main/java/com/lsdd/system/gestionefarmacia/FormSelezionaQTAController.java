@@ -1,5 +1,7 @@
 package com.lsdd.system.gestionefarmacia;
 
+import com.lsdd.system.utils.DDBMS;
+import com.lsdd.system.utils.Ordine;
 import com.lsdd.system.utils.Prodotto;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -16,6 +18,7 @@ import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class FormSelezionaQTAController implements Initializable {
     private final Prodotto prodotto;
+
     private final ControlOrdiniF controlOrdiniF;
 
     private final Stage stage;
@@ -43,10 +46,13 @@ public class FormSelezionaQTAController implements Initializable {
         if (actionEvent.getSource() == cancelButton)
             stage.close();
         else if (actionEvent.getSource() == confirmButton) {
-            try {
+            /*if(modifica==-1) {
                 controlOrdiniF.richiestaProdotti(prodotto, stage, Integer.parseInt(qtaField.getText()));
-            } catch (Exception e) {
-            }
+            }else if(modifica!=-1 && Integer.parseInt(qtaField.getText())!=prodotto.getQuantitá()) {
+                DDBMS.getAzienda().creaNotifica(modifica);//FIXME starebbe meglio in control ordini
+            }*/
+            prodotto.setQuantitá(Integer.parseInt(qtaField.getText()));
+            stage.close();
         }
     }
 

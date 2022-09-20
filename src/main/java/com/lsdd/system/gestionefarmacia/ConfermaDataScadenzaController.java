@@ -46,9 +46,10 @@ public class ConfermaDataScadenzaController implements Initializable {
         if (actionEvent.getSource() == confirmButton) {
             if (prodotto.getQuantitá() - richiesta.getFirst().getQuantitá() < 0)
                 prodotto.setQuantitá(0);
-            else
+            else if(!richiesta.isFattura()) {
                 prodotto.setQuantitá(prodotto.getQuantitá() - richiesta.getFirst().getQuantitá());
-            controlProdottiF.checkDateDiverse(richiesta, qta);
+                controlProdottiF.checkDateDiverse(richiesta, qta);
+            }else prodotto.setQuantitá(prodotto.getQuantitá() - richiesta.getFirst().getQuantitá());
         } else {
             richiesta.pop();
         }

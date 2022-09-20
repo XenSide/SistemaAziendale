@@ -71,7 +71,7 @@ public class GUIPrincipaleFarmaciaController implements Initializable {
         } else if (event.getSource() == ricercaButton) {
             controlProdottiF.onClickRicerca();
         } else if (event.getSource() == venditaButton) {
-            controlOrdiniF.onClickVendita();
+            controlProdottiF.onClickVendiProdotti();
         } else if (event.getSource() == listaOrdineButton) {
             controlOrdiniF.onClickListaOrdiniEffetuati();
         } else if (event.getSource() == modificaButton) {

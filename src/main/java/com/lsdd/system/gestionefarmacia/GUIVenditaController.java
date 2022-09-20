@@ -1,7 +1,7 @@
 package com.lsdd.system.gestionefarmacia;
 
 
-import com.lsdd.system.utils.Ordine;
+import com.lsdd.system.utils.*;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableRow;
@@ -27,10 +27,11 @@ import java.util.ResourceBundle;
 
 
 public class GUIVenditaController implements Initializable {
-    private final String title = "MODIFICA ORDINE";
+    private final String title = "VENDITA PRODOTTI";
     private final Stage stage;
-    private final ControlOrdiniF controlOrdiniF;
-    private final List<Ordine> listaOrdini;
+    private final Richiesta fattura;
+    private final ControlProdottiF controlProdottiF;
+    private final List<Prodotto> listaProdotti;
     @FXML
     private ResourceBundle resources;
     @FXML
@@ -46,36 +47,49 @@ public class GUIVenditaController implements Initializable {
     @FXML
     private Label username;
 
-    public GUIVenditaController(Stage stage, ControlOrdiniF controlOrdiniF, List<Ordine> listaOrdini) {
+    public GUIVenditaController(Stage stage, ControlProdottiF controlProdottiF, List<Prodotto> listaProdotti) {
         this.stage = stage;
-        this.controlOrdiniF = controlOrdiniF;
-        this.listaOrdini = listaOrdini;
-
+        this.controlProdottiF = controlProdottiF;
+        this.listaProdotti = listaProdotti;
+        this.fattura = new Richiesta( controlProdottiF.getFarmaciaID());
+        fattura.setFattura(true);
     }
 
-    public void onCancelButtonClick(ActionEvent actionEvent) {
+    public void onClick(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == confirmButton) {
+            System.out.println(fattura);
+            if (fattura.getSize() != 0) {
+                //boolean sstampa=Utils.showConfirm("vuoi stampare la fattura?");
+                boolean  sstampa=true;
+                // DONE: 15/09/2022 QUERY PER SALVARE RICHIESTA
+                DDBMS.getAzienda().venditaProdotti(fattura,(sstampa)?1:0);
+                //TODO: metodo per stampare
+
+            } else {
+                Utils.showAlert("La selezione dei prodotti era vuota");
+            }
+        }
         stage.close();
     }
 
 
     public void setupTable() {
-        MFXTableColumn<Ordine> codiceOrdineColumn = new MFXTableColumn<>("Codice Ordine", true, Comparator.comparing(Ordine::getCodiceOrdine));
-        codiceOrdineColumn.setPrefWidth(179);
-        MFXTableColumn<Ordine> dataOrdineColumn = new MFXTableColumn<>("Data Ordine", true, Comparator.comparing(Ordine::getDataOrdine));
-        dataOrdineColumn.setPrefWidth(179);
-        MFXTableColumn<Ordine> nomeFarmaciaColumn = new MFXTableColumn<>("Nome Farmacia", true, Comparator.comparing(Ordine::getNomeFarmacia));
-        nomeFarmaciaColumn.setPrefWidth(179);
-        MFXTableColumn<Ordine> dataConsegnaColumn = new MFXTableColumn<>("Data di Consegna", true, Comparator.comparing(Ordine::getDataConsegna));
-        dataConsegnaColumn.setPrefWidth(179);
-        MFXTableColumn<Ordine> statoColumn = new MFXTableColumn<>("Stato Ordine", true, Comparator.comparing(Ordine::getStatoOrdine));
-        statoColumn.setPrefWidth(179);
-        MFXTableColumn<Ordine> infoOrderColumn = new MFXTableColumn<>("", false);
-        infoOrderColumn.setRowCellFactory(param -> new MFXTableRowCell<>(ordine -> ordine) {
+
+        MFXTableColumn<Prodotto> codiceUIDColumn = new MFXTableColumn<>("Codice UID", true, Comparator.comparing(Prodotto::getCodiceUID));
+        codiceUIDColumn.setPrefWidth(179);
+        MFXTableColumn<Prodotto> nomeFarmacoColumn = new MFXTableColumn<>("Nome Farmaco", true, Comparator.comparing(Prodotto::getNome));
+        nomeFarmacoColumn.setPrefWidth(179);
+        MFXTableColumn<Prodotto> pAttivoColumn = new MFXTableColumn<>("Principio Attivo", true, Comparator.comparing(Prodotto::getPrincipioAttivo));
+        pAttivoColumn.setPrefWidth(179);
+        MFXTableColumn<Prodotto> costoColumn = new MFXTableColumn<>("Costo", true, Comparator.comparing(Prodotto::getCosto));
+        costoColumn.setPrefWidth(179);
+        MFXTableColumn<Prodotto> infoOrderColumn = new MFXTableColumn<>("", false);
+        infoOrderColumn.setRowCellFactory(param -> new MFXTableRowCell<>(prodotto -> prodotto) {
             private final Button infoOrderButton = new MFXButton("");
 
             @Override
-            public void update(Ordine ordine) {
-                if (ordine == null) {
+            public void update(Prodotto prodotto) {
+                if (prodotto == null) {
                     setGraphic(null);
                     return;
                 }
@@ -87,29 +101,29 @@ public class GUIVenditaController implements Initializable {
                 infoOrderButton.setStyle("-fx-background-color: rgba(0, 0, 0, 0)"); //trasparent
                 infoOrderButton.setGraphic(imageView);
                 setGraphic(infoOrderButton);
-                infoOrderButton.setOnAction(event -> controlOrdiniF.onClickVenditaProdotti(ordine.getProdotto()));
+                infoOrderButton.setOnAction(event -> controlProdottiF.creaFormSelezionaUnita(prodotto, fattura));
             }
         });
 
 
-        codiceOrdineColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getCodiceOrdine));
-        dataOrdineColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getDataOrdine));
-        nomeFarmaciaColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getNomeFarmacia));
-        dataConsegnaColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getDataConsegna));
-        statoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Ordine::getStatoOrdine));
-        table.getTableColumns().addAll(codiceOrdineColumn, dataOrdineColumn, nomeFarmaciaColumn, dataConsegnaColumn, statoColumn, infoOrderColumn);
+        costoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getCosto));
+        nomeFarmacoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getNome));
+        codiceUIDColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getCodiceUID));
+        pAttivoColumn.setRowCellFactory(order -> new MFXTableRowCell<>(Prodotto::getPrincipioAttivo));
+        table.getTableColumns().addAll(codiceUIDColumn, nomeFarmacoColumn, pAttivoColumn, costoColumn, infoOrderColumn);
         table.getFilters().addAll(
-                new IntegerFilter<>("Codice Ordine", Ordine::getCodiceOrdine),
-                new StringFilter<>("Nome Farmacia", Ordine::getNomeFarmacia),
-                new IntegerFilter<>("Stato Ordine", Ordine::getStatoOrdine)
+                new StringFilter<>("Codice Lotto", Prodotto::getLotto),
+                new StringFilter<>("Nome Farmaco", Prodotto::getNome),
+                new IntegerFilter<>("Codice UID", Prodotto::getCodiceUID),
+                new IntegerFilter<>("Quantitá", Prodotto::getQuantitá),
+                new StringFilter<>("Principio Attivo", Prodotto::getPrincipioAttivo)
         );
-
         table.setTableRowFactory(resource -> new MFXTableRow<>(table, resource) {{
             setPrefHeight(40);
             setAlignment(Pos.CENTER_LEFT);
         }});
         table.autosizeColumnsOnInitialization();
-        table.setItems(FXCollections.observableArrayList(listaOrdini));
+        table.setItems(FXCollections.observableArrayList(listaProdotti));
 
 
     }
@@ -117,9 +131,8 @@ public class GUIVenditaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //FXML edit code here
+        username.setText(controlProdottiF.getUsername());
         titleLabel.setText(title);
-        username.setText(controlOrdiniF.getUsername());
         setupTable();
-
     }
 }

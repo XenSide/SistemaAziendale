@@ -31,7 +31,7 @@ public class AuthManager {
             //System.out.printf("Hash: %s%n", encodedHash);
             //Verifier verifier = jargon2Verifier();
             //return verifier.hash(encodedHash).password(pass).verifyEncoded();
-            // TODO: 12/09/2022 return Utente from DBMS
+            // DONE: 12/09/2022 return Utente from DBMS
             //return new Utente()=DDBMS.getAzienda().controlloCredenziali(email,createHash(password));
             //DDBMS.getAzienda()
             return new Utente(12, 2, "testquery", "Claudio", "Dalfino", "$argon2id$v=19$m=65536,t=3,p=4$MZ7a00EJJnnLl+D+X57Bqw$SpB3kSZAkmjIBfMjqaYUTw");
@@ -109,7 +109,7 @@ public class AuthManager {
                             fxmlLoader.setController(new GUIPrincipaleCorriereController(this, utente, stage, fxmlLoader));
                             new GUIPrincipaleCorriereBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
                             break;
-                        }//TODO:GUI PRINCIPALE CORRIERE BOUNDARY,  CONTROLLER,CONTROL E CONTROLLER SPEDIZIONI, CONTROLLER INFO SPEDIZIONE
+                        }//DONE:GUI PRINCIPALE CORRIERE BOUNDARY,  CONTROLLER,CONTROL E CONTROLLER SPEDIZIONI, CONTROLLER INFO SPEDIZIONE
                         default -> {
                             Utils.showAlert("Errore, contatta un amministratore di sistema.");
                         }
