@@ -7,6 +7,8 @@ import com.lsdd.system.gestioneconsegna.GUIPrincipaleCorriereController;
 import com.lsdd.system.gestionefarmacia.GUIPrincipaleFarmaciaBoundary;
 import com.lsdd.system.gestionefarmacia.GUIPrincipaleFarmaciaController;
 import com.lsdd.system.utils.DDBMS;
+import com.lsdd.system.utils.TempoB;
+import com.lsdd.system.utils.TempoC;
 import com.lsdd.system.utils.Utils;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -96,18 +98,21 @@ public class AuthManager {
                             fxmlLoader = new FXMLLoader(GUIPrincipaleAziendaBoundary.class.getResource("HPAzienda.fxml"));
                             fxmlLoader.setController(new GUIPrincipaleAziendaController(this, utente, stage, fxmlLoader));
                             new GUIPrincipaleAziendaBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+                            //new TempoB(utente.getUIDFarmacia());
                             break;
                         }
                         case 2 -> {
                             fxmlLoader = new FXMLLoader(GUIPrincipaleFarmaciaBoundary.class.getResource("HPFarmacia.fxml"));
                             fxmlLoader.setController(new GUIPrincipaleFarmaciaController(this, utente, stage, fxmlLoader));
                             new GUIPrincipaleFarmaciaBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+                            //new TempoB(utente.getUIDFarmacia());
                             break;
                         }
                         case 3 -> {
                             fxmlLoader = new FXMLLoader(GUIPrincipaleCorriereBoundary.class.getResource("HPCorriere.fxml"));
                             fxmlLoader.setController(new GUIPrincipaleCorriereController(this, utente, stage, fxmlLoader));
                             new GUIPrincipaleCorriereBoundary(stage, fxmlLoader); //new Stage() per creare una nuova finestra
+                            //new TempoB(utente.getUIDFarmacia());
                             break;
                         }//DONE:GUI PRINCIPALE CORRIERE BOUNDARY,  CONTROLLER,CONTROL E CONTROLLER SPEDIZIONI, CONTROLLER INFO SPEDIZIONE
                         default -> {
